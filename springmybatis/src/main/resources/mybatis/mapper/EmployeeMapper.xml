@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sonic.mapper.EmployeeMapper">
+
+    <select id="getEmployeeReturnComplexMap" resultType="java.util.Map">
+       SELECT id, last_name as lastName, email, gender  FROM tbl_employee
+       where last_name like #{lastName}
+    </select>
+
+    <select id="getEmployeeByIdReturnMap" resultType="map">
+       SELECT id, last_name as lastName, email, gender  FROM tbl_employee
+       where id = #{id}
+    </select>
+
+    <select id="getEmployeeByIdAndLastNameParam" resultType="com.sonic.bean.Employee">
+       SELECT id, last_name as lastName, email, gender  FROM tbl_employee
+       where id = #{id} and last_name = #{lastName}
+    </select>
+
+    <select id="getEmployeeByIdAndLastName" resultType="com.sonic.bean.Employee">
+       SELECT id, last_name as lastName, email, gender  FROM tbl_employee
+       where id = ${arg0} and last_name = #{arg1}
+    </select>
+
+    <select id="getEmployeeByIdAndLastNameMap" resultType="Employee">
+       SELECT id, last_name as lastName, email, gender  FROM ${tableName}
+       where id = ${id} and last_name = #{lastName}
+    </select>
+
+    <select id="getEmployee" resultType="com.sonic.bean.Employee">
+       SELECT id, last_name as lastName, email, gender  FROM tbl_employee where id = #{id}
+    </select>
+
+    <insert id="addEmployee" parameterType="Employee" useGeneratedKeys="true" keyProperty="id">
+        insert into tbl_employee(last_name, email, gender)
+        values (#{lastName},#{email},#{gender})
+    </insert>
+    
+    <update id="updateEmployee" >
+        update tbl_employee
+        set last_name = #{lastName},email=#{email},gender=#{gender}
+        where id = #{id}
+    </update>
+
+    <delete id="deleteEmployeeById">
+        delete from tbl_employee where id = #{id}
+    </delete>
+
+</mapper>

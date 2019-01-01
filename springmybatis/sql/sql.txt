@@ -1,0 +1,15 @@
+USE mybatis
+CREATE TABLE employee (
+NAME VARCHAR(18),
+age INT
+
+)
+
+SELECT NAME, age FROM employee
+
+INSERT INTO employee VALUES ('Sonic', 18)
+INSERT INTO employee VALUES ('Sky', 18)
+
+
+SELECT * FROM tbl_employee
+
