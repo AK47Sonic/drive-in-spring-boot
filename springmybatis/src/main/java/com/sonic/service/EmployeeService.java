@@ -2,6 +2,7 @@ package com.sonic.service;
 
 import com.sonic.bean.Employee;
 import com.sonic.mapper.EmployeeMapper;
+import com.sonic.mapper.EmployeeMapperPlus;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +25,15 @@ public class EmployeeService {
     @Autowired
     private SqlSessionTemplate sqlSessionTemplate;
 
+    @Autowired
+    private EmployeeMapperPlus employeeMapperPlus;
 
+
+
+    public Employee getEmployeePlusResultMap(int id){
+        Employee employee = employeeMapperPlus.getEmployeeById(id);
+        return  employee;
+    }
 
     public Map<Integer, Employee> getEmployeeReturnComplexMap(String lastName){
         Map<Integer, Employee> employeeByIdReturnComplexMap = employeeMapper.getEmployeeReturnComplexMap(lastName);

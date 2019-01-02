@@ -30,6 +30,14 @@ public class EmployeeTest {
     @Autowired
     private EmployeeService employeeService;
 
+
+    @Test
+    public void testQueryEmployeeResultMap() {
+        int id = 10;
+        Employee employee = employeeService.getEmployeePlusResultMap(id);
+        logger.info("employee: " + employee);
+    }
+
     @Test
     public void testQueryEmployeeReturnComplexMap() {
         Map<Integer, Employee> employeeReturnComplexMap = employeeService.getEmployeeReturnComplexMap("%e%");
