@@ -28,7 +28,10 @@ public class EmployeeService {
     @Autowired
     private EmployeeMapperPlus employeeMapperPlus;
 
-
+    public Employee getEmployeeAndDept(int id){
+        Employee employee = employeeMapperPlus.getEmployeeAndDept(id);
+        return  employee;
+    }
 
     public Employee getEmployeePlusResultMap(int id){
         Employee employee = employeeMapperPlus.getEmployeeById(id);

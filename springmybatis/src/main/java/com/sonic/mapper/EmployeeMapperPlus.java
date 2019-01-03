@@ -11,4 +11,6 @@ import com.sonic.bean.Employee;
 public interface EmployeeMapperPlus {
 
     Employee getEmployeeById(int id);
+
+    Employee getEmployeeAndDept(int id);
 }

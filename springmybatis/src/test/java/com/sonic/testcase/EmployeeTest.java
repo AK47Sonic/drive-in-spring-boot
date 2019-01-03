@@ -30,6 +30,12 @@ public class EmployeeTest {
     @Autowired
     private EmployeeService employeeService;
 
+    @Test
+    public void testQueryEmployeeAndDept() {
+        int id = 10;
+        Employee employee = employeeService.getEmployeeAndDept(id);
+        logger.info("employee: " + employee);
+    }
 
     @Test
     public void testQueryEmployeeResultMap() {
@@ -92,21 +98,21 @@ public class EmployeeTest {
     }
 
     @Test
-    public void addEmployee(){
-        Employee employee = new Employee(0, "jerry", "jefrry@hotmail.com","1");
+    public void addEmployee() {
+        Employee employee = new Employee(0, "jerry", "jefrry@hotmail.com", "1");
         Long lineNum = employeeService.addEmployee(employee);
         logger.info("lineNum: " + lineNum);
         logger.info("employee: " + employee);
     }
 
     @Test
-    public void updateEmployee(){
-        Employee employee = new Employee(15, "Bill", "Bill@hotmail.com","1");
+    public void updateEmployee() {
+        Employee employee = new Employee(15, "Bill", "Bill@hotmail.com", "1");
         employeeService.updateEmployee(employee);
     }
 
     @Test
-    public void deleteEmployeeById(){
+    public void deleteEmployeeById() {
         int id = 15;
         employeeService.deleteEmployeeById(id);
     }
