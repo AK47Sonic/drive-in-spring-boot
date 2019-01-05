@@ -59,6 +59,10 @@ public class MySQLConfig {
         myBatisConfig.setMapUnderscoreToCamelCase(true);
         myBatisConfig.setJdbcTypeForNull(JdbcType.NULL);
 
+        //Enable POJO lazy loading
+        myBatisConfig.setLazyLoadingEnabled(true);
+        myBatisConfig.setAggressiveLazyLoading(false);
+
         SqlSessionFactoryBean factory = new SqlSessionFactoryBean();
         factory.setDataSource(dataSource);
         factory.setConfiguration(myBatisConfig);

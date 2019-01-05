@@ -28,6 +28,11 @@ public class EmployeeService {
     @Autowired
     private EmployeeMapperPlus employeeMapperPlus;
 
+    public Employee getEmployeeAndDeptStep(int id){
+        Employee employee = employeeMapperPlus.getEmployeeByIdStep(id);
+        return  employee;
+    }
+
     public Employee getEmployeeAndDept(int id){
         Employee employee = employeeMapperPlus.getEmployeeAndDept(id);
         return  employee;

@@ -30,6 +30,18 @@ public class EmployeeTest {
     @Autowired
     private EmployeeService employeeService;
 
+    /**
+     * Lazy loading
+     */
+    @Test
+    public void testQueryEmployeeAndDeptStep() {
+        int id = 10;
+        Employee employee = employeeService.getEmployeeAndDeptStep(id);
+//        logger.info("employee: " + employee);
+        logger.info("Employee lastName: " + employee.getLastName());
+//        logger.info("Department name: " + employee.getDepartment().getDepartmentName());
+    }
+
     @Test
     public void testQueryEmployeeAndDept() {
         int id = 10;

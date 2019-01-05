@@ -13,4 +13,6 @@ public interface EmployeeMapperPlus {
     Employee getEmployeeById(int id);
 
     Employee getEmployeeAndDept(int id);
+
+    Employee getEmployeeByIdStep(int id);
 }
