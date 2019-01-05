@@ -11,4 +11,8 @@ import com.sonic.bean.Department;
 public interface DepartmentMapper {
 
     Department getDeptById(int id);
+
+    Department getDeptByIdPlus(int id);
+
+    Department getDeptByIdStep(int id);
 }

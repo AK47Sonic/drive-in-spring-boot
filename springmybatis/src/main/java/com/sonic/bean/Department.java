@@ -2,6 +2,8 @@ package com.sonic.bean;
 
 import org.apache.ibatis.type.Alias;
 
+import java.util.List;
+
 /**
  * Department
  *
@@ -13,12 +15,22 @@ public class Department {
 
     private Integer id;
     private String departmentName;
+    private List<Employee> employees;
+
+    public List<Employee> getEmployees() {
+        return employees;
+    }
+
+    public void setEmployees(List<Employee> employees) {
+        this.employees = employees;
+    }
 
     @Override
     public String toString() {
         return "Department{" +
                 "id=" + id +
                 ", departmentName='" + departmentName + '\'' +
+                ", employees=" + employees +
                 '}';
     }
 

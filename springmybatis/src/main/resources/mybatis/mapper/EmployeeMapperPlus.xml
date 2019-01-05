@@ -55,9 +55,37 @@
         </association>
     </resultMap>
     
-    <select id="getEmployeeByIdStep" resultMap="myEmpByStep">
+    <select id="getEmployeeByIdStep" resultMap="myEmpDis">
        SELECT id, last_name, email, gender, d_id  FROM tbl_employee
        where id = #{id}
     </select>
+
+    <select id="getEmployeesByDeptId" resultType="Employee">
+       SELECT id, last_name, email, gender, d_id  FROM tbl_employee
+       where d_id = #{deptId}
+    </select>
+
+    <resultMap id="myEmpDis" type="Employee">
+        <id column="id" property="id"/>
+        <result column="last_name" property="lastName"/>
+        <result column="email" property="email"/>
+        <result column="gender" property="gender"/>
+        <discriminator javaType="string" column="gender">
+            <case value="0" resultType="Employee">
+                <association property="department"
+                             select="com.sonic.mapper.DepartmentMapper.getDeptById"
+                             column="{id=d_id}">
+                </association>
+            </case>
+            <case value="1" resultType="Employee">
+                <id column="id" property="id"/>
+                <result column="last_name" property="lastName"/>
+                <result column="last_name" property="email"/>
+                <result column="gender" property="gender"/>
+            </case>
+        </discriminator>
+
+    </resultMap>
+
 
 </mapper>

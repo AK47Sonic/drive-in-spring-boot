@@ -1,8 +1,7 @@
-package com.sonic.testcase;
+package com.sonic.service;
 
 import com.sonic.StartUpApplication;
 import com.sonic.bean.Employee;
-import com.sonic.service.EmployeeService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -16,16 +15,16 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * EmployeeTest
+ * EmployeeServiceTest
  *
  * @auther Sonic
  * @since 2018/12/29
  */
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.NONE, classes = StartUpApplication.class)
-public class EmployeeTest {
+public class EmployeeServiceTest {
 
-    private static final Logger logger = LoggerFactory.getLogger(EmployeeTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(EmployeeServiceTest.class);
 
     @Autowired
     private EmployeeService employeeService;
@@ -35,10 +34,10 @@ public class EmployeeTest {
      */
     @Test
     public void testQueryEmployeeAndDeptStep() {
-        int id = 10;
+        int id = 4;
         Employee employee = employeeService.getEmployeeAndDeptStep(id);
-//        logger.info("employee: " + employee);
-        logger.info("Employee lastName: " + employee.getLastName());
+        logger.info("employee: " + employee);
+//        logger.info("Employee lastName: " + employee.getLastName());
 //        logger.info("Department name: " + employee.getDepartment().getDepartmentName());
     }
 

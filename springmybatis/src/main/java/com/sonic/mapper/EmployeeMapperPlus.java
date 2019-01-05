@@ -2,6 +2,8 @@ package com.sonic.mapper;
 
 import com.sonic.bean.Employee;
 
+import java.util.List;
+
 /**
  * EmployeeMapperPlus
  *
@@ -15,4 +17,6 @@ public interface EmployeeMapperPlus {
     Employee getEmployeeAndDept(int id);
 
     Employee getEmployeeByIdStep(int id);
+
+    List<Employee> getEmployeesByDeptId(int deptId);
 }
