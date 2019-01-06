@@ -29,6 +29,20 @@ public class EmployeeServiceTest {
     @Autowired
     private EmployeeService employeeService;
 
+    @Test
+    public void testUpdateEmployeeDynamicSQL() {
+        Employee employee = new Employee(1, "RockLee", "RockLee@hotmailcom", null);
+        long affectedRowCount = employeeService.updateEmployeeDynamicSQL(employee);
+        logger.info("affected row count: " + affectedRowCount);
+    }
+
+    @Test
+    public void testQueryEmployeeMapperDynamicSQL() {
+        Employee employee = new Employee(0, "%a%", null, null);
+        List<Employee> employeeList = employeeService.getEmployeeMapperDynamicSQL(employee);
+        logger.info("employees: " + employeeList);
+    }
+
     /**
      * Lazy loading
      */

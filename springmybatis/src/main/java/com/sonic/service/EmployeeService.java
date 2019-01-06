@@ -2,6 +2,7 @@ package com.sonic.service;
 
 import com.sonic.bean.Employee;
 import com.sonic.mapper.EmployeeMapper;
+import com.sonic.mapper.EmployeeMapperDynamicSQL;
 import com.sonic.mapper.EmployeeMapperPlus;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +24,26 @@ public class EmployeeService {
     private EmployeeMapper employeeMapper;
 
     @Autowired
+    private EmployeeMapperDynamicSQL employeeMapperDynamicSQL;
+
+    @Autowired
     private SqlSessionTemplate sqlSessionTemplate;
 
     @Autowired
     private EmployeeMapperPlus employeeMapperPlus;
+
+    public long updateEmployeeDynamicSQL(Employee employee) {
+        long affectedRowCount = employeeMapperDynamicSQL.updateEmp(employee);
+        return affectedRowCount;
+    }
+
+    public List<Employee> getEmployeeMapperDynamicSQL(Employee employee) {
+//        List<Employee> employees = employeeMapperDynamicSQL.getEmpsByConditionIf(employee);
+//        List<Employee> employees = employeeMapperDynamicSQL.getEmpsByConditionTrim(employee);
+        List<Employee> employees = employeeMapperDynamicSQL.getEmpsByConditionChoose(employee);
+        return employees;
+    }
+
 
     public Employee getEmployeeAndDeptStep(int id){
         Employee employee = employeeMapperPlus.getEmployeeByIdStep(id);

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sonic.mapper.EmployeeMapperDynamicSQL">
+    <select id="getEmpsByConditionIf" resultType="Employee">
+        SELECT id, last_name as lastName, email, gender FROM tbl_employee
+        <where>
+            <if test="id != null and id != 0">
+                id = #{id}
+            </if>
+            <if test="lastName!=null &amp;&amp; lastName!=&quot;&quot;">
+                and last_name like #{lastName}
+            </if>
+            <if test="email!=null and email.trim()!=&quot;&quot;">
+                and email = #{email}
+            </if>
+            <if test="gender==0 or gender==1">
+                and gender = #{gender}
+            </if>
+        </where>
+    </select>
+
+    <select id="getEmpsByConditionTrim" resultType="Employee">
+        SELECT id, last_name as lastName, email, gender FROM tbl_employee
+        <trim prefix="where" suffixOverrides="and">
+            <if test="id != null and id != 0">
+                id = #{id} and
+            </if>
+            <if test="lastName!=null &amp;&amp; lastName!=&quot;&quot;">
+                last_name like #{lastName} and
+            </if>
+            <if test="email!=null and email.trim()!=&quot;&quot;">
+                email = #{email} and
+            </if>
+            <if test="gender==0 or gender==1">
+                gender = #{gender}
+            </if>
+        </trim>
+    </select>
+
+    <select id="getEmpsByConditionChoose" resultType="Employee">
+        SELECT id, last_name as lastName, email, gender FROM tbl_employee
+        <where>
+            <choose>
+                <when test="id != 0">
+                    id = #{id}
+                </when>
+                <when test="lastName != null">
+                    last_name like #{lastName}
+                </when>
+                <when test="email != null">
+                    email = #{email}
+                </when>
+                <otherwise>
+                    1 = 1
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
+    <update id="updateEmp">
+        update tbl_employee
+        <!--<set>-->
+            <!--<if test="lastName != null">-->
+                <!--last_name = #{lastName},-->
+            <!--</if>-->
+            <!--<if test="email != null">-->
+                <!--email=#{email},-->
+            <!--</if>-->
+            <!--<if test="gender != null">-->
+                <!--gender=#{gender}-->
+            <!--</if>-->
+        <!--</set>-->
+        <trim prefix="set" suffixOverrides=",">
+            <if test="lastName != null">
+                last_name = #{lastName},
+            </if>
+            <if test="email != null">
+                email=#{email},
+            </if>
+            <if test="gender != null">
+                gender=#{gender}
+            </if>
+        </trim>
+        where id = #{id}
+    </update>
+
+</mapper>
