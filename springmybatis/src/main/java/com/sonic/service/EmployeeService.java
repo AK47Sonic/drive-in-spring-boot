@@ -32,6 +32,16 @@ public class EmployeeService {
     @Autowired
     private EmployeeMapperPlus employeeMapperPlus;
 
+    public long addEmpsForeach(List<Employee> employeeList) {
+        long affectedRows = employeeMapperDynamicSQL.addEmps(employeeList);
+        return affectedRows;
+    }
+
+    public List<Employee> getEmployeeMapperDynamicSQLForeach(List<Integer> ids) {
+        List<Employee> employees = employeeMapperDynamicSQL.getEmpsByConditionForeach(ids);
+        return employees;
+    }
+
     public long updateEmployeeDynamicSQL(Employee employee) {
         long affectedRowCount = employeeMapperDynamicSQL.updateEmp(employee);
         return affectedRowCount;

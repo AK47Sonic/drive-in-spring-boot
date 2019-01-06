@@ -1,6 +1,7 @@
 package com.sonic.mapper;
 
 import com.sonic.bean.Employee;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -19,5 +20,9 @@ public interface EmployeeMapperDynamicSQL {
     List<Employee> getEmpsByConditionChoose(Employee employee);
 
     long updateEmp(Employee employee);
+
+    List<Employee> getEmpsByConditionForeach(List<Integer> ids);
+
+    long addEmps(@Param("employeeList") List<Employee> employeeList);
 
 }

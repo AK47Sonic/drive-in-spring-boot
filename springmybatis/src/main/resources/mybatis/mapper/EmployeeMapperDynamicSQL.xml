@@ -85,4 +85,28 @@
         where id = #{id}
     </update>
 
+    <select id="getEmpsByConditionForeach" resultType="Employee">
+       SELECT id, last_name as lastName, email, gender  FROM tbl_employee
+       where id in
+       <foreach collection="collection" item="item_id" separator="," open="(" close=")" index="i">
+           #{item_id}
+       </foreach>
+    </select>
+
+    <!--<insert id="addEmps" parameterType="collection">-->
+        <!--INSERT INTO tbl_employee(last_name,email,gender,d_id)-->
+        <!--VALUES-->
+        <!--<foreach collection="employeeList" item="employee" separator=",">-->
+            <!--(#{employee.lastName},#{employee.email},#{employee.gender},#{employee.department.id})-->
+        <!--</foreach>-->
+    <!--</insert>-->
+
+    <insert id="addEmps" parameterType="collection">
+        <foreach collection="employeeList" item="employee" separator=";">
+            INSERT INTO tbl_employee(last_name,email,gender,d_id)
+            VALUES
+            (#{employee.lastName},#{employee.email},#{employee.gender},#{employee.department.id})
+        </foreach>
+    </insert>
+
 </mapper>

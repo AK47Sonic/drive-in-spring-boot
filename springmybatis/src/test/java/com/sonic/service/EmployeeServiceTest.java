@@ -1,6 +1,7 @@
 package com.sonic.service;
 
 import com.sonic.StartUpApplication;
+import com.sonic.bean.Department;
 import com.sonic.bean.Employee;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -28,6 +30,29 @@ public class EmployeeServiceTest {
 
     @Autowired
     private EmployeeService employeeService;
+
+    @Test
+    public void testBatchInsertEmps() {
+        List<Employee> employeeList = new ArrayList<>();
+        Employee employee1 = new Employee(0, "Smith", "Smith@hotmailcom", "1",
+                new Department(3, "Wire"));
+        Employee employee2 = new Employee(0, "Rain", "Rain@hotmailcom", "1",
+                new Department(3, "Wire"));
+        employeeList.add(employee1);
+        employeeList.add(employee2);
+        long affectedRowCount = employeeService.addEmpsForeach(employeeList);
+        logger.info("affected row count: " + affectedRowCount);
+    }
+
+    @Test
+    public void testQueryEmployeeMapperDynamicSQLForeach() {
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        List<Employee> employeeList = employeeService.getEmployeeMapperDynamicSQLForeach(list);
+        logger.info("employees: " + employeeList);
+    }
 
     @Test
     public void testUpdateEmployeeDynamicSQL() {
