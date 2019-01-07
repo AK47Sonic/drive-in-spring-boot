@@ -32,6 +32,16 @@ public class EmployeeService {
     @Autowired
     private EmployeeMapperPlus employeeMapperPlus;
 
+    public boolean addEmpsMultiParam(int id, List<Employee> employeeList) {
+        boolean result = employeeMapperDynamicSQL.addEmpsMultiParam(id, employeeList);
+        return result;
+    }
+
+
+    public List<Employee> getEmpsInnerMultiParam(int id, Employee employee) {
+        List<Employee> employees = employeeMapperDynamicSQL.getEmpsInnerMultiParam(id, employee);
+        return employees;
+    }
 
     public List<Employee> getEmpsInnerParam(Employee employee) {
         List<Employee> employees = employeeMapperDynamicSQL.getEmpsInnerParam(employee);

@@ -32,6 +32,27 @@ public class EmployeeServiceTest {
     private EmployeeService employeeService;
 
     @Test
+    public void testAddEmpsMultiParam() {
+        List<Employee> employeeList = new ArrayList<>();
+        Employee employee1 = new Employee(0, "QiYa2", "QiYa@hotmailcom", "1",
+                new Department(3, "Wire"));
+        Employee employee2 = new Employee(0, "Gang2", "Gang@hotmailcom", "1",
+                new Department(3, "Wire"));
+        employeeList.add(employee1);
+        employeeList.add(employee2);
+        boolean result = employeeService.addEmpsMultiParam(0, employeeList);
+        logger.info("result: " + result);
+    }
+
+    @Test
+    public void testEmpsInnerMultiParam() {
+        Employee employee = new Employee(1, "%Le%", "RockLee@hotmailcom", null);
+//        Employee employee = null;
+        List<Employee> employees = employeeService.getEmpsInnerMultiParam(0, employee);
+        logger.info("employees: " + employees);
+    }
+
+    @Test
     public void testEmpsInnerParam() {
         Employee employee = new Employee(1, "%Le%", "RockLee@hotmailcom", null);
 //        Employee employee = null;

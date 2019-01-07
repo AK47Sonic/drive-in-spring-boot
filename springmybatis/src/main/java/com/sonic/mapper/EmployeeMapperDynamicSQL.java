@@ -13,6 +13,10 @@ import java.util.List;
  */
 public interface EmployeeMapperDynamicSQL {
 
+    boolean addEmpsMultiParam(int id, List<Employee> employeeList);
+
+    List<Employee> getEmpsInnerMultiParam(int id, Employee employee);
+
     List<Employee> getEmpsInnerParam(Employee employee);
 
     List<Employee> getEmpsByConditionIf(Employee employee);
