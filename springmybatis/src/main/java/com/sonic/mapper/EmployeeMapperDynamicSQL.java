@@ -13,6 +13,8 @@ import java.util.List;
  */
 public interface EmployeeMapperDynamicSQL {
 
+    List<Employee> getEmpsInnerParam(Employee employee);
+
     List<Employee> getEmpsByConditionIf(Employee employee);
 
     List<Employee> getEmpsByConditionTrim(Employee employee);

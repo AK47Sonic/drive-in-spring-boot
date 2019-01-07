@@ -20,7 +20,7 @@
 
     <select id="getEmployeeByIdAndLastName" resultType="com.sonic.bean.Employee">
        SELECT id, last_name as lastName, email, gender  FROM tbl_employee
-       where id = ${arg0} and last_name = #{arg1}
+       where id = ${_parameter.arg0} and last_name = #{_parameter.arg1}
     </select>
 
     <select id="getEmployeeByIdAndLastNameMap" resultType="Employee">

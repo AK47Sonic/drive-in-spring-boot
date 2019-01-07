@@ -32,6 +32,12 @@ public class EmployeeService {
     @Autowired
     private EmployeeMapperPlus employeeMapperPlus;
 
+
+    public List<Employee> getEmpsInnerParam(Employee employee) {
+        List<Employee> employees = employeeMapperDynamicSQL.getEmpsInnerParam(employee);
+        return employees;
+    }
+
     public long addEmpsForeach(List<Employee> employeeList) {
         long affectedRows = employeeMapperDynamicSQL.addEmps(employeeList);
         return affectedRows;

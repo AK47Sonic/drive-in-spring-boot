@@ -32,6 +32,14 @@ public class EmployeeServiceTest {
     private EmployeeService employeeService;
 
     @Test
+    public void testEmpsInnerParam() {
+        Employee employee = new Employee(1, "%Le%", "RockLee@hotmailcom", null);
+//        Employee employee = null;
+        List<Employee> employees = employeeService.getEmpsInnerParam(employee);
+        logger.info("employees: " + employees);
+    }
+
+    @Test
     public void testBatchInsertEmps() {
         List<Employee> employeeList = new ArrayList<>();
         Employee employee1 = new Employee(0, "Smith", "Smith@hotmailcom", "1",

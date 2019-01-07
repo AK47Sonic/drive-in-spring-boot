@@ -88,7 +88,7 @@
     <select id="getEmpsByConditionForeach" resultType="Employee">
        SELECT id, last_name as lastName, email, gender  FROM tbl_employee
        where id in
-       <foreach collection="collection" item="item_id" separator="," open="(" close=")" index="i">
+       <foreach collection="_parameter.get(&quot;list&quot;)" item="item_id" separator="," open="(" close=")" index="i">
            #{item_id}
        </foreach>
     </select>
@@ -108,5 +108,12 @@
             (#{employee.lastName},#{employee.email},#{employee.gender},#{employee.department.id})
         </foreach>
     </insert>
+
+    <select id="getEmpsInnerParam" resultType="Employee">
+        SELECT id, last_name as lastName, email, gender  FROM tbl_employee
+        <if test="_parameter!=null">
+            where last_name like #{_parameter.lastName}
+        </if>
+    </select>
 
 </mapper>
