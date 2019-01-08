@@ -34,9 +34,9 @@ public class EmployeeServiceTest {
     @Test
     public void testAddEmpsMultiParam() {
         List<Employee> employeeList = new ArrayList<>();
-        Employee employee1 = new Employee(0, "QiYa2", "QiYa@hotmailcom", "1",
+        Employee employee1 = new Employee(0, "QiYa3", "QiYa@hotmailcom", "1",
                 new Department(3, "Wire"));
-        Employee employee2 = new Employee(0, "Gang2", "Gang@hotmailcom", "1",
+        Employee employee2 = new Employee(0, "Gang3", "Gang@hotmailcom", "1",
                 new Department(3, "Wire"));
         employeeList.add(employee1);
         employeeList.add(employee2);

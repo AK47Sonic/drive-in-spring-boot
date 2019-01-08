@@ -110,12 +110,40 @@
         </foreach>
     </insert>
 
+    <!--<select id="getEmpsInnerMultiParam" resultType="Employee">-->
+        <!--SELECT id, last_name as lastName, email, gender FROM tbl_employee-->
+        <!--<if test="_parameter.get(&quot;param2&quot;)!=null">-->
+            <!--where last_name like #{param2.lastName}-->
+        <!--</if>-->
+    <!--</select>-->
+
+    <!--<select id="getEmpsInnerMultiParam" resultType="Employee">-->
+        <!--SELECT id, last_name as lastName, email, gender FROM tbl_employee-->
+        <!--<if test="_parameter.get(&quot;param2&quot;).getLastName()!=null">-->
+            <!--where last_name like #{param2.lastName}-->
+        <!--</if>-->
+    <!--</select>-->
+
+    <!--<select id="getEmpsInnerMultiParam" resultType="Employee">-->
+        <!--SELECT id, last_name as lastName, email, gender FROM tbl_employee-->
+        <!--<if test="_parameter[&quot;param2&quot;].lastName!=null">-->
+            <!--where last_name like #{_parameter[param2].lastName}-->
+        <!--</if>-->
+    <!--</select>-->
+
     <select id="getEmpsInnerMultiParam" resultType="Employee">
         SELECT id, last_name as lastName, email, gender FROM tbl_employee
-        <if test="_parameter.get(&quot;param2&quot;)!=null">
-            where last_name like #{param2.lastName}
+        <if test="_parameter[&quot;param2&quot;].lastName!=null">
+            where last_name like #{_parameter[param2].lastName}
         </if>
     </select>
+
+    <!--<select id="getEmpsInnerMultiParam" resultType="Employee">-->
+        <!--SELECT id, last_name as lastName, email, gender FROM tbl_employee-->
+        <!--<if test="_parameter.param2.lastName!=null">-->
+            <!--where last_name like #{_parameter.param2.lastName}-->
+        <!--</if>-->
+    <!--</select>-->
 
     <select id="getEmpsInnerParam" resultType="Employee">
         SELECT id, last_name as lastName, email, gender FROM tbl_employee
@@ -124,22 +152,29 @@
         </if>
     </select>
 
-
-    <!--<insert id="addEmpsMultiParam">-->
-    <!--<foreach collection="param2" item="employee" separator=";">-->
-    <!--INSERT INTO tbl_employee(last_name,email,gender,d_id)-->
-    <!--VALUES-->
-    <!--(#{employee.lastName},#{employee.email},#{employee.gender},#{employee.department.id})-->
-    <!--</foreach>-->
-    <!--</insert>-->
-
     <insert id="addEmpsMultiParam">
-        <foreach collection="_parameter.get(&quot;param2&quot;)" item="employee" separator=";">
+        <foreach collection="_parameter.param2" item="employee" separator=";">
             INSERT INTO tbl_employee(last_name,email,gender,d_id)
             VALUES
             (#{employee.lastName},#{employee.email},#{employee.gender},#{employee.department.id})
         </foreach>
     </insert>
+
+    <!--<insert id="addEmpsMultiParam">-->
+        <!--<foreach collection="_parameter[&quot;param2&quot;]" item="employee" separator=";">-->
+            <!--INSERT INTO tbl_employee(last_name,email,gender,d_id)-->
+            <!--VALUES-->
+            <!--(#{employee.lastName},#{employee.email},#{employee.gender},#{employee.department.id})-->
+        <!--</foreach>-->
+    <!--</insert>-->
+
+    <!--<insert id="addEmpsMultiParam">-->
+        <!--<foreach collection="_parameter.get(&quot;param2&quot;)" item="employee" separator=";">-->
+            <!--INSERT INTO tbl_employee(last_name,email,gender,d_id)-->
+            <!--VALUES-->
+            <!--(#{employee.lastName},#{employee.email},#{employee.gender},#{employee.department.id})-->
+        <!--</foreach>-->
+    <!--</insert>-->
 
 
 </mapper>
