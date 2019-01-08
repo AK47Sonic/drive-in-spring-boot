@@ -43,6 +43,11 @@ public class EmployeeService {
         return employees;
     }
 
+    public List<Employee> getEmpsEmpsBind(Employee employee) {
+        List<Employee> employees = employeeMapperDynamicSQL.getEmpsBind(employee);
+        return employees;
+    }
+
     public List<Employee> getEmpsInnerParam(Employee employee) {
         List<Employee> employees = employeeMapperDynamicSQL.getEmpsInnerParam(employee);
         return employees;

@@ -53,6 +53,14 @@ public class EmployeeServiceTest {
     }
 
     @Test
+    public void testEmpsBind() {
+        Employee employee = new Employee(1, "Le", "RockLee@hotmailcom", null);
+//        Employee employee = null;
+        List<Employee> employees = employeeService.getEmpsEmpsBind(employee);
+        logger.info("employees: " + employees);
+    }
+
+    @Test
     public void testEmpsInnerParam() {
         Employee employee = new Employee(1, "%Le%", "RockLee@hotmailcom", null);
 //        Employee employee = null;

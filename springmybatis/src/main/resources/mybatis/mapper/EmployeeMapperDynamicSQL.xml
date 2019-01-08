@@ -145,6 +145,15 @@
         <!--</if>-->
     <!--</select>-->
 
+
+    <select id="getEmpsBind" resultType="Employee">
+        <bind name="_lastName" value="'%' + lastName + '%'"/>
+        SELECT id, last_name as lastName, email, gender FROM tbl_employee
+        <if test="_parameter!=null">
+            where last_name like #{_lastName}
+        </if>
+    </select>
+
     <select id="getEmpsInnerParam" resultType="Employee">
         SELECT id, last_name as lastName, email, gender FROM tbl_employee
         <if test="_parameter!=null">

@@ -13,6 +13,12 @@ import java.util.List;
  */
 public interface EmployeeMapperDynamicSQL {
 
+    /**
+     * Caused by: org.apache.ibatis.reflection.ReflectionException: There is no getter for property named '_lastName' in 'class com.sonic.bean.Employee'
+     * where last_name like #{_parameter._lastName} 不能使用，_parameter指得是传入的参数。因此，Employee没有_lastName这个属性
+     */
+    List<Employee> getEmpsBind(Employee employee);
+
     boolean addEmpsMultiParam(int id, List<Employee> employeeList);
 
     List<Employee> getEmpsInnerMultiParam(int id, Employee employee);
