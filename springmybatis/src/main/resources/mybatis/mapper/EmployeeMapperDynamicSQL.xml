@@ -163,7 +163,9 @@
 
     <insert id="addEmpsMultiParam">
         <foreach collection="_parameter.param2" item="employee" separator=";">
-            INSERT INTO tbl_employee(last_name,email,gender,d_id)
+            INSERT INTO tbl_employee(
+            <include refid="insertColumn"/>
+            )
             VALUES
             (#{employee.lastName},#{employee.email},#{employee.gender},#{employee.department.id})
         </foreach>
@@ -185,5 +187,8 @@
         <!--</foreach>-->
     <!--</insert>-->
 
+    <sql id="insertColumn">
+        last_name,email,gender,d_id
+    </sql>
 
 </mapper>
