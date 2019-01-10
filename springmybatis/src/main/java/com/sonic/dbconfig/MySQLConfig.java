@@ -30,7 +30,8 @@ import java.util.List;
  * @since 2018/12/29
  */
 @ConfigurationProperties(prefix = "mybatis")
-@MapperScan(basePackages = "com.sonic.mapper", sqlSessionFactoryRef = "mysqlSqlSessionFactory")
+//@MapperScan(basePackages = "com.sonic.mapper", sqlSessionFactoryRef = "mysqlSqlSessionFactory")
+@MapperScan(basePackages = "com.sonic.mapper", sqlSessionTemplateRef = "mysqlSqlSessionTemplate")
 @Configuration
 public class MySQLConfig {
 
@@ -62,6 +63,7 @@ public class MySQLConfig {
         //Enable POJO lazy loading
         myBatisConfig.setLazyLoadingEnabled(true);
         myBatisConfig.setAggressiveLazyLoading(false);
+        myBatisConfig.setCacheEnabled(true);
 
         SqlSessionFactoryBean factory = new SqlSessionFactoryBean();
         factory.setDataSource(dataSource);

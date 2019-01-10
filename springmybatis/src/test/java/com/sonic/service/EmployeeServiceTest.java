@@ -10,6 +10,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,6 +31,23 @@ public class EmployeeServiceTest {
 
     @Autowired
     private EmployeeService employeeService;
+
+    @Transactional
+    @Test
+    public void testGetEmployeeById1Cache() {
+        int id = 1;
+        List<Employee> employees = employeeService.getEmployee(id);
+        logger.info("employees: " + employees);
+
+//        Employee employee = new Employee(0, "jerry", "jefrry@hotmail.com", "1");
+//        Long lineNum = employeeService.addEmployee(employee);
+//        logger.info("lineNum: " + lineNum);
+//        logger.info("employee: " + employee);
+
+        List<Employee> employees2 = employeeService.getEmployee(id);
+        logger.info("employees2: " + employees2);
+        logger.info("equals: " + (employees == employees2));
+    }
 
     @Test
     public void testAddEmpsMultiParam() {
