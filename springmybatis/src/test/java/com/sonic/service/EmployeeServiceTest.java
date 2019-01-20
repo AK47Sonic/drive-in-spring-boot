@@ -97,6 +97,7 @@ public class EmployeeServiceTest {
         employeeList.add(employee2);
         long affectedRowCount = employeeService.addEmpsForeach(employeeList);
         logger.info("affected row count: " + affectedRowCount);
+        logger.info("employeeList: " + employeeList);
     }
 
     @Test

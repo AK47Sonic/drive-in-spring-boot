@@ -102,10 +102,10 @@
     <!--</foreach>-->
     <!--</insert>-->
 
-    <insert id="addEmps" parameterType="collection">
-        <foreach collection="employeeList" item="employee" separator=";">
-            INSERT INTO tbl_employee(last_name,email,gender,d_id)
-            VALUES
+    <insert id="addEmps" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO tbl_employee(last_name,email,gender,d_id)
+        VALUES
+        <foreach collection="list" item="employee" separator="," >
             (#{employee.lastName},#{employee.email},#{employee.gender},#{employee.department.id})
         </foreach>
     </insert>
