@@ -44,7 +44,41 @@
                 - beanFactory.setTempClassLoader(new ContextTypeMatchClassLoader(beanFactory.getBeanClassLoader()));
             - 给beanFactory注册一些能用的组件
                 - environment -> StandardEnvironment
-                    - 保存在DefaultSingletonBeanRegistry.singletonObjects
-                    - 保存在DefaultSingletonBeanRegistry.registeredSingletons
+                    - 保存在Map<String, Object> DefaultSingletonBeanRegistry.singletonObjects
+                    - 保存在Set<String> DefaultSingletonBeanRegistry.registeredSingletons
+                    - 保存在Set<String> manualSingletonNames
                 - systemProperties -> System.getProperties();
                 - systemEnvironment -> System.getenv();
+        4. postProcessBeanFactory(beanFactory); 空方法，BeanFactory的预准备工作完成后，进行的后置处理工作
+        5. invokeBeanFactoryPostProcessors(beanFactory); 执行BeanFactoryPostProcessor
+            - BeanDefinitionRegistryPostProcessor
+            - BeanFactoryPostProcessor
+            1. invokeBeanFactoryPostProcessors 执行BeanFactoryPostProcessor的方法
+                1. 获取AbstractApplicationContext.beanFactoryPostProcessors
+                2. 遍历BeanFactoryPostProcessor
+                    1. 如果是BeanDefinitionRegistry， 把SharedMetadataReaderFactoryBean加入DefaultListableBeanFactory.beanDefinitionMap和DefaultListableBeanFactory.beanDefinitionNames
+                    2. 如果不是， regularPostProcessors.add(postProcessor);
+                3. 获取所有的BeanDefinitionRegistryPostProcessor
+                    1. 对所有实现了PriorityOrdered接口的BeanDefinitionRegistryPostProcessor排序
+                    2. 执行所有实现了PriorityOrdered接口的BeanDefinitionRegistryPostProcessor：postProcessor.postProcessBeanDefinitionRegistry(registry);
+                    3. 对所有实现了Ordered接口的BeanDefinitionRegistryPostProcessor排序
+                    4. 执行所有实现了Ordered接口的BeanDefinitionRegistryPostProcessor：postProcessor.postProcessBeanDefinitionRegistry(registry);
+                    5. 最后执行所有没有实现任何优先级接口的BeanDefinitionRegistryPostProcessor: postProcessor.postProcessBeanDefinitionRegistry(registry);
+                4. 获取所有的BeanFactoryPostProcessor
+                    1. 对所有实现了PriorityOrdered接口的BeanFactoryPostProcessor排序
+                    2. 执行所有实现了PriorityOrdered接口的BeanFactoryPostProcessor：postProcessor.postProcessBeanFactory(beanFactory);
+                    3. 对所有实现了Ordered接口的BeanFactoryPostProcessor排序
+                    4. 执行所有实现了Ordered接口的BeanFactoryPostProcessor：postProcessor.postProcessBeanFactory(beanFactory);
+                    5. 最后执行所有没有实现任何优先级接口的BeanFactoryPostProcessor: postProcessor.postProcessBeanFactory(beanFactory);
+                    
+                    
+                    
+                    
+                
+                
+                    
+                   
+                    
+                   
+                    
+                    
