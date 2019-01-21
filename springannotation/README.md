@@ -2,7 +2,7 @@
 
 ## Spring Container 的创建和刷新
 
-1. AbstractApplicationContext
+1. AbstractApplicationContext[AnnotationConfigApplicationContext]
     - getEnvironment() 获得Environment
     1. refresh();
         1. prepareRefresh(); 刷新前的预处理；
@@ -70,6 +70,34 @@
                     3. 对所有实现了Ordered接口的BeanFactoryPostProcessor排序
                     4. 执行所有实现了Ordered接口的BeanFactoryPostProcessor：postProcessor.postProcessBeanFactory(beanFactory);
                     5. 最后执行所有没有实现任何优先级接口的BeanFactoryPostProcessor: postProcessor.postProcessBeanFactory(beanFactory);
+        6. registerBeanPostProcessors(beanFactory); 注册BeanPostProcessor，来拦截bean创建过程的
+            1. 增加BeanPostProcessorChecker
+            2. 获取所有的BeanPostProcessor, 都可以通过PriorityOrdered或Ordered来指定顺序
+                - BeanPostProcessor
+                - DestructionAwareBeanPostProcessor
+                - InstantiationAwareBeanPostProcessor
+                - SmartInstantiationAwareBeanPostProcessor
+                - MergedBeanDefinitionPostProcessor
+            3. 先注册PriorityOrdered的BeanPostProcessor：[DefaultListableBeanFactory]beanFactory.addBeanPostProcessor(postProcessor); -> AbstractBeanFactory.beanPostProcessors.add(beanPostProcessor);
+            4. 再注册Ordered的BeanPostProcessor：[DefaultListableBeanFactory]beanFactory.addBeanPostProcessor(postProcessor); -> AbstractBeanFactory.beanPostProcessors.add(beanPostProcessor);
+            5. 再注册没有实现任何优先级接口的BeanPostProcessor：[DefaultListableBeanFactory]beanFactory.addBeanPostProcessor(postProcessor); -> AbstractBeanFactory.beanPostProcessors.add(beanPostProcessor);
+            6. 最后注册MergedBeanDefinitionPostProcessor
+            7. 增加监听器检查的BeanPostProcessor： ApplicationListenerDetector:[在bean创建完成后，检查bean是否是ApplicationListener，如果是，则加入到AnnotationConfigApplicationContext.applicationEventMulticaster]
+        7. initMessageSource(); 初始化MessageSource, 做国际化功能，消息绑定，消息解析
+            1. 获取beanFactory
+            2. 看容器beanFactory中是否有MessageSource， 如果有，就获取，保存到AbstractApplicationContext.messageSource。如果没有，就创建。
+            3. 把MessageSource注册到容器中DefaultListableBeanFactory.manualSingletonNames：beanFactory.registerSingleton(MESSAGE_SOURCE_BEAN_NAME, this.messageSource);
+        8. initApplicationEventMulticaster(); 初始化事件派发器
+            1. 获取beanFactory
+            2. 从beanFactory中获取applicationEventMulticaster组件
+            3. 如果没有配置，就创建一个SimpleApplicationEventMulticaster， 并注入
+        9. onRefresh(); 空方法
+        10. registerListeners(); 把容器中所有的ApplicationListener注册进来
+            1. 获取所有statically specified的ApplicationListener， 加入到AbstractApplicationContext.applicationEventMulticaster中：getApplicationEventMulticaster().addApplicationListener(listener);
+            2. 获取容器中所有的ApplicationListener，加入到AbstractApplicationContext.applicationEventMulticaster中： getApplicationEventMulticaster().addApplicationListenerBean(listenerBeanName);
+            3. 派发earlyApplicationEvents：getApplicationEventMulticaster().multicastEvent(earlyEvent);
+        11. finishBeanFactoryInitialization(beanFactory); 初始化所有剩下的单实例bean。
+        12. finishRefresh();   
                     
                     
                     
