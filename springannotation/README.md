@@ -96,7 +96,21 @@
             1. 获取所有statically specified的ApplicationListener， 加入到AbstractApplicationContext.applicationEventMulticaster中：getApplicationEventMulticaster().addApplicationListener(listener);
             2. 获取容器中所有的ApplicationListener，加入到AbstractApplicationContext.applicationEventMulticaster中： getApplicationEventMulticaster().addApplicationListenerBean(listenerBeanName);
             3. 派发earlyApplicationEvents：getApplicationEventMulticaster().multicastEvent(earlyEvent);
-        11. finishBeanFactoryInitialization(beanFactory); 初始化所有剩下的单实例bean。
+        11. finishBeanFactoryInitialization(beanFactory); 初始化所有剩下的单实例bean
+            1. preInstantiateSingletons()； 初始化剩下的单实例bean
+                1. 获取容器中的所有bean的beanDefinitionNames，依次进行遍历，创建对象和初始化
+                    1. 获取bean的定义信息： RootBeanDefinition
+                    2. 如果bean不是抽象的，是单实例的，不是懒加载的
+                        1. 是FactoryBean，实现FactoryBean接口的bean： if (isFactoryBean(beanName)) {}
+                            1. 
+                        2. 不是FactoryBean，则用AbstractBeanFactory.getBean(beanName);创建对象
+                            1. AbstractBeanFactory.doGetBean
+                                1. 先从[ConcurrentHashMap<String, Object>] DefaultSingletonBeanRegistry.singletonObjects中获取单实例bean，如果能获取到，说明这个bean之前已经被创建过。
+                                2. 缓存中获取不到，开始bean的创建对象流程，标记当前bean已经被创建，为了防止多线程同时创建单实例bean：AbstractBeanFactory.markBeanAsCreated(beanName); 
+                                3. 获取bean的定义信息，
+                                4. 获取当前bean依赖的其他bean， 如果有，用AbstractBeanFactory.getBean(dep);方式先创建依赖的bean
+                                5. 启动单实例bean的创建流程: 用AbstractBeanFactory.createBean(beanName, mbd, args);
+                            
         12. finishRefresh();   
                     
                     
