@@ -114,6 +114,13 @@
                                         1. resolveBeforeInstantiation(beanName, mbdToUse); 让[InstantiationAwareBeanPostProcessor] BeanPostProcessor先拦截返回代理对象，例如：ImportAwareBeanPostProcessor
                                             1. applyBeanPostProcessorsBeforeInstantiation(targetType, beanName); 调用InstantiationAwareBeanPostProcessor.postProcessBeforeInstantiation返回对象
                                             2. applyBeanPostProcessorsAfterInitialization(bean, beanName); 如果before返回的对象不为null，调用InstantiationAwareBeanPostProcessor.postProcessAfterInitialization
+                                        2. 如果resolveBeforeInstantiation返回代理对象，则执行doCreateBean(beanName, mbdToUse, args); 创建bean
+                                            1. createBeanInstance(beanName, mbd, args); 利用工厂方法或者对象的构造器，创建bean实例，比如：@Bean标注的bean
+                                            2. applyMergedBeanDefinitionPostProcessors(mbd, beanType, beanName); 调用MergedBeanDefinitionPostProcessors.postProcessMergedBeanDefinition
+                                            3. populateBean(beanName, mbd, instanceWrapper); 为bean的属性赋值
+                                                1. InstantiationAwareBeanPostProcessor.postProcessAfterInstantiation
+                                                2. InstantiationAwareBeanPostProcessor.postProcessProperties 拿到属性值对象PropertyValues
+                                                3. applyPropertyValues(beanName, mbd, bw, pvs); 利用属性的setter方法进行赋值
                                             
                             
         12. finishRefresh();   
