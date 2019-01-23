@@ -58,7 +58,7 @@
                 2. 遍历BeanFactoryPostProcessor
                     1. 如果是BeanDefinitionRegistry， 把SharedMetadataReaderFactoryBean加入DefaultListableBeanFactory.beanDefinitionMap和DefaultListableBeanFactory.beanDefinitionNames
                     2. 如果不是， regularPostProcessors.add(postProcessor);
-                3. 获取所有的BeanDefinitionRegistryPostProcessor
+                3. 获取所有的BeanDefinitionRegistryPostProcessor，例如：ConfigurationClassPostProcessor
                     1. 对所有实现了PriorityOrdered接口的BeanDefinitionRegistryPostProcessor排序
                     2. 执行所有实现了PriorityOrdered接口的BeanDefinitionRegistryPostProcessor：postProcessor.postProcessBeanDefinitionRegistry(registry);
                     3. 对所有实现了Ordered接口的BeanDefinitionRegistryPostProcessor排序
@@ -110,6 +110,11 @@
                                 3. 获取bean的定义信息，
                                 4. 获取当前bean依赖的其他bean， 如果有，用AbstractBeanFactory.getBean(dep);方式先创建依赖的bean
                                 5. 启动单实例bean的创建流程: 用AbstractBeanFactory.createBean(beanName, mbd, args);
+                                    1. AbstractAutowireCapableBeanFactory.createBean
+                                        1. resolveBeforeInstantiation(beanName, mbdToUse); 让[InstantiationAwareBeanPostProcessor] BeanPostProcessor先拦截返回代理对象，例如：ImportAwareBeanPostProcessor
+                                            1. applyBeanPostProcessorsBeforeInstantiation(targetType, beanName); 调用InstantiationAwareBeanPostProcessor.postProcessBeforeInstantiation返回对象
+                                            2. applyBeanPostProcessorsAfterInitialization(bean, beanName); 如果before返回的对象不为null，调用InstantiationAwareBeanPostProcessor.postProcessAfterInitialization
+                                            
                             
         12. finishRefresh();   
                     
