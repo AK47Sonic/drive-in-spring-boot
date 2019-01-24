@@ -121,6 +121,12 @@
                                                 1. InstantiationAwareBeanPostProcessor.postProcessAfterInstantiation
                                                 2. InstantiationAwareBeanPostProcessor.postProcessProperties 拿到属性值对象PropertyValues
                                                 3. applyPropertyValues(beanName, mbd, bw, pvs); 利用属性的setter方法进行赋值
+                                            4. initializeBean(beanName, exposedObject, mbd); bean初始化
+                                                1. invokeAwareMethods(beanName, bean); 执行XXXAware接口的方法
+                                                    - BeanNameAware
+                                                    - BeanClassLoaderAware
+                                                    - BeanFactoryAware
+                                                2. applyBeanPostProcessorsBeforeInitialization(wrappedBean, beanName); 执行BeanPostProcessor后置处理器processor.postProcessBeforeInitialization
                                             
                             
         12. finishRefresh();   
