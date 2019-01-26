@@ -74,13 +74,16 @@
             1. 增加BeanPostProcessorChecker
             2. 获取所有的BeanPostProcessor, 都可以通过PriorityOrdered或Ordered来指定顺序
                 - BeanPostProcessor
+                    - ApplicationContextAwareProcessor
                 - DestructionAwareBeanPostProcessor
+                    - ApplicationListenerDetector
                 - InstantiationAwareBeanPostProcessor
                 - SmartInstantiationAwareBeanPostProcessor
                     - AutowiredAnnotationBeanPostProcessor 处理自动注入
                     - AnnotationAwareAspectJAutoProxyCreator 为bean创建代理对象
                 - MergedBeanDefinitionPostProcessor
                     - ScheduledAnnotationBeanPostProcessor
+                    - ApplicationListenerDetector
             3. 先注册PriorityOrdered的BeanPostProcessor：[DefaultListableBeanFactory]beanFactory.addBeanPostProcessor(postProcessor); -> AbstractBeanFactory.beanPostProcessors.add(beanPostProcessor);
             4. 再注册Ordered的BeanPostProcessor：[DefaultListableBeanFactory]beanFactory.addBeanPostProcessor(postProcessor); -> AbstractBeanFactory.beanPostProcessors.add(beanPostProcessor);
             5. 再注册没有实现任何优先级接口的BeanPostProcessor：[DefaultListableBeanFactory]beanFactory.addBeanPostProcessor(postProcessor); -> AbstractBeanFactory.beanPostProcessors.add(beanPostProcessor);
