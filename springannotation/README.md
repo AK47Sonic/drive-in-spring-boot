@@ -136,7 +136,7 @@
                                                 3. invokeInitMethods(beanName, wrappedBean, mbd); 执行初始化方法
                                                     1. 执行InitializingBean接口的bean的初始化afterPropertiesSet
                                                     2. invokeCustomInitMethod(beanName, bean, mbd); 调用自定义初始化方法
-                                                    3. applyBeanPostProcessorsAfterInitialization(wrappedBean, beanName); 执行BeanPostProcessor后置处理器processor.postProcessAfterInitialization
+                                                4. applyBeanPostProcessorsAfterInitialization(wrappedBean, beanName); 执行BeanPostProcessor后置处理器processor.postProcessAfterInitialization
                                             5. registerDisposableBeanIfNecessary(beanName, bean, mbd); 注册bean的销毁方法
                                 6. addSingleton(beanName, singletonObject); 将创建的bean添加到缓存中：DefaultSingletonBeanRegistry.singletonObjects
                                     (IOC容器就是这些map保存了单实例bean，环境变量。。。)                        
