@@ -76,6 +76,7 @@
                 - BeanPostProcessor
                     - ApplicationContextAwareProcessor
                 - DestructionAwareBeanPostProcessor
+                    - ScheduledAnnotationBeanPostProcessor
                     - ApplicationListenerDetector
                 - InstantiationAwareBeanPostProcessor
                 - SmartInstantiationAwareBeanPostProcessor
