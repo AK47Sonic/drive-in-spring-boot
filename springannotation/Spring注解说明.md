@@ -36,3 +36,12 @@
                         - FilterType.CUSTOM 自定义，实现`org.springframework.core.type.filter.TypeFilter` [demo](./src/main/java/com/sonic/config/MyTypeFilter.java)
             - excludeFilters 不包含
                 - `@Filter`
+    5. ```flow
+       st=>start: 开始
+       op=>operation: My Operation
+       cond=>condition: Yes or No?
+       e=>end
+       st->op->cond
+       cond(yes)->e
+       cond(no)->op
+       &```
