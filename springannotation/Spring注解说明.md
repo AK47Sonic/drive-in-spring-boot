@@ -10,8 +10,10 @@
     - BeanDefinitionRegistry
 3. Spring中注册Bean的方式
     1. 在`@Configuration`中使用`@Bean`
-    2. 在`@ComponentScan`扫描的包中包含@Service, @Control, @Repository, @Component
-    3. 在`@ComponentScan`中使用includeFilters，符合规则的则注册为Bean
+        - 注册普通bean
+        - 注册FactoryBean
+    2. 在`@Configuration`上，`@ComponentScan`扫描的包中包含@Service, @Control, @Repository, @Component
+    3. 在`@Configuration`上，`@ComponentScan`中使用includeFilters，符合规则的则注册为Bean
     4. 在`@Configuration`上使用`@Import`注册Bean
     
 4. `@Configuration` 配置类
@@ -44,4 +46,6 @@
     6. `@Import` 给容器中导入一个组件 [demo](./src/main/java/com/sonic/config/MainConfig2.java)
         - 类名XXX.class, 注册的Bean name是全类名, （有没有@Configuration不影响）
         - `ImportSelector` 返回String全类名
-        - `ImportBeanDefinitionRegistrar`
+        - `ImportBeanDefinitionRegistrar` [demo](./src/main/java/com/sonic/bootstrap/ImportBeanDefinitionRegistrarBootstrap.java)
+        
+    7. 类实现FactoryBean接口，并使用@Bean注册bean， 如果要获取FactoryBean本身，在beanName前加&，`BeanFactory.FACTORY_BEAN_PREFIX` [demo](./src/main/java/com/sonic/config/MainConfig2.java)
