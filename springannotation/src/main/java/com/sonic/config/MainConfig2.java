@@ -19,8 +19,8 @@ import org.springframework.context.annotation.Import;
  * @since 2018/12/15
  */
 //类中组件统一设置：满足当前条件，类中所有配置的Bean注册才会生效，和内部@Conditional条件冲突时候，内部条件覆盖外部条件
-//@Conditional(value = {WindowsCondition.class})
-@Conditional(value = {LinuxCondition.class})
+@Conditional(value = {WindowsCondition.class})
+//@Conditional(value = {LinuxCondition.class})
 @Configuration
 @Import({Red.class, MyImportSelector.class, MyImportBeanDefinitionRegistrar.class}) //id为导入组件的全类名
 public class MainConfig2 {
