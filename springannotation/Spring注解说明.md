@@ -23,7 +23,7 @@
         - `ConfigurableBeanFactory#SCOPE_PROTOTYPE` 多例， IOC容器创建完成，没有实例化，创建一次，调用一次
         - `ConfigurableBeanFactory#SCOPE_SINGLETON` 单例(默认)， IOC容器创建完成，已经实例化
     
-    3. `@Lazy` *单实例*懒加载，容器启动不创建对象，第一次调用bean创建对象。
+    3. `@Lazy` **单实例**懒加载，容器启动不创建对象，第一次调用bean创建对象。
         
     4. `@ComponentScans` 指定多个`@ComponentScan`，多个`@ComponentScan`是并集的效果
         - `@ComponentScan` 指定包扫描 [demo](./src/main/java/com/sonic/bootstrap/ConfigurationBootstrap.java)
