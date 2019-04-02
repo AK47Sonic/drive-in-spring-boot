@@ -11,6 +11,7 @@
         <module>springautoconfig</module>
         <module>springannotation</module>
         <module>springmybatis</module>
+        <module>springbootdemo</module>
     </modules>
     <packaging>pom</packaging>
 
