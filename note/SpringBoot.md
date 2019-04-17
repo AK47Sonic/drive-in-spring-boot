@@ -43,6 +43,7 @@
             - Read-only status
         - TransactionStatus
 ![事务传播特性](pic/事务传播特性.JPG)
+
 ![事务隔离特性](pic/事务隔离特性.JPG)
 
 
