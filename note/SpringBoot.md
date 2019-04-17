@@ -32,6 +32,20 @@
     - FastList代替ArrayList
     - 无锁集合ConcurrentBag
     - 代理类的优化，invokestatic代替了invokevirtual
+    
+7. 事务
+- PlatformTransactionManager
+    - DataSourceTransactionManager
+        - TransactionDefinition
+            - Propagation
+            - Isolation
+            - TimeOut
+            - Read-only status
+        - TransactionStatus
+![事务传播特性](pic/事务传播特性.JPG)
+![事务隔离特性](pic/事务隔离特性.JPG)
+
+
 
 
 
