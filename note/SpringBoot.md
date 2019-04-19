@@ -47,6 +47,10 @@
     
 ![事务隔离特性](pic/事务隔离特性.JPG)
 
+- 编程式事务
+    - TransactionTemplate
+- 申明式事务
+
 
 
 
