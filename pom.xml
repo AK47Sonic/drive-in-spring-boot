@@ -12,6 +12,7 @@
         <module>springannotation</module>
         <module>springmybatis</module>
         <module>springbootdemo</module>
+        <module>springbucket</module>
     </modules>
     <packaging>pom</packaging>
 

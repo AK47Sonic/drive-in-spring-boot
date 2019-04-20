@@ -52,6 +52,18 @@
 - 申明式事务
 
 
+8. 配置Mybatis数据源
+- DataSource
+    - HikariDataSource
+- SqlSessionFactory
+    - SqlSessionFactoryBean.getObject();
+- PlatformTransactionManager
+    - DataSourceTransactionManager(DataSource)
+- SqlSessionTemplate(SqlSessionFactory)
+
+
+
+
 
 
 
