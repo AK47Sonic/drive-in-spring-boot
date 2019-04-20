@@ -65,11 +65,11 @@ public class MySQLConfig {
         myBatisConfig.setAggressiveLazyLoading(false);
         myBatisConfig.setCacheEnabled(true);
 
-        SqlSessionFactoryBean factory = new SqlSessionFactoryBean();
-        factory.setDataSource(dataSource);
-        factory.setConfiguration(myBatisConfig);
+        SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
+        factoryBean.setDataSource(dataSource);
+        factoryBean.setConfiguration(myBatisConfig);
 
-        factory.setTypeAliasesPackage("com.sonic.bean");
+        factoryBean.setTypeAliasesPackage("com.sonic.bean");
 
         PathMatchingResourcePatternResolver patternResolver = new PathMatchingResourcePatternResolver();
         Resource[] resources = mapperLocationList.stream().map(el -> {
@@ -82,9 +82,9 @@ public class MySQLConfig {
             }
             return rs;
         }).flatMap(ls -> ls.stream()).toArray(Resource[]::new);
-        factory.setMapperLocations(resources);
+        factoryBean.setMapperLocations(resources);
 
-        return factory.getObject();
+        return factoryBean.getObject();
     }
 
     @Bean("mysqlTransactionManger")
