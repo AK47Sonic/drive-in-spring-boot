@@ -61,7 +61,16 @@
     - DataSourceTransactionManager(DataSource)
 - SqlSessionTemplate(SqlSessionFactory)
 
-
+9 AOP
+- DefaultAopProxyFactory implements AopProxyFactory(创建Aop)
+    - JdkDynamicAopProxy implements AopProxy
+    - ObjenesisCglibAopProxy implements AopProxy
+    
+- EnableAspectJAutoProxy
+    - proxyTargetClass
+    - exposeProxy 如果true，放入ThreadLocal，可以通过AopContext来获取
+    
+- AbstractAutoProxyCreator.postProcessBeforeInstantiation -> AspectJAwareAdvisorAutoProxyCreator.createProxy -> proxyFactory.getProxy
 
 
 

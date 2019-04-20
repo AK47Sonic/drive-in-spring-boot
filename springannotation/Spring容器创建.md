@@ -82,6 +82,8 @@
                 - SmartInstantiationAwareBeanPostProcessor
                     - AutowiredAnnotationBeanPostProcessor 处理自动注入
                     - AnnotationAwareAspectJAutoProxyCreator 为bean创建代理对象
+                        - DefaultAopProxyFactory.createAopProxy (使用Java代理，必须设置spring.aop.proxy-target-class设置为false)
+                        - ProxyProcessorSupport.evaluateProxyInterfaces 评估是否实现了接口，如果没有实现接口，则spring.aop.proxy-target-class设置为true
                 - MergedBeanDefinitionPostProcessor
                     - ScheduledAnnotationBeanPostProcessor
                     - ApplicationListenerDetector
