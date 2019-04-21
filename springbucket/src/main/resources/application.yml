@@ -6,10 +6,6 @@ datasource:
     username: root
     password: Citi2013
 
-# 如果要只用Java动态代理，必须设置为false，默认设置见：spring-boot-autoconfigure-2.1.0.RELEASE.jar/META-INF/spring-configuration-metadata.json
-spring:
-  aop:
-    proxy-target-class: false
 
 # Mybatis
 mybatis:
@@ -17,5 +13,5 @@ mybatis:
     - classpath*:/mybatis/mapper/*.xml
 logging:
   level:
-   com.sonic: debug
+   com.sonic.mapper: debug
 
