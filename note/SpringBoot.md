@@ -74,7 +74,8 @@
     
 - AbstractAutoProxyCreator.postProcessBeforeInstantiation -> AspectJAwareAdvisorAutoProxyCreator.createProxy -> proxyFactory.getProxy
 
-
+10. 数据库错误码解析 SQLErrorCodeSQLExceptionTranslator
+- 错误码定义：spring-jdbc-5.1.2.RELEASE.jar/org/springframework/jdbc/support/sql-error-codes.xml
 
 
 
