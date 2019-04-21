@@ -6,12 +6,18 @@ datasource:
     username: root
     password: Citi2013
 
-
 # Mybatis
 mybatis:
   mapperLocationList:
     - classpath*:/mybatis/mapper/*.xml
+
+# Log
 logging:
   level:
    com.sonic.mapper: debug
+
+# Spring
+spring:
+  aop:
+    proxy-target-class: false
 

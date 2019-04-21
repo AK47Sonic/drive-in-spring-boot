@@ -4,7 +4,6 @@ import com.sonic.service.DeclarativeTransactionService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -20,7 +19,9 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  */
 @SpringBootApplication
 @EnableTransactionManagement(mode = AdviceMode.PROXY)
-public class DeclarativeTransactionApplication implements CommandLineRunner {
+public class DeclarativeTransactionApplication
+//        implements CommandLineRunner
+{
 
     private Logger logger = LoggerFactory.getLogger(DeclarativeTransactionApplication.class);
 
@@ -33,8 +34,8 @@ public class DeclarativeTransactionApplication implements CommandLineRunner {
         new SpringApplicationBuilder(DeclarativeTransactionApplication.class).web(WebApplicationType.NONE).run(args);
     }
 
-    @Override
-    public void run(String... args) throws Exception {
+//    @Override
+//    public void run(String... args) throws Exception {
 //        // Step 1
 //        declarativeTransactionService.insertRecord();
 //        logger.info("AAA {}",
@@ -67,17 +68,17 @@ public class DeclarativeTransactionApplication implements CommandLineRunner {
 //                    jdbcTemplate
 //                            .queryForObject("SELECT COUNT(*) FROM student WHERE sname='BBB'", Long.class));
 //        }
-
-        // Step 5
-        try {
-            declarativeTransactionService.invokeInsertThenRollbackByAopContext();
-        } catch (Exception e) {
-            logger.info(e.getMessage(), e);
-            logger.info("BBB {}",
-                    jdbcTemplate
-                            .queryForObject("SELECT COUNT(*) FROM student WHERE sname='BBB'", Long.class));
-        }
-
-
-    }
+//
+//        // Step 5
+//        try {
+//            declarativeTransactionService.invokeInsertThenRollbackByAopContext();
+//        } catch (Exception e) {
+//            logger.info(e.getMessage(), e);
+//            logger.info("BBB {}",
+//                    jdbcTemplate
+//                            .queryForObject("SELECT COUNT(*) FROM student WHERE sname='BBB'", Long.class));
+//        }
+//
+//
+//    }
 }
