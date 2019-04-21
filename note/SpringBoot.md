@@ -49,7 +49,9 @@
 
 - 编程式事务
     - TransactionTemplate
+    - DataSourceTransactionManager
 - 申明式事务
+    - @EnableTransactionManagement在spring boot中在TransactionAutoConfiguration中自动装配
 
 
 8. 配置Mybatis数据源
@@ -66,7 +68,7 @@
     - JdkDynamicAopProxy implements AopProxy
     - ObjenesisCglibAopProxy implements AopProxy
     
-- EnableAspectJAutoProxy
+- @EnableAspectJAutoProxy 在spring boot中在AopAutoConfiguration中自动装配
     - proxyTargetClass
     - exposeProxy 如果true，放入ThreadLocal，可以通过AopContext来获取
     
