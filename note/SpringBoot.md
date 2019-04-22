@@ -1,8 +1,15 @@
 ## Spring Boot
 
-1. 通过Web查看beans
+1. 监控（JMX）
+- health
+    - http://localhost:8080/actuator/health
+- 通过Web查看beans
     - application.properties增加management.endpoints.web.exposure.include=*
     - 访问http://localhost:8080/actuator/beans
+- mappings
+    - http://localhost:8080/actuator/mappings
+- env
+    - http://localhost:8080/actuator/env
 
 2. Datasource配置
     - DataSourceAutoConfiguration
@@ -76,6 +83,14 @@
 
 10. 数据库错误码解析 SQLErrorCodeSQLExceptionTranslator
 - 错误码定义：spring-jdbc-5.1.2.RELEASE.jar/org/springframework/jdbc/support/sql-error-codes.xml
+- sql-error-codes.xml注册自定义的CustomSQLErrorCodesTranslation
+
+
+11. JPA
+- Java persistence API
+
+
+
 
 
 

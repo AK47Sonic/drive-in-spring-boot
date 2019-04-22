@@ -39,6 +39,16 @@ public class MySQLConfig {
 
     public List<String> mapperLocationList;
 
+    public String getTypeHandlersPackage() {
+        return typeHandlersPackage;
+    }
+
+    public void setTypeHandlersPackage(String typeHandlersPackage) {
+        this.typeHandlersPackage = typeHandlersPackage;
+    }
+
+    private String typeHandlersPackage;
+
     public void setMapperLocationList(List<String> mapperLocationList) {
         this.mapperLocationList = mapperLocationList;
     }
@@ -70,6 +80,7 @@ public class MySQLConfig {
         factoryBean.setConfiguration(myBatisConfig);
 
         factoryBean.setTypeAliasesPackage("com.sonic.bean");
+        factoryBean.setTypeHandlersPackage(typeHandlersPackage);
 
         PathMatchingResourcePatternResolver patternResolver = new PathMatchingResourcePatternResolver();
         Resource[] resources = mapperLocationList.stream().map(el -> {

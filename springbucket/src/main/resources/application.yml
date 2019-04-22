@@ -10,6 +10,7 @@ datasource:
 mybatis:
   mapperLocationList:
     - classpath*:/mybatis/mapper/*.xml
+  type-handlers-package: com.sonic.handler
 
 # Log
 logging:
@@ -20,4 +21,11 @@ logging:
 spring:
   aop:
     proxy-target-class: false
+
+# management
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
 
