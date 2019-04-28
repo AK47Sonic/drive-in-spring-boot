@@ -6,8 +6,10 @@ import org.apache.ibatis.type.JdbcType;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.mybatis.spring.annotation.MapperScan;
+import org.mybatis.spring.batch.MyBatisCursorItemReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -106,6 +108,14 @@ public class MySQLConfig {
     @Bean("mysqlSqlSessionTemplate")
     public SqlSessionTemplate sqlSessionTemplate(@Qualifier("mysqlSqlSessionFactory") SqlSessionFactory sqlSessionFactory) {
         return new SqlSessionTemplate(sqlSessionFactory);
+    }
+
+    @Bean("sonicMyBatisCursorItemReader")
+    public MyBatisCursorItemReader myBatisCursorItemReader(@Autowired SqlSessionFactory sqlSessionFactory){
+        MyBatisCursorItemReader myBatisCursorItemReader = new MyBatisCursorItemReader();
+        myBatisCursorItemReader.setSqlSessionFactory(sqlSessionFactory);
+        myBatisCursorItemReader.setQueryId("com.sonic.mapper.CoffeeMapper.queryCoffeeById");
+        return myBatisCursorItemReader;
     }
 
 }

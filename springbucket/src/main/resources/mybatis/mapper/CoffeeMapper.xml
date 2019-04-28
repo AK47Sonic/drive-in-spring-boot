@@ -9,4 +9,8 @@
     <select id="queryCoffee" resultType="Coffee">
         select id, name, price from coffee
     </select>
+
+    <select id="queryCoffeeById" resultType="Coffee">
+        select id, name, price from coffee where id = #{id}
+    </select>
 </mapper>

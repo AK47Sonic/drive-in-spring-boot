@@ -2,6 +2,7 @@ package com.sonic.bean;
 
 import org.apache.ibatis.type.Alias;
 import org.joda.money.Money;
+import org.springframework.stereotype.Component;
 
 /**
  * Coffee
@@ -10,6 +11,7 @@ import org.joda.money.Money;
  * @since 2019/4/22
  */
 @Alias("Coffee")
+@Component
 public class Coffee {
     private Long id;
     private String name;
