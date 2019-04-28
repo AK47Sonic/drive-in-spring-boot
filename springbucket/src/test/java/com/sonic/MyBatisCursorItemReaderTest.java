@@ -45,12 +45,6 @@ public class MyBatisCursorItemReaderTest {
         int count = 0;
         try {
             while ((coffee = (Coffee) sonicMyBatisCursorItemReader.read()) != null) {
-                // Fetch next 10 employees
-//            for(int i = 0; i<10 && iter.hasNext(); i++) {
-//                smallChunk.add(iter.next());
-//            }
-//            doSomethingWithAlreadyFetchedEmployees(smallChunk);
-
                 System.out.println("Coffee: " + coffee);
                 ++count;
                 System.out.println(count);
