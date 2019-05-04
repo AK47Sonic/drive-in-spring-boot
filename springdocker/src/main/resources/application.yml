@@ -1,0 +1,10 @@
+# 注意事项
+# 使用外部Tomcat部署访问的时候，application.properties(或者application.yml)中配置的
+# server.port=
+# server.servlet.context-path=
+# 将失效，请使用tomcat的端口，tomcat，webapps下项目名进行访问。
+
+#server:
+#  servlet:
+#    context-path: /testweb
+#  port: 7777

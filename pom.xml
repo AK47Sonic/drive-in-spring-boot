@@ -13,6 +13,7 @@
         <module>springmybatis</module>
         <module>springbootdemo</module>
         <module>springbucket</module>
+        <module>springdocker</module>
     </modules>
     <packaging>pom</packaging>
 
