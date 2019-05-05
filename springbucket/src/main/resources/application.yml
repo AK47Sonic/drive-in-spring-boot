@@ -29,3 +29,15 @@ management:
       exposure:
         include: '*'
 
+person:
+  last-name: zhangsan
+  age: 18
+  boss: false
+  birth: 2019/12/12
+  maps: {k1: v1, k2: v2} # 行内写法
+  lists:
+    - lisi
+    - zhaolu
+  dog:  # 行外写法
+    name: dog
+    age: 2
