@@ -9,8 +9,8 @@ person:
   birth: 2019/12/12
   maps: {k1: v1, k2: v2} # 行内写法
   lists:
-    - lisi
-    - zhaolu
+    - ${person.last-name} # 使用之前定义的值
+    - ${person.last-name1:sky} # 如果定义值找不到，使用默认值
   dog:  # 行外写法
     name: dog
     age: 2

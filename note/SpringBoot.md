@@ -88,11 +88,21 @@
 12. Logback
     - AbstractLoggingSystem#initializeWithConventions 检测装载了哪个配置文件
 
-13. @ConfigurationProperties VS @Value
+13. @ConfigurationProperties VS @Value   
     ![区别](./pic/ConfigValue.JPG)
 
+14. @PropertySource(value = {"classpath:application.properties"}) 加载额外属性文件
 
+15. @ImportResource(value = {"classpath:beans.xml"}) 加载额外配置文件
 
+16. Profiles
+    - `--spring.profiles.active=dev` 程序参数
+    - `-Dspring.profiles.active=dev` JVM参数
+    - spring.profiles.active=dev 配置文件参数
 
+17. `--spring.config.location=` 指定配置文件，互补配置
+
+18. @PropertySource 不支持YAML，只支持properties， 但可以定制MixPropertySourceFactory
+19. @TestPropertySource(value = {"classpath:externalized-config.properties"}) 只支持properties
 
 

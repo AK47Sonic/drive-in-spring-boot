@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
 /**
@@ -19,6 +20,7 @@ import org.springframework.test.context.junit4.SpringRunner;
  */
 @RunWith(SpringRunner.class)
 @ActiveProfiles("test")
+@TestPropertySource(value = {"classpath:externalized-config.properties"})
 @SpringBootTest(classes = {ClientApplication.class})
 public class SpringBootAppTest {
 
@@ -28,12 +30,14 @@ public class SpringBootAppTest {
     ApplicationContext applicationContext;
 
     @Test
-    public void testPerson(){
+    public void testPerson() {
 
         Person person = applicationContext.getBean("person", Person.class);
 
         logger.info("person: {}", person);
-    }
 
+        logger.info("myDog: {}", applicationContext.containsBean("myDog"));
+
+    }
 
 }
