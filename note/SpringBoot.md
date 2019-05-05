@@ -89,6 +89,9 @@
 11. JPA
 - Java persistence API
 
+12. Logback
+- AbstractLoggingSystem#initializeWithConventions 检测装载了哪个配置文件
+
 
 
 

@@ -17,6 +17,7 @@ import java.util.Map;
 @ConfigurationProperties(prefix = "person")
 public class Person {
 
+//    @Value("${person.last-name:#{null}}")
     private String lastName;
     private Integer age;
     private Boolean boss;
