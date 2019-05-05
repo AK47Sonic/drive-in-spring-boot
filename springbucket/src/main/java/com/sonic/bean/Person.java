@@ -2,6 +2,7 @@ package com.sonic.bean;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
+import org.springframework.validation.annotation.Validated;
 
 import java.util.Date;
 import java.util.List;
@@ -15,10 +16,12 @@ import java.util.Map;
  */
 @Component
 @ConfigurationProperties(prefix = "person")
+@Validated
 public class Person {
 
 //    @Value("${person.last-name:#{null}}")
     private String lastName;
+//    @Digits(integer = 1, fraction = 0)
     private Integer age;
     private Boolean boss;
     private Date birth;
