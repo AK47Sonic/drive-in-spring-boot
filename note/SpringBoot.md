@@ -115,6 +115,10 @@
     - FaviconConfiguration 定义图标
 24. thymeleaf
     - 可根据<properties/>切换版本
+    
+25. jsp
+    - DispatcherServlet#processDispatchResult->#render
+    - UrlBasedViewResolver#buildView
 
 
 
