@@ -119,6 +119,9 @@
 25. jsp
     - DispatcherServlet#processDispatchResult->#render
     - UrlBasedViewResolver#buildView
+    - java/resources/webapp在一层
+    - war包根是webapp下面一层
+    
 
 
 
