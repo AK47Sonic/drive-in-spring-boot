@@ -41,3 +41,6 @@ management:
 #  dog:  # 行外写法
 #    name: dog
 #    age: 2
+
+# 查看自动配置是否启用
+#debug: true

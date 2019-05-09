@@ -104,5 +104,17 @@
 
 18. @PropertySource 不支持YAML，只支持properties， 但可以定制MixPropertySourceFactory
 19. @TestPropertySource(value = {"classpath:externalized-config.properties"}) 只支持properties
+20. @EnableConfigurationProperties // 相当于@Configuration或者 @Component + @ConfigurationProperties(prefix = "person")， bean name 不确定
+21. application.yml定义debug=true调试自动装配依赖
+22. logback-spring.xml VS logback.xml
+    - 可以和<springProfile name="uat" />进行配合使用
+    
+23. WebMvcAutoConfiguration
+    - addResourceHandlers (https://www.webjars.org/) 定义web资源和静态文件 ResourceProperties
+    - welcomePageHandlerMapping 定义首页 ResourceProperties
+    - FaviconConfiguration 定义图标
+24. thymeleaf
+    - 可根据<properties/>切换版本
+
 
 

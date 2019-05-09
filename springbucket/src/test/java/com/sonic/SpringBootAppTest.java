@@ -12,6 +12,8 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Arrays;
+
 /**
  * SpringBootAppTest
  *
@@ -32,11 +34,13 @@ public class SpringBootAppTest {
     @Test
     public void testPerson() {
 
-        Person person = applicationContext.getBean("person", Person.class);
+        Person person = applicationContext.getBean( Person.class);
 
         logger.info("person: {}", person);
 
         logger.info("myDog: {}", applicationContext.containsBean("myDog"));
+
+        logger.info("beans: {}", Arrays.toString(applicationContext.getBeanDefinitionNames()));
 
     }
 
