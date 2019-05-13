@@ -113,6 +113,11 @@
     - addResourceHandlers (https://www.webjars.org/) 定义web资源和静态文件 ResourceProperties
     - welcomePageHandlerMapping 定义首页 ResourceProperties
     - FaviconConfiguration 定义图标
+    - @ConditionalOnMissingBean(WebMvcConfigurationSupport.class)
+        - addDefaultHttpMessageConverters 配置Converters
+        - 重写这个方法getMessageConverters#extendMessageConverters，可以手动替换MessageConverter
+    
+    
 24. thymeleaf
     - 可根据<properties/>切换版本
     
@@ -121,7 +126,7 @@
     - UrlBasedViewResolver#buildView
     - java/resources/webapp在一层
     - war包根是webapp下面一层
-    
+
 
 
 
