@@ -116,8 +116,7 @@
     - @ConditionalOnMissingBean(WebMvcConfigurationSupport.class)
         - addDefaultHttpMessageConverters 配置Converters
         - 重写这个方法getMessageConverters#extendMessageConverters，可以手动替换MessageConverter
-    
-    
+     
 24. thymeleaf
     - 可根据<properties/>切换版本
     
@@ -126,7 +125,32 @@
     - UrlBasedViewResolver#buildView
     - java/resources/webapp在一层
     - war包根是webapp下面一层
+    
+26. ViewResolver 视图解析器， 返回View对象
+    - ContentNegotiatingViewResolver#resolveViewName解析视图, 组合所有的视图解析器。
+    
+27. DispatcherServlet
+    1. FrameworkServlet#service(ServletRequest req, ServletResponse res)
+    2. DispatcherServlet#doService->doDispatch->render
 
+28. Converter, Formatter
+
+29. 实现WebMvcConfigurer，来扩展Spring MVC 的功能
+    - 例子
+    ```text
+    @Configuration
+    public class MyMvcConfig implements WebMvcConfigurer {
+        @Override
+        public void addViewControllers(ViewControllerRegistry registry) {
+            registry.addViewController("/ss").setViewName("success");
+        }
+    }
+    ```
+    - 原理：
+        - WebMvcAutoConfigurationAdapter#EnableWebMvcConfiguration#DelegatingWebMvcConfiguration#setConfigurers注册Configurers到WebMvcConfigurerComposite
+        - 遍历WebMvcConfigurerComposite调用WebMvcConfigurer的方法
+
+30. 
 
 
 
