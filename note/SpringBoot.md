@@ -149,8 +149,16 @@
     - 原理：
         - WebMvcAutoConfigurationAdapter#EnableWebMvcConfiguration#DelegatingWebMvcConfiguration#setConfigurers注册Configurers到WebMvcConfigurerComposite
         - 遍历WebMvcConfigurerComposite调用WebMvcConfigurer的方法
+        - 不需要@EnableWebMvc，使用此注解，则spring boot自动装配失效，完全手动配置（WebMvcAutoConfiguration中配置的bean都没有注册到容器中）
 
-30. 
+30. ResourceBundleMessageSource 国际化
+    - MessageSourceAutoConfiguration#messageSource
+    - MessageSourceProperties
+    - LocaleResolver/Locale (WebMvcAutoConfiguration#localeResolver) bean名字一定要是localeResolver, 和源码保持一致
+        - WebMvcAutoConfiguration#localeResolver
+        - http://localhost:8080/success （Accept-Language: zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7）
+    
+31. 
 
 
 

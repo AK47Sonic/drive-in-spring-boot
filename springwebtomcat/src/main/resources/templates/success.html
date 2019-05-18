@@ -14,5 +14,13 @@
 <h4>
     <span th:each="user:${users}">[[${user}]]</span>
 </h4>
+
+<h3 th:text="#{success.tip}"></h3>
+
+<form>
+    <a th:href="@{/success(l='zh_CN')}">中文</a>
+    <a th:href="@{/success(l='en_US')}">English</a>
+</form>
+
 </body>
 </html>
