@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+员工列表
+<br/>
+<a th:href="@{/emp}">add</a>
+<br/>
+<div>
+<table>
+    <tbody>
+    <tr th:each="emp:${emps}">
+        <td th:text="${emp.id}"></td>
+        <td>[[${emp.name}]]</td>
+        <td><button>edit</button></td>
+        <td><button>delete</button></td>
+    </tr>
+    </tbody>
+</table>
+
+</div>
+
+</body>
+</html>

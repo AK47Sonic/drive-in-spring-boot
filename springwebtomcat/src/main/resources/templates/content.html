@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+主页
+<br/>
+UserName:<a>[[${session.loginUser}]]</a>
+<br/>
+<ol>
+    <li><a th:href="@{/emps}">员工管理</a></li>
+</ol>
+
+</body>
+</html>

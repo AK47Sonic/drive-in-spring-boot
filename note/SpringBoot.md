@@ -158,7 +158,22 @@
         - WebMvcAutoConfiguration#localeResolver
         - http://localhost:8080/success （Accept-Language: zh-CN,zh;q=0.9,en-US;q=0.8,en;q=0.7）
     
-31. 
+31. ThymeleafAutoConfiguration
+    - ThymeleafProperties#DEFAULT_PREFIX
+    - ThymeleafProperties#DEFAULT_SUFFIX
+    
+32. Model/ModelAndView/Map/ModelAndView 都可放在请求域中
+33. ThymeleafViewResolver
+    - REDIRECT_URL_PREFIX
+    - FORWARD_URL_PREFIX
+    - createView
+    
+34. Servlet
+    - HttpServletResponse#sendRedirect(); 两次请求，所以地址变化
+    - HttpServletRequest#getRequestDispatcher#forward(request,response); 一次请求，所以地址不变
+    
+
+
 
 
 

@@ -17,9 +17,17 @@
 
 <h3 th:text="#{success.tip}"></h3>
 
-<form>
+<form th:action="@{/content}" method="post">
+    userName:<input th:name="userName"/>
+    <br/>
+    password:<input th:name="password"/>
+    <br/>
+    <button th:name="login" type="submit">登录</button>
+    <br/>
     <a th:href="@{/success(l='zh_CN')}">中文</a>
     <a th:href="@{/success(l='en_US')}">English</a>
+    <br/>
+    <p style="color: red" th:text="${msg}" th:if="${not #strings.isEmpty(msg)}"></p>
 </form>
 
 </body>
