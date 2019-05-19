@@ -15,7 +15,7 @@
     <tr th:each="emp:${emps}">
         <td th:text="${emp.id}"></td>
         <td>[[${emp.name}]]</td>
-        <td><button>edit</button></td>
+        <td><a th:href="@{/emp/}+${emp.id}">edit</a></td>
         <td><button>delete</button></td>
     </tr>
     </tbody>

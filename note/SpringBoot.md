@@ -172,8 +172,11 @@
     - HttpServletResponse#sendRedirect(); 两次请求，所以地址变化
     - HttpServletRequest#getRequestDispatcher#forward(request,response); 一次请求，所以地址不变
     
+35. Put方式
+    - HiddenHttpMethodFilter 转变请求方式，因为表单提交只支持get/post, 不支持put/delete/patch
 
-
-
-
-
+36. redirect VS forward
+    - form表单：可以采用post或者get请求，客户端主动跳转，url地址会改变为提交后的地址
+    - forward：forward是转发请求，不转发地址。服务器直接访问目标地址，把目标地址响应内容读取过来，然后再发送到客户端，客户端浏览器根本不知道服务器的内容是从其他的目标地址获取的，客户端url地址也不会改变。forward不但转发请求内容，还把请求的方式也转发了，所以forward的请求是get还是post取决于启用forward的源请求是post方式还是get方式，如：a.jsp 以 post 方式调b.jsp，那么b.jsp 以forward的方式访问c.jsp也会以post方式访问。
+    - redirect：redirect是通过服务端向客户端发送状态码，在客户端跳转url，redirect都是get的方式请求，而且url地址会跳转到目标地址
+    - redirect会进行两次request和两次response，并且地址和参数都被暴露出来，forward只会进行一次请求，效率更高而且可以隐藏信息

@@ -6,7 +6,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,7 +42,7 @@ public class EmpController {
     }
 
     @PostMapping("/emp")
-    public String addEmp(Employee employee){
+    public String addEmp(Employee employee) {
 
         logger.info("employee: {}", employee);
 
@@ -49,6 +51,20 @@ public class EmpController {
 
         return "redirect:/emps";
 //        return "forward:/emps";
+    }
+
+    @GetMapping("/emp/{id}")
+    public String toEditPage(@PathVariable("id") Integer id, Model model) {
+        logger.info("id: {}", id);
+
+        model.addAttribute("emp", getEmps(id));
+        return "emp/edit";
+    }
+
+    @PutMapping("/emp")
+    public String updateEmp(Employee employee){
+        logger.info("employee: {}", employee);
+        return "redirect:/emps";
     }
 
     private List<Employee> getEmps() {
@@ -72,6 +88,15 @@ public class EmpController {
         employeeList.add(employee3);
 
         return employeeList;
+    }
+
+    private Employee getEmps(Integer id) {
+
+        Employee employee1 = new Employee();
+        employee1.setId(1);
+        employee1.setName("Sky");
+
+        return employee1;
     }
 
 }
