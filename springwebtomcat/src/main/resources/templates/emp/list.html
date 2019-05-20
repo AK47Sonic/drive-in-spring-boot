@@ -10,16 +10,23 @@
 <a th:href="@{/emp}">add</a>
 <br/>
 <div>
-<table>
-    <tbody>
-    <tr th:each="emp:${emps}">
-        <td th:text="${emp.id}"></td>
-        <td>[[${emp.name}]]</td>
-        <td><a th:href="@{/emp/}+${emp.id}">edit</a></td>
-        <td><button>delete</button></td>
-    </tr>
-    </tbody>
-</table>
+    <table>
+        <tbody>
+        <tr th:each="emp:${emps}">
+            <td th:text="${emp.id}"></td>
+            <td>[[${emp.name}]]</td>
+            <td><a th:href="@{/emp/}+${emp.id}">edit</a></td>
+
+            <td>
+                <form th:action="@{/emp/}+${emp.id}" method="post">
+                    <input hidden name="_method" value="delete">
+                    <input hidden name="input2" value="input2_value">
+                    <button type="submit">delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 
 </div>
 
