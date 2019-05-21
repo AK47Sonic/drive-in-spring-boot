@@ -182,9 +182,14 @@
     - redirect会进行两次request和两次response，并且地址和参数都被暴露出来，forward只会进行一次请求，效率更高而且可以隐藏信息
 
 37. ErrorMvcAutoConfiguration
-    - errorAttributes (DefaultErrorAttributes)
+    - errorAttributes (DefaultErrorAttributes) 存放共享信息，给DefaultErrorViewResolver使用
     - basicErrorController (BasicErrorController) 处理error请求 （@RequestMapping("${server.error.path:${error.path:/error}}")）
-        - errorHtml 产生HTML数据
-        - error 产生json数据
+        - errorHtml 产生HTML数据    
+        ![MediaType](pic/MediaType.JPG)
+        - error 产生json数据     
+        ![MediaTypeJson](pic/MediaTypeJson.JPG) 
     - errorPageCustomizer (ErrorPageCustomizer) 系统出现错误以后，来到error请求进行处理(@Value("${error.path:/error}"))
     - DefaultErrorViewResolverConfiguration#conventionErrorViewResolver (DefaultErrorViewResolver)
+        - 有模板引擎的情况下，在模板引擎根路径下建立error/404
+        - 没有模板引擎情况下，在静态资源文件夹下static/error/404.html
+        - 以上都没有，走默认Spring Boot错误页面 new ModelAndView("error", model);
