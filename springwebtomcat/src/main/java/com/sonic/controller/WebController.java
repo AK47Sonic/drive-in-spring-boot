@@ -1,5 +1,6 @@
 package com.sonic.controller;
 
+import com.sonic.exception.UserNotExistException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -25,7 +26,10 @@ public class WebController {
 
     //JSP 和 Thymeleaf不兼容 (JSP)
     @RequestMapping("/hello")
-    public String hello() {
+    public String hello(@RequestParam("user") String user) {
+        if(user.equals("aaa")){
+            throw new UserNotExistException();
+        }
         return "hello";
     }
 

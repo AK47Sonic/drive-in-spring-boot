@@ -193,3 +193,6 @@
         - 有模板引擎的情况下，在模板引擎根路径下建立error/404
         - 没有模板引擎情况下，在静态资源文件夹下static/error/404.html
         - 以上都没有，走默认Spring Boot错误页面 new ModelAndView("error", model);
+
+38. InvocableHandlerMethod
+    - doInvoke
