@@ -14,6 +14,19 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
  */
 @Configuration
 public class MyMvcConfig implements WebMvcConfigurer {
+
+//    @Bean
+//    public WebServerFactoryCustomizer<ConfigurableWebServerFactory> webServerFactoryCustomizer() {
+//        // 订制嵌入式的servlet容器相关的规则
+////        return new WebServerFactoryCustomizer<ConfigurableWebServerFactory>() {
+////            @Override
+////            public void customize(ConfigurableWebServerFactory factory) {
+////                factory.setPort(8081);
+////            }
+////        };
+//        return (factory) -> factory.setPort(8081);
+//    }
+
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/ss").setViewName("success");
