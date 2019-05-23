@@ -8,6 +8,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpSession;
 import java.util.Arrays;
@@ -54,6 +55,12 @@ public class WebController {
             map.put("msg", "password is not right");
             return "success";
         }
+    }
+
+    @RequestMapping("/json")
+    @ResponseBody
+    public String getJson() {
+        return "jsonString";
     }
 
 }

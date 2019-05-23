@@ -195,13 +195,21 @@
         - 以上都没有，走默认Spring Boot错误页面 new ModelAndView("error", model);
 
 38. MVC调用流程
-    - InvocableHandlerMethod
-        - doInvoke
+    - DispatcherServlet#doService->#doDispatch
+    - RequestMappingHandlerAdapter#handle->#handleInternal->#invokeHandlerMethod(modelFactory.initModel)
+    - ServletInvocableHandlerMethod#invokeAndHandle
+    - InvocableHandlerMethod#invokeForRequest
+    - HandlerMethodReturnValueHandler 遍历获取HandlerMethodReturnValueHandler
+        - RequestResponseBodyMethodProcessor#handleReturnValue -> HttpMessageConverter
+        - ViewNameMethodReturnValueHandler
+
+39. 主要类    
+    - ModelAndViewContainer
     - RequestMappingHandlerMapping
 
-39. @ControllerAdvice
+40. @ControllerAdvice
     
-39. 嵌入式Servlet容器
+41. 嵌入式Servlet容器
     - 修改server有关的配置(ServerProperties)
         - server.port=8081
         - server.servlet.context-path=/crud
