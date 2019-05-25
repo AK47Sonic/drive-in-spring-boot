@@ -250,8 +250,25 @@
         - 优点： 简单，便携
         - 默认不支持JSP，优化订制比较复杂 （ServerProperties，ServletWebServerFactoryCustomizer， TomcatServletWebServerFactory）
     - 外置（war包）
-        - 
-        
-    
+        - 只能直接访问webapp下的jsp，不能访问WEB-INF下的
+        - 必须实现SpringBootServletInitializer#configure
+    - 原理
+        - jar包：执行SpringBoot主类的main方法，启动IOC容器，创建嵌入式的Servlet容器
+        - war包：启动服务器，服务器启动SpringBoot应用[SpringBootServletInitializer], 启动IOC容器
+            - servlet 3.0 规范 （8.2.4 Shared libraries/runtimes pluggability）
+                - 服务器web应用启动，会创建当前web应用里面每一个jar包里面的ServletContainerInitializer的实现类的实例
+                - ServletContainerInitializer的实现放在jar包的META-INF/services文件夹下，有一个名为javax.servlet.ServletContainerInitializer的文件，内容就是ServletContainerInitializer的实现类的全类名
+                - 还可以使用`@HandlesTypes`，在应用启动的时候加载我们感兴趣的类
+    - 流程
+        1. 启动Tomcat
+        2. 在所有jar下，寻找META-INF/services文件夹下ServletContainerInitializer -> org.springframework.web.SpringServletContainerInitializer
+            ![SPI](./pic/Tomcat.JPG)
+        3. SpringServletContainerInitializer将`@HandlesTypes(WebApplicationInitializer.class)`标注的类型的类传入到#onStartup方法的`Set<Class<?>> webAppInitializerClasses`, 为WebApplicationInitializer类型的类创建实例
+            - 相当于SpringBootServletInitializer的类会被创建对象，并执行onStartup方法
+        4. 每一个WebApplicationInitializer都调用自己的onStartup (SpringBootServletInitializer#onStartup)
+        5. SpringBootServletInitializer实例执行onStartup的时候，会调用#createRootApplicationContext创建容器
+            - 调用`configure`方法
+            - 创建SpringApplication
+            - 启动Spring应用
     
     
