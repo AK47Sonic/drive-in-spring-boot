@@ -271,4 +271,10 @@
             - 创建SpringApplication
             - 启动Spring应用
     
-    
+48. 读属性文件
+    - PropertySourceLoader
+        - PropertiesPropertySourceLoader
+        - YamlPropertySourceLoader
+    - ResourceLoader
+        - DefaultResourceLoader
+        - PathMatchingResourcePatternResolver
