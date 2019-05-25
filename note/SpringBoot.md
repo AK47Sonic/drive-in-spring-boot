@@ -278,3 +278,49 @@
     - ResourceLoader
         - DefaultResourceLoader
         - PathMatchingResourcePatternResolver
+        
+49. Docker
+    - docker主机（Host）：安装了docker程序的机器
+    - docker客户端（Client），连接docker主机进行操作
+    - docker仓库（Registries/Repository），保存各种打包好的软件镜像
+    - docker镜像（Image）, 软件打包好的镜像，放在docker仓库中
+    - docker容器（Container），镜像启动后的实例称为一个容器，容器是独立运行的一个或一组应用
+    
+50. Docker Command
+    - `uname -r` (内核必须3.10以上版本，3.10.0-693.el7.x86_64)
+    - `yum update` 升级内核
+    - `yum install docker` 安装docker
+    - `systemctl start docker` 启动docker 
+    - `systemctl stop docker` 停止docker
+    - `docker -v` 查看docker 版本号，Docker version 1.13.1, build 774336d/1.13.1
+    - `systemctl enable docker` docker开机启动
+    - `docker search mysql` 去docker hub搜索
+    - `docker pull mysql:5.5` 拉取tag 5.5镜像
+    - `docker images` 查看所有镜像
+    - `docker rmi imageID` 删除镜像
+    - `docker run --name mytomcat -d -p 主机端口:容器端口 hub.c.163.com/library/tomcat:latest` 启动容器
+    - `docker ps -a` 查看所有运行过的容器
+    - `docker stop containerID/containerName` 停止容器
+    - `docker start containerID/containerName` 启动容器
+    - `docker rm containerID` 删除容器
+    - `docker logs containerID/containerName` 查看容器日志
+    - `docker exec -it mysql01 /bin/bash` 进入容器
+
+51. MySQL docker
+    - `docker run -p3306:3306 --name mysql01 -e MYSQL_ROOT_PASSWORD=123456 -d mysql`
+    - `docker exec -it mysql01 /bin/bash`
+    - MySQL 8.0会有caching-sha2-password问题
+        ```text
+        mysql -uroot -p123456
+        use mysql;
+        #修改加密规则 
+        ALTER USER 'root'@'%' IDENTIFIED BY '123456' PASSWORD EXPIRE NEVER; 
+        #更新密码（mysql_native_password模式）
+        ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '{123456}';
+        flush privileges;
+        ```
+52. 
+    
+    
+    
+    
