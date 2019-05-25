@@ -225,3 +225,33 @@
     
 43. DispatcherServletAutoConfiguration
     - DispatcherServletRegistrationBean
+    
+44. Servlet容器
+    - Tomcat （默认 ）
+    - Jetty
+    - Undertow
+    
+45. 内嵌容器自动化配置原理
+    - ServletWebServerFactoryAutoConfiguration
+        - ServletWebServerFactoryConfiguration.EmbeddedTomcat.class
+            - AbstractApplicationContext#refresh -> #onRefresh -> ServletWebServerApplicationContext#createWebServer -> TomcatWebServer#initialize -> Tomcat#start
+            - ServletWebServerApplicationContext#finishRefresh -> #startWebServer (备用)
+       - ServletWebServerFactoryConfiguration.EmbeddedJetty.class
+       - ServletWebServerFactoryConfiguration.EmbeddedUndertow.class
+       
+46. ApplicationContext
+    - AnnotationConfigApplicationContext
+    - ClassPathXmlApplicationContext
+    - AnnotationConfigServletWebServerApplicationContext
+    - XmlServletWebServerApplicationContext
+    
+47. Tomcat
+    - 内置（可执行jar）
+        - 优点： 简单，便携
+        - 默认不支持JSP，优化订制比较复杂 （ServerProperties，ServletWebServerFactoryCustomizer， TomcatServletWebServerFactory）
+    - 外置（war包）
+        - 
+        
+    
+    
+    
