@@ -214,5 +214,14 @@
         - server.port=8081
         - server.servlet.context-path=/crud
         - server.tomcat.uri-encoding=UTF-8
-    - WebServerFactoryCustomizer
-        - customize
+    - ServletWebServerFactoryAutoConfiguration
+        - WebServerFactoryCustomizer 通过WebServerFactoryCustomizerBeanPostProcessor#postProcessBeforeInitialization进行遍历
+            - customize
+
+42. 注册Servlet三大组件
+    - Servlet (ServletRegistrationBean)
+    - Filter (FilterRegistrationBean)
+    - Listener (ServletListenerRegistrationBean)
+    
+43. DispatcherServletAutoConfiguration
+    - DispatcherServletRegistrationBean
