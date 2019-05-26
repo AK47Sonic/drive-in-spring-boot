@@ -346,4 +346,24 @@
 53. JdbcTemplateAutoConfiguration
     - 自动配置了JdbcTemplate操作数据库
     
+54. SpringData JPA（Object Relational Mapping）
+    - 编写一个实体类（bean）和数据表进行映射， 并标注@Entity
+    - 编写一个Dao接口来操作实体类对应的表（Repository）, 并标注@Repository
+    - 基本配置
+        ```yaml
+          jpa:
+            hibernate:
+            # 更新或创建数据表
+              ddl-auto: update
+            # 控制台显示SQL
+            show-sql: true
+        ```
+     - 指定扫包
+        - 方案一、把 @SpringBootApplication 注解的 SpringBoot 入口类移到上层 root 包中，使 JpaRepository 子接口位于 root 包及其子包中。
+        - 方案二、在 SpringBoot 入口类上添加
+            1. @ComponentScan(basePackages = "xxx.xxx.xxx")：扫描 @Controller、@Service 注解；
+            2. @EnableJpaRepositories(basePackages = "xxx.xxx.xxx")：扫描 @Repository 注解；如果开发过程当中使用到了MongoRepository的话，就需要增加@EnableMongoRepositories注解。
+            3. @EntityScan(basePackages = "xxx.xxx.xxx")：扫描 @Entity 注解；
+
+    
     
