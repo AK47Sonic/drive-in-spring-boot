@@ -404,5 +404,18 @@
         - 启动器依赖自动配置， 别人只需要引入启动器（starter）
         - 自定义启动器名：xxx-spring-boot-starter
         - 不能使用spring-boot-maven-plugin，此插件会要求main-class
+        
+57. 缓存
+    - CachingProvider 管理CacheManager
+    - CacheManager 管理Cache
+    - Cache 包含很多Entry
+    - Entry 每一条记录
+    - Expiry 过期时间
+    - `@Cacheable` 标注结果要缓存，如果缓存有，就从缓存拿
+    - `@CacheEvict` 清空缓存
+    - `@CachePut` 更新缓存
+    - `@EnableCaching` 开启注解的缓存
+    - KeyGenerator 缓存数据时Key生成策略
+    - Serialize  缓存数据时Value序列化策略
     
     
