@@ -2,6 +2,7 @@ package com.sonic.controller;
 
 import com.sonic.entity.User;
 import com.sonic.repository.UserRepository;
+import com.sonic.starter.HelloService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,9 @@ public class UserController {
     @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    HelloService helloService;
+
     @GetMapping("/user/{id}")
     public User getUser(@PathVariable("id") Integer id){
         Optional<User> userOptional = userRepository.findById(id);
@@ -36,6 +40,11 @@ public class UserController {
     public User insertUser(User user) {
         User userSave = userRepository.save(user);
         return userSave;
+    }
+
+    @GetMapping("/hello")
+    public String hello(){
+        return helloService.sayHello("hh");
     }
 
 

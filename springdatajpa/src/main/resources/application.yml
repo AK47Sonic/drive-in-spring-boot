@@ -15,3 +15,7 @@ logging:
   level:
     root: info
 
+sonic:
+  hello:
+    prefix: sonic
+    suffix: hello world

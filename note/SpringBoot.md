@@ -365,5 +365,44 @@
             2. @EnableJpaRepositories(basePackages = "xxx.xxx.xxx")：扫描 @Repository 注解；如果开发过程当中使用到了MongoRepository的话，就需要增加@EnableMongoRepositories注解。
             3. @EntityScan(basePackages = "xxx.xxx.xxx")：扫描 @Entity 注解；
 
+55. Spring Boot 启动配置原理
+    - 关键接口
+        - ApplicationContextInitializer
+        - SpringApplicationRunListener
+        - ApplicationRunner
+        - CommandLineRunner
+    - 启动流程
+        1. 创建SpringApplication对象
+            - setInitializers
+                - 从类路径下找到META-INF/spring.factories配置的所有ApplicationContextInitializer，保存起来
+            - setListeners
+                - 从类路径下找到META-INF/spring.factories配置的所有ApplicationListener，保存起来
+            - 从多个配置类中找到有main方法的主配置类
+        2. 运行run方法
+            - 从类路径下找到META-INF/spring.factories配置的所有SpringApplicationRunListener，保存起来 
+            - 回调所有的SpringApplicationRunListener#starting
+            - 回调所有的SpringApplicationRunListener#environmentPrepared
+            - 创建ApplicationContext，决定创建web的IOC还是普通的IOC
+            - 准备上下文环境，将Environment保存到IOC中，而且applyInitializer();回调ApplicationContextInitializer#initialize
+            - 回调SpringApplicationRunListener#contextPrepared
+            - 回调SpringApplicationRunListener#contextLoaded
+            - refreshContext刷新容器，扫描所有组件，创建对象
+            - afterRefresh调用IOC容器中的ApplicationRunner、CommandLineRunner
+            - 回调SpringApplicationRunListener#running
+            - 启动完成，返回IOC，ApplicationContext
+    
+56. 自定义starter
+    - `@Configuration`指定配置类
+    - `@ConditionalOnxxx` 在条件成立的情况下，自动配置类生效
+    - `@AutoConfigurexxx` 指定自动配置类的加载顺序
+    - `@Bean` 给容器中添加组件
+    - `@EnableConfigurationProperties`使用`@ConfigurationProperties`结合相关的xxxProperties类来绑定相关的配置，加入到容器中
+    - 在META-INF/spring.factories中配置org.springframework.boot.autoconfigure.EnableAutoConfiguration
+    - 模式
+        - 启动器只用来做依赖导入
+        - 专门写一个自动配置模块
+        - 启动器依赖自动配置， 别人只需要引入启动器（starter）
+        - 自定义启动器名：xxx-spring-boot-starter
+        - 不能使用spring-boot-maven-plugin，此插件会要求main-class
     
     
