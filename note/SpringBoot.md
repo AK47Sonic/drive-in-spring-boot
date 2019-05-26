@@ -222,6 +222,7 @@
     - Servlet (ServletRegistrationBean)
     - Filter (FilterRegistrationBean)
     - Listener (ServletListenerRegistrationBean)
+        - ServletContextListener
     
 43. DispatcherServletAutoConfiguration
     - DispatcherServletRegistrationBean
@@ -319,8 +320,30 @@
         ALTER USER 'root'@'%' IDENTIFIED WITH mysql_native_password BY '{123456}';
         flush privileges;
         ```
-52. 
-    
-    
+52. 数据库DataSourceAutoConfiguration
+    - DataSourceConfiguration
+        - `org.apache.tomcat.jdbc.pool.DataSource`
+        - `com.zaxxer.hikari.HikariDataSource`
+        - `org.apache.commons.dbcp2.BasicDataSource`
+        - 自定义数据源
+    - DataSourceInitializationConfiguration
+        - DataSourceInitializerInvoker (ApplicationListener <- EventListener) 运行建表语句和sql语句（`schema-*.sql`，`data-*.sql`）
+            - DataSourceInitializer
+    - 初始化表, 默认只支持内嵌数据源，必须设置initialization-mode: always
+        ```yaml
+        spring:
+          datasource:
+            username: root
+            password: 123456
+            url: jdbc:mysql://192.168.1.151:3306/jdbc?useSSL=false&allowMultiQueries=true
+            driver-class-name: com.mysql.cj.jdbc.Driver
+            initialization-mode: always
+            schema:
+              - classpath:department.sql
+
+       ```
+
+53. JdbcTemplateAutoConfiguration
+    - 自动配置了JdbcTemplate操作数据库
     
     

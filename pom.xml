@@ -16,6 +16,7 @@
         <module>springdocker</module>
         <module>springwebtomcat</module>
         <module>springwebtomcatjsp</module>
+        <module>springdatajdbc</module>
     </modules>
     <packaging>pom</packaging>
 
