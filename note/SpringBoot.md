@@ -418,4 +418,23 @@
     - KeyGenerator 缓存数据时Key生成策略
     - Serialize  缓存数据时Value序列化策略
     
+58. 使用缓存
+    - `@EnableCaching` 开启基于注解的缓存
+    - `@Cacheable` 标注结果要缓存，如果缓存有，就从缓存拿
+        - cacheNames/value: 指定缓存名字
+        - key: 缓存数据时的key，默认使用方法参数的值，比如：key->员工id1，value->方法返回值,可以使用SpEL (#root.args[0],#id)
+        ![SpringCache](./pic/SpringCache.JPG)   
+        - keyGenerator: key的生成器，可以指定key的生成器的组件id，key和keyGenerator二选一
+        - cacheManager: 缓存管理器， 或者CacheResolver, 二选一
+        - condition: 指定符合条件下，才缓存
+        - unless: 指定的条件为true，方法返回值就不会被缓存，和condition相反，获取到结果来判断
+        - sync: 是否使用异步模式
+    - `@CacheEvict` 清空缓存
+    - `@CachePut` 更新缓存
     
+59. CacheAutoConfiguration
+    - 默认： SimpleCacheConfiguration（ConcurrentMap ）
+    - `@Cacheable`标注的方法执行之前先来检查缓存有没有这个数据，默认按照参数的值作为key去查询缓存，（如果没有参数，使用SimpleKey对象作为参数）如果没有，就运行目标方法，并将结果放入缓存
+    - 原理：
+        - 增加`@Cacheable`的方法的类会被解析为代理类，是通过代理实现的
+        - CacheAspectSupport#execute
