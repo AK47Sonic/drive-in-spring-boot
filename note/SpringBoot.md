@@ -431,6 +431,8 @@
         - sync: 是否使用异步模式
     - `@CacheEvict` 清空缓存
     - `@CachePut` 更新缓存
+    - `@Caching` 组合注解
+    - `@CacheConfig` 缓存的公共配置
     
 59. CacheAutoConfiguration
     - 默认： SimpleCacheConfiguration（ConcurrentMap ）
