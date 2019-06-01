@@ -440,3 +440,12 @@
     - 原理：
         - 增加`@Cacheable`的方法的类会被解析为代理类，是通过代理实现的
         - CacheAspectSupport#execute
+        
+ 60. 安装Redis和集成
+    - https://c.163yun.com/hub#/m/home/
+    - docker pull hub.c.163.com/library/redis:latest
+    - docker run -d -p 6379:6379 --name myredis hub.c.163.com/library/redis
+    - 引入starter：spring-boot-starter-data-redis
+        - stringRedisTemplate (k-v 都是字符串)
+        - redisTemplate （k-v 都是对象）默认使用jdk序列化保存
+    
