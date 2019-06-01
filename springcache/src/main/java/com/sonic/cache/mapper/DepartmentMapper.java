@@ -1,5 +1,8 @@
 package com.sonic.cache.mapper;
 
+import com.sonic.cache.bean.Department;
+import org.apache.ibatis.annotations.Select;
+
 /**
  * DepartmentMapper
  *
@@ -8,4 +11,6 @@ package com.sonic.cache.mapper;
  */
 //@Mapper
 public interface DepartmentMapper {
+    @Select("select * from department where id = #{id}")
+    Department getDeptById(Integer id);
 }

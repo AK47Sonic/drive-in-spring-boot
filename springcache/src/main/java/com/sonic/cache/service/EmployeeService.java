@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.*;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 /**
@@ -22,6 +23,18 @@ public class EmployeeService {
 
     @Autowired
     EmployeeMapper employeeMapper;
+
+    @Autowired
+    RedisTemplate redisTemplate;
+
+    public Employee getEmpManual(Integer id) {
+        logger.info("Query emp: {}", id);
+        Employee emp = employeeMapper.getEmpById(id);
+        redisTemplate.opsForValue().set(id, emp);
+        return emp;
+    }
+
+
 
     //    @Cacheable(cacheNames = {"emp", "temp"}, condition = "#id>0", unless = "#result == null")
     @Cacheable(cacheNames = {"emp"})

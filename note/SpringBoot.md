@@ -448,4 +448,6 @@
     - 引入starter：spring-boot-starter-data-redis
         - stringRedisTemplate (k-v 都是字符串)
         - redisTemplate （k-v 都是对象）默认使用jdk序列化保存
+    - CacheAutoConfiguration -> CacheConfigurationImportSelector.class -> CacheConfigurations#getConfigurationClass -> CacheConfigurations#MAPPINGS -> org.springframework.boot.autoconfigure.cache.RedisCacheConfiguration -> cacheManager
+    - 默认java序列化，使用Json序列化
     
