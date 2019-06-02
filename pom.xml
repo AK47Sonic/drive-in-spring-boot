@@ -18,6 +18,7 @@
         <module>springwebtomcatjsp</module>
         <module>springdatajdbc</module>
         <module>springdatajpa</module>
+        <module>springamqp</module>
     </modules>
     <packaging>pom</packaging>
 

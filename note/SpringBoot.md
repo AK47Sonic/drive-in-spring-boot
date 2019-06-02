@@ -451,3 +451,43 @@
     - CacheAutoConfiguration -> CacheConfigurationImportSelector.class -> CacheConfigurations#getConfigurationClass -> CacheConfigurations#MAPPINGS -> org.springframework.boot.autoconfigure.cache.RedisCacheConfiguration -> cacheManager
     - 默认java序列化，使用Json序列化
     
+61. 消息通信
+    - JMS（Java Message Service) 
+        - ActiveMQ
+        - HornetMQ
+    - AMQP (Advanced Message Queuing Protocol)
+        - RabbitMQ
+    - 仿AMQP
+        - Kafka
+
+62. Spring 消息配置
+    - JmsAutoConfiguration
+    - RabbitAutoConfiguration
+        - CachingConnectionFactory
+        - RabbitProperties
+        - RabbitTemplate
+        - AmqpAdmin: RabbitMQ系统管理功能组件，创建队列，Exchange等
+        - SpringBoot & RabbitMQ
+            - @EnableRabbit
+            - @RabbitListener
+                - 使用对象输出流转字节，才能用输入流转对象
+                - 如果使用String 对象的 getBytes() ，逆操作使用new String(bytes)
+    
+63. RabbitMQ
+    ![RabbitMQ](./pic/RabbitMQ.JPG)
+    - 分类
+        - Direct Exchange 单播模式，根据路由Key，派发给指定Queue
+        - Fanout Exchange 广播模式，不管路由Key，派发给所有Queue
+        - Topic Exchange 根据路由Key，选择性地进行广播
+
+64. RabbitMQ 安装配置
+    - docker pull hub.c.163.com/library/rabbitmq:3-management   
+    - docker run -d -p 5672:5672 -p 25672:15672 --name myrabbitmq fb11f4e0a6b6
+    - http://192.168.1.151:25672/
+    - Account: guest/guest
+    
+    
+    
+    
+
+
