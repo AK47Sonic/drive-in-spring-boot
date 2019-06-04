@@ -486,6 +486,19 @@
     - http://192.168.1.151:25672/
     - Account: guest/guest
     
+65. Elasticsearch
+    -  docker run -e ES_JAVA_OPTS="-Xms256m -Xmx256m" -d -p 9200:9200 -p 9300:9300 --name ES01 7516701e4922
+    - Web port/node port
+    - docker pull hub.c.163.com/library/elasticsearch
+    - docker run -e ES_JAVA_OPTS="-Xms256m -Xmx256m" -d -p 9200:9200 -p 9300:9300 --name ES01 7516701e4922
+    - Spring Boot 支持2种技术和ES交互
+        - Jest 默认不生效
+        - SpringData ElasticSearch  
+            - Client 节点信息
+            - ElasticsearchTemplate 操作ES
+            - ElasticsearchRepository 操作ES，类似JPA
+
+    
     
     
     
