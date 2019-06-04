@@ -497,6 +497,17 @@
             - Client 节点信息
             - ElasticsearchTemplate 操作ES
             - ElasticsearchRepository 操作ES，类似JPA
+            
+66. 异步任务
+    - @EnableAsync
+    - @Async
+    
+67. 定时任务
+    - @EnableScheduling
+    - @Scheduled
+    ![Schedule](./pic/Schedule.JPG)
+    
+68. 
 
     
     
