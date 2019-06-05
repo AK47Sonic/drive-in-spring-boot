@@ -507,7 +507,9 @@
     - @Scheduled
     ![Schedule](./pic/Schedule.JPG)
     
-68. 
+68. Spring Security
+    - 认证 Authentication
+    - 授权 Authorization
 
     
     

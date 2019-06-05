@@ -21,6 +21,7 @@
         <module>springamqp</module>
         <module>springdataelastic</module>
         <module>springtask</module>
+        <module>springsecurity</module>
     </modules>
     <packaging>pom</packaging>
 
