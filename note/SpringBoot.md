@@ -288,24 +288,38 @@
     - docker容器（Container），镜像启动后的实例称为一个容器，容器是独立运行的一个或一组应用
     
 50. Docker Command
-    - `uname -r` (内核必须3.10以上版本，3.10.0-693.el7.x86_64)
+    - `uname -r` (内核最好3.10以上版本，3.10.0-693.el7.x86_64)
+    - `cat /etc/redhat-release` 6,5以上
     - `yum update` 升级内核
     - `yum install docker` 安装docker
     - `systemctl start docker` 启动docker 
     - `systemctl stop docker` 停止docker
     - `docker -v` 查看docker 版本号，Docker version 1.13.1, build 774336d/1.13.1
     - `systemctl enable docker` docker开机启动
+    - `docker --help` docker全部命令介绍 docker images --help
+    - `docker search -s 30 tomcat` 罗列点赞数超过30的镜像
     - `docker search mysql` 去docker hub搜索
     - `docker pull mysql:5.5` 拉取tag 5.5镜像
+    - `docker info` 查看docker 配置信息
     - `docker images` 查看所有镜像
     - `docker rmi imageID` 删除镜像
-    - `docker run --name mytomcat -d -p 主机端口:容器端口 hub.c.163.com/library/tomcat:latest` 启动容器
+    - `docker run --name mytomcat -d -p 主机端口:容器端口 hub.c.163.com/library/tomcat:latest` 启动容器 （P 随机端口）
     - `docker ps -a` 查看所有运行过的容器
     - `docker stop containerID/containerName` 停止容器
     - `docker start containerID/containerName` 启动容器
     - `docker rm containerID` 删除容器
     - `docker logs containerID/containerName` 查看容器日志
-    - `docker exec -it mysql01 /bin/bash` 进入容器
+    - `docker exec -it mysql01 /bin/bash` 进入已启动容器 `docker exec -it mysql01 ls -l /tmp` 直接在容器执行命令，不进入容器
+    - `docker attach containerID` 进入已启动容器
+    - `docker rmi -f $(docker images -qa)` 删除所有镜像 docker ps -a -q | xargs docker rm
+    - `exit` 退出容器并关闭
+    - `ctrl+p+q` 退出容器不关闭
+    - `docker kill containerID` 强制关闭容器
+    - `docker logs -t -f --tail 3` 看docker日志，（时间，追加，最后3行）
+    - `docker top containerID` 看容器内进程
+    - `docker inspect containerID` 查看容器json细节
+    - `docker cp containerID:/tmp/yum.log /root/abc` 复制容器内文件到宿主机 反之，`docker cp /root/abc containerID:/tmp/yum.log`
+    - `docker commit -m="描述" -a="作者" containerID 镜像名:tag` 提交镜像
 
 51. MySQL docker
     - `docker run -p3306:3306 --name mysql01 -e MYSQL_ROOT_PASSWORD=123456 -d mysql`
