@@ -1,0 +1,14 @@
+FROM hub.c.163.com/library/centos
+MAINTAINER Sonic<675737965@qq.com>
+
+ENV MYPATH /usr/local
+WORKDIR $MYPATH
+
+RUN yum -y install vim
+RUN yum -y install net-tools
+
+EXPOSE 80
+
+CMD echo $MYPATH
+CMD echo "success------------------ok"
+CMD /bin/bash

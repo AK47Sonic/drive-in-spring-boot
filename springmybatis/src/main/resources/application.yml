@@ -14,4 +14,5 @@ mybatis:
 logging:
   level:
    com.sonic.mapper: debug
+   com.zaxxer.hikari.pool: debug
 

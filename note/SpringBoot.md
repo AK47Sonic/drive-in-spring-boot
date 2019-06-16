@@ -320,6 +320,10 @@
     - `docker inspect containerID` 查看容器json细节
     - `docker cp containerID:/tmp/yum.log /root/abc` 复制容器内文件到宿主机 反之，`docker cp /root/abc containerID:/tmp/yum.log`
     - `docker commit -m="描述" -a="作者" containerID 镜像名:tag` 提交镜像
+    - `docker run -it -v /宿主机绝对路径目录:/容器内目录:ro 镜像名` 挂载数据卷(只读)
+    - `docker build -f Dockerfile -t 名称空间/名称 .` 从Dockerfile构建镜像
+    - `docker run -it --volumes-from dc01 名称空间/名称` 挂载数据卷(只读)
+    - `docker history 953be22a8d0a` 查看构建镜像层
 
 51. MySQL docker
     - `docker run -p3306:3306 --name mysql01 -e MYSQL_ROOT_PASSWORD=123456 -d mysql`

@@ -29,3 +29,26 @@
         sudo systemctl daemon-reload
         sudo systemctl restart docker
         ```
+ 4. Dockerfile
+    - FROM
+    - MAINTAINER
+    - RUN
+    - EXPOSE
+    - WORKDIR
+    - ENV
+    - ADD 复制+解压
+    - COPY
+    - VOLUME
+    - CMD 多个命令，只有最后一个生效，并且会被docker run的参数替换
+    - ENTRYPOINT 
+    - ONBUILD 触发器，父镜像的ONBUILD会被子镜像构建时触发
+    
+5. Dockerfile demo
+    - docker build -f CentosDockerfile -t mycentos:1.3 .
+    - [Centos docker demo](./docker/CentosDockerfile)
+    
+6. K8s
+    - https://github.com/liuyi01/kubernetes-starter
+    - 
+    
+    

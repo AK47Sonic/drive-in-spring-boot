@@ -3,6 +3,8 @@ package com.sonic.service;
 import com.sonic.StartUpApplication;
 import com.sonic.bean.Department;
 import com.sonic.bean.Employee;
+import com.zaxxer.hikari.HikariDataSource;
+import com.zaxxer.hikari.HikariPoolMXBean;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
@@ -31,6 +33,9 @@ public class EmployeeServiceTest {
 
     @Autowired
     private EmployeeService employeeService;
+
+    @Autowired
+    HikariDataSource dataSource;
 
     @Transactional
     @Test
@@ -194,6 +199,20 @@ public class EmployeeServiceTest {
         int id = 1;
         List<Employee> employees = employeeService.getEmployee(id);
         logger.info("employees: " + employees);
+
+        logger.info("dataSource:{}",dataSource );
+        dataSource.setPassword("aaa");
+        HikariPoolMXBean hikariPoolMXBean = dataSource.getHikariPoolMXBean();
+        hikariPoolMXBean.softEvictConnections();
+
+        List<Employee> employees2 = employeeService.getEmployee(id);
+        logger.info("employees: " + employees2);
+
+//        try {
+//            Thread.sleep(100000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
     }
 
     @Test
