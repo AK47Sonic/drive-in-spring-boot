@@ -51,10 +51,29 @@
         - API Server  负责接收和处理请求
         - Scheduler 调度容器创建的请求
         - Controller Manager 确保控制器健康，而控制器确保容器处于健康状态
+            - 控制器
+                - Replication Controller 老的版本（核心）
+                - ReplicaSet 新的版本（核心）
+                    - Deployment 负责管理无状态应用， 使用ReplicaSet
+                        - HPA（HorizontalPodAutoscaler） 水平Pod自动伸缩控制器
+                    - StatefulSet 负责管理有状态应用， 使用ReplicaSet
+                    - DaemonSet 确保在每一个结点上运行一个副本，而不是随意运行， 使用ReplicaSet
+                    - Job, Cronjob 运行作业和周期性作业， 使用ReplicaSet
     - Node
         - Kubelet 调度的执行者，来运行docker
+        - Kube-proxy 维护servcie转发
+        - etcd （key value存储，类似zookeeper），数据库
+        - DNS 内部设定一个范围
+        - CNI：提供网络
+            - flannel 网络配置
+            - calico 网络配置 网络策略
         - Pod Kubernetes 调度的最小单位，一个Pod上可以包含多个容器，共享同一个网络名称空间，地址相同，共享存储卷 
         - Label Selector 通过标签来过滤资源对象，（key，value） 比如： app=Nginx，pod可以用，其他资源也可用
+    - 网络
+        - 结点网络（node）
+        - 集群网络（service）
+        - Pod网络 （pod）
+
 
 7. 容器编排3剑客
     1. Docker

@@ -37,7 +37,8 @@
 
 
     <select id="getEmployeeAndDept" resultMap="myDifEmp2">
-       SELECT e.id id, e.last_name, e.email, e.gender, e.d_id, d.id did, d.dept_name
+-- e.d_id,
+       SELECT e.id id, e.last_name, e.email, e.gender, d.id did, d.dept_name
        FROM mybatis.tbl_employee e
        INNER JOIN mybatis.tbl_dept d
        ON e.d_id = d.id
