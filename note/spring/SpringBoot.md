@@ -35,3 +35,12 @@
 
 7. Spring Boot 与 JSP 结合
     - spring-configuration-metadata.json中spring.mvc.view.prefix
+    
+8. 模板引擎属性一般实现`AbstractViewResolverProperties`
+
+9. Spring Front Controller是DispatcherServlet, @Controller是Application Controller 或者叫 Command
+
+10. 调用顺序
+    HttpServlet#service -> DispatcherServlet#doDispatch -> @Controller方法 
+
+11. 
