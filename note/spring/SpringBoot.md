@@ -43,4 +43,19 @@
 10. 调用顺序
     HttpServlet#service -> DispatcherServlet#doDispatch -> @Controller方法 
 
-11. 
+11. Rest常用注解
+    - @RequestParam(required=false,defaultValue="Empty") 也支持Servlet规范HttpServletRequest获取
+    - @PathVariable
+    - @Controller
+    - @RestController
+    - @ResponseBody
+    - @RequestMapping(consumes={MediaType.APPLICATION_JSON_VALUE，...}, produces=MediaType.APPLICATION_JSON_VALUE) 使用哪种accept类型判断使用什么content-type
+    - @RequestHeader(value="Accept")
+    - @CookieValue
+    - RequestEntity
+    - ResponseEntity
+
+12. 配置Json/XML
+    - WebMvcConfigurationSupport  
+    
+    
