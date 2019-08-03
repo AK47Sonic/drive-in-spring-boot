@@ -22,6 +22,7 @@
         <module>springdataelastic</module>
         <module>springtask</module>
         <module>springsecurity</module>
+        <module>springhateoas</module>
     </modules>
     <packaging>pom</packaging>
 
