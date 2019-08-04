@@ -30,4 +30,11 @@ public class User extends ResourceSupport {
 
     private String userName;
 
+    @Override
+    public String toString() {
+        return "User{" +
+                "userId=" + userId +
+                ", userName='" + userName + '\'' +
+                '}';
+    }
 }

@@ -58,4 +58,51 @@
 12. 配置Json/XML
     - WebMvcConfigurationSupport  
     
+13. HttpStatus
+    - 401
+    
+14. 监控
+    - management.endpoint
+    
+15. Servlet
+    - Servlet
+        - init
+    - Filter
+        - init
+    - ServletContext
+    - HttpSession
+    - HttpServletRequest
+    - HttpServletResponse
+    - Cookie
+    - Event (ServletContextEvent -> EventObject)
+    - Listener (ServletContextListener -> EventListener, ContextLoaderListener)
+    
+16. Servlet 3.0
+    - 注解
+        - WebServlet
+        - WebFilter
+        - WebListener
+        - ServletSecurity
+        - HttpMethodConstraint
+        - HttpConstraint
+        - WebInitParam
+    - 上下文
+        - AsyncContext/Event/Listener
+    - ServletContainerInitializer(搭配使用HandlesTypes)
+        - META-INF/services (ServiceLoader)
+    - Spring Boot 整合
+        - ServletRegistrationBean
+        - FilterRegistrationBean
+        - RequestContextHolder 获取request
+        - ServletListenerRegistrationBean
+        
+17. 整合JSP
+    - 引入Jasper和Jstl
+    - 实现SpringBootServletInitializer
+    - 配置WebMvcProperties （spring.mvc.view.prefix）
+    - 排查 InternalResourceViewResolver#buildView
+
+    
+     
+
     

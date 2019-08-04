@@ -2,7 +2,9 @@ package com.sonic.controller;
 
 import com.sonic.bean.User;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -26,4 +28,6 @@ public class WebController {
 
         return user;
     }
+
+
 }
