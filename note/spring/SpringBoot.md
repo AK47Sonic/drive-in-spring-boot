@@ -102,6 +102,8 @@
     - 配置WebMvcProperties （spring.mvc.view.prefix）
     - 排查 InternalResourceViewResolver#buildView
 
+18. WebSocket
+    - 
     
      
 

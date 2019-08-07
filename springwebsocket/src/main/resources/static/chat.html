@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>聊天室</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+</head>
+
+<body>
+聊天室内容：
+<br/>
+<textarea id="text_chat_content" readonly="readonly" cols="100" rows="9">
+
+</textarea>
+
+<br/>
+
+user: <input id="in_user_name" value=""/>
+<button id="btn_join">加入聊天室</button>
+<button id="btn_exit">离开聊天室</button>
+<br/>
+
+输入框：<input id="in_msg" value=""/>
+<button id="btn_send">发送消息</button>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        var urlPrefix = 'ws://localhost:8080/chat-room/';
+    })
+</script>
+
+</body>
+
+</html>

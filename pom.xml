@@ -23,6 +23,7 @@
         <module>springtask</module>
         <module>springsecurity</module>
         <module>springhateoas</module>
+        <module>springwebsocket</module>
     </modules>
     <packaging>pom</packaging>
 
