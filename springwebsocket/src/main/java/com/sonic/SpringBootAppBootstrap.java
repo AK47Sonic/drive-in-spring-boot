@@ -1,8 +1,10 @@
 package com.sonic;
 
+import com.sonic.websocket.ChatRoomServerEndpoint;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.web.socket.config.annotation.EnableWebSocket;
 import org.springframework.web.socket.server.standard.ServerEndpointExporter;
 
 /**
@@ -12,6 +14,7 @@ import org.springframework.web.socket.server.standard.ServerEndpointExporter;
  * @since 2019/8/8
  */
 @SpringBootApplication
+@EnableWebSocket
 public class SpringBootAppBootstrap {
     public static void main(String[] args) {
         SpringApplication.run(SpringBootAppBootstrap.class, args);
@@ -22,5 +25,9 @@ public class SpringBootAppBootstrap {
         return new ServerEndpointExporter();
     }
 
+    @Bean
+    public ChatRoomServerEndpoint chatRoomServerEndpoint(){
+        return new ChatRoomServerEndpoint();
+    }
 
 }

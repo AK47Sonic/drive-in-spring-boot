@@ -103,7 +103,7 @@
     - 排查 InternalResourceViewResolver#buildView
 
 18. WebSocket
-    - 
+    - 长连接
     
      
 
