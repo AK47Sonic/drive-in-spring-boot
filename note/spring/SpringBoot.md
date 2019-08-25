@@ -105,6 +105,16 @@
 18. WebSocket
     - 长连接
     
+19. Tomcat
+    - Engine(Catalina)
+    - Host
+    - Context
+    
+20. Embedded Tomcat
+    - ServletWebServerFactoryCustomizer(WebServerFactoryCustomizer)
+    
+
+    
      
 
     
