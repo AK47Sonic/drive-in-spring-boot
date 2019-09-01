@@ -113,6 +113,11 @@
 20. Embedded Tomcat
     - ServletWebServerFactoryCustomizer(WebServerFactoryCustomizer) 自定义Tomcat配置
     
+21. Statement
+    - Statement: SQL注入问题
+    - PreparedStatement： 预编译，无SQL注入问题
+    - CallableStatement: 存储过程
+    
 
     
      
