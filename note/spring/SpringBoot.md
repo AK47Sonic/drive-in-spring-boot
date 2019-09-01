@@ -118,6 +118,22 @@
     - PreparedStatement： 预编译，无SQL注入问题
     - CallableStatement: 存储过程
     
+22. HttpStatus
+    - 查看错误码
+    
+23. MediaType
+    - 包括浏览器支持的各种类型
+    
+24. Transaction
+    - @EnableTransactionManagement
+    - @Transactional
+    - TransactionInterceptor
+    - TransactionDefinition    
+    - Isolation
+    
+
+    
+
 
     
      
