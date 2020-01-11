@@ -47,9 +47,23 @@
 - core: 资源管理（Resource）, 泛型处理（GenericTypeResolver）
 - beans: 依赖查找（BeanFactory），依赖注入（AutowiredAnnotationBeanPostProcessor）
 - context：事件驱动（ApplicationEvent）， 注解驱动（Component, ComponentScan），模块驱动（EnableCaching, EnableAspectJAutoProxy）
+ ![Ioc](../pic/IOC.JPG)
+ 
 
-#### DI/IOC
-- DI是IOC的一种实现方式， 原本是A对象要调用B对象，即主动创建B对象，现在则需要依赖容器去创建B对象，才能调用，属于被动方式
+
+#### DI/IoC
+- DI是IoC的一种实现方式， 原本是A对象要调用B对象，即主动创建B对象，现在则需要依赖容器去创建B对象，才能调用，属于被动方式
+- IoC实现方式：
+    - Java Beans
+    - Java ServiceLoader SPI
+    - JNDI
+- Ioc 其实是一种推的模式（通常使用的是拉的模式），观察者模式的扩展都属于Ioc
+  
+#### Java Beans
+- Introspector(自省)  
+- PropertyEditorSupport(接口：PropertyEditor)
+- 构造注入/Set注入（构造注入：属性申明final，不变对象）
+
 
 
 
