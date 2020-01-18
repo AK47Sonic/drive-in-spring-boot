@@ -63,9 +63,22 @@
 - Introspector(自省)  
 - PropertyEditorSupport(接口：PropertyEditor)
 - 构造注入/Set注入（构造注入：属性申明final，不变对象）
-
-
-
+- 依赖查找
+    - getBean
+    - ObjectFactoryCreatingFactoryBean的createInstance会被反射调用，返回TargetBeanObjectFactory（ObjectFactory），TargetBeanObjectFactory会beanFactory中getBean
+    - getBeansOfType 返回同一类型的多个beans
+    - getBeansWithAnnotation 通过Annotation获取beans
+- 依赖注入
+    - `<util:list>`
+    - `autowire="byType"`
+- bean分类
+    - 自定义bean DefaultListableBeanFactory#beanDefinitionMap
+    - 容器内建bean DefaultSingletonBeanRegistry#singletonObjects
+    - 容器内建依赖（非容器的bean） AbstractApplicationContext#prepareBeanFactory->beanFactory.registerResolvableDependency
+- ApplicationContext VS BeanFactory
+    - XmlBeanDefinitionReader#loadBeanDefinitions
+    - AnnotationConfigApplicationContext#register, refresh
+    
 
 
 
