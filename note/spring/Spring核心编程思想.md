@@ -88,7 +88,32 @@
     - Lazy initialization mode
     - Initialization method
     - Destruction method
+- BeanDefinition
+    - GenericBeanDefinition
+    - RootBeanDefinition
+    - AnnotatedBeanDefinition
 - BeanNameGenerator
+    - DefaultBeanNameGenerator
+    - AnnotationBeanNameGenerator
+- BeanDefinition注册
+    - XML配置
+    - 注解配置
+        - @Bean
+        - @Component
+        - @Import
+    - Java API
+        - BeanDefinitionReaderUtils#registerWithGeneratedName (无bean name)
+        - BeanDefinitionRegistry#registerBeanDefinition (有bean name)
+        - AnnotatedBeanDefinitionReader#register
+- BeanDefinition实例化
+    - 构造器
+    - factory-bean 工厂方法 （XML）
+    - factory-method 静态工厂 （XML）
+    - FactoryBean
+    - ServiceLoaderFactoryBean
+    - AutowireCapableBeanFactory#createBean
+ 
+    
 
 
 
