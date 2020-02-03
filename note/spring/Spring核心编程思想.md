@@ -78,7 +78,18 @@
 - ApplicationContext VS BeanFactory
     - XmlBeanDefinitionReader#loadBeanDefinitions
     - AnnotationConfigApplicationContext#register, refresh
-    
+- BeanDefinition
+    - Class
+    - Name
+    - Scope
+    - Constructor arguments
+    - Properties
+    - Autowiring mode
+    - Lazy initialization mode
+    - Initialization method
+    - Destruction method
+- BeanNameGenerator
+
 
 
 
