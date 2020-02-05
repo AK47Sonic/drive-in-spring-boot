@@ -112,6 +112,23 @@
     - FactoryBean
     - ServiceLoaderFactoryBean
     - AutowireCapableBeanFactory#createBean
+- 初始化
+    - @PostConstruct
+    - InitializingBean
+    - XML <bean init-method/>
+    - Java注解 @Bean(initMethod)
+    - AbstractBeanDefinition#setInitMethodName
+- 延迟初始化
+    - XML <bean lazy-init/>
+    - @Lazy(true)
+- Bean销毁 (applicationContext#close)
+    - @PreDestroy
+    - DisposableBean
+    - XML <bean destroy-method/>
+    - Java注解 @Bean(destroyMethod)
+    - AbstractBeanDefinition#setDestroyMethodName
+
+
  
     
 
