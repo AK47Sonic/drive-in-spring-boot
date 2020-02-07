@@ -121,7 +121,7 @@
 - 延迟初始化
     - XML <bean lazy-init/>
     - @Lazy(true)
-- Bean销毁 (applicationContext#close)a
+- Bean销毁 (applicationContext#close)
     - @PreDestroy
     - DisposableBean
     - XML <bean destroy-method/>
