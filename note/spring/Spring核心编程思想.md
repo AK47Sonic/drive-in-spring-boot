@@ -121,14 +121,14 @@
 - 延迟初始化
     - XML <bean lazy-init/>
     - @Lazy(true)
-- Bean销毁 (applicationContext#close)
+- Bean销毁 (applicationContext#close)a
     - @PreDestroy
     - DisposableBean
     - XML <bean destroy-method/>
     - Java注解 @Bean(destroyMethod)
     - AbstractBeanDefinition#setDestroyMethodName
-
-
+- 注册外部单例
+    - DefaultListableBeanFactory#registerSingleton
  
     
 
