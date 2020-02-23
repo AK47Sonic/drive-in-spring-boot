@@ -129,6 +129,9 @@
     - AbstractBeanDefinition#setDestroyMethodName
 - 注册外部单例
     - DefaultListableBeanFactory#registerSingleton
+- 层次性的依赖查找HierarchicalBeanFactory#getParentBeanFactory
+    - containsLocalBean
+    - BeanFactoryUtils#beanOfTypeIncludingAncestors (递归) 
  
     
 

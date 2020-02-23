@@ -24,6 +24,7 @@
         <module>springsecurity</module>
         <module>springhateoas</module>
         <module>springwebsocket</module>
+        <module>purejpademo</module>
     </modules>
     <packaging>pom</packaging>
 
