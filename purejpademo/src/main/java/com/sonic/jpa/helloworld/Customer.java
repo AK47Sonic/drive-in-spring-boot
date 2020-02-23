@@ -42,6 +42,18 @@ public class Customer {
 
     //    @Column(name = "ID")
     @GeneratedValue(strategy = GenerationType.IDENTITY) // 默认auto是sequence,版本不同有差别
+//    @TableGenerator(name = "id_generator", table = "jpa_id_generators",
+//            pkColumnName = "pk_name", pkColumnValue = "customer_id", valueColumnName = "pk_value",
+//            allocationSize = 1)
+//    @GeneratedValue(strategy = GenerationType.TABLE, generator = "id_generator")
+    /**
+     * jpa_id_generators：
+     *     id  pk_name      pk_value
+     * ------  -----------  ----------
+     *      3  order_id            100
+     *      2  student_id           10
+     *      1  customer_id           3
+     */
     @Id
     public Integer getId() {
         return id;
@@ -82,4 +94,15 @@ public class Customer {
         return "lastName: " + lastName + ", email: " + email;
     }
 
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "id=" + id +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", age=" + age +
+                ", createdTime=" + createdTime +
+                ", birth=" + birth +
+                '}';
+    }
 }
