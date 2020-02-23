@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import java.util.Date;
 
 /**
  * MainApp
@@ -17,10 +18,14 @@ public class MainApp {
         EntityManager entityManager = entityManagerFactory.createEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
+
         Customer customer = new Customer();
         customer.setAge(12);
         customer.setEmail("Sonic@qq.com");
         customer.setLastName("Sonic");
+        customer.setCreatedTime(new Date());
+        customer.setBirth(new Date());
+
         entityManager.persist(customer);
         transaction.commit();
         entityManager.close();
