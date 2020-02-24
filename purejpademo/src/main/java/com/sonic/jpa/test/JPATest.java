@@ -1,11 +1,15 @@
 package com.sonic.jpa.test;
 
 import com.sonic.jpa.helloworld.Customer;
+import com.sonic.jpa.helloworld.Order;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.persistence.*;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
 import java.util.Date;
 
 /**
@@ -209,6 +213,61 @@ public class JPATest {
         Customer customer = entityManager.find(Customer.class, 1);
         System.out.println("----------------------------------------------");
         System.out.println("customer: " + customer);
+    }
+
+    /**
+     * 保存多对一时，建议先保存1，后保存n，这样不会多出额外的update语句
+     */
+    @Test
+    public void testManyToOnePersist() {
+        Customer customer = new Customer();
+
+        customer.setAge(15);
+        customer.setEmail("hh@qq.com");
+        customer.setLastName("hh");
+        customer.setCreatedTime(new Date());
+        customer.setBirth(new Date());
+
+        Order order1 = new Order();
+        order1.setOrderName("O-hh-1");
+
+        Order order2 = new Order();
+        order2.setOrderName("O-hh-2");
+
+        order1.setCustomer(customer);
+        order2.setCustomer(customer);
+
+        entityManager.persist(customer);
+        entityManager.persist(order1);
+        entityManager.persist(order2);
+
+    }
+
+    /**
+     * 左外连接
+     */
+    @Test
+    public void testManyToOneFind() {
+//        Customer customer = entityManager.find(Customer.class, 11);
+//        System.out.println(customer.getEmail());
+        Order order = entityManager.find(Order.class, 1);
+        System.out.println(order.getOrderName());
+        System.out.println(order.getCustomer().getEmail());
+    }
+
+    @Test
+    public void testManyToOneRemove(){
+        Order order = entityManager.find(Order.class, 6);
+//  Wrong
+//        Order order = new Order();
+//        order.setId(8);
+        entityManager.remove(order);
+    }
+
+    @Test
+    public void testManyToOneUpdate() {
+        Order order = entityManager.find(Order.class, 1);
+        order.getCustomer().setLastName("Sky222");
     }
 
 }
