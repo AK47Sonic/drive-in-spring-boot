@@ -2,6 +2,8 @@ package com.sonic.jpa.helloworld;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Customer
@@ -21,6 +23,18 @@ public class Customer {
 
     private Date createdTime;
     private Date birth;
+
+    private Set<Order> orders = new HashSet<>();
+
+    @JoinColumn(name = "CUSTOMER_ID")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
+    }
 
     @Temporal(value = TemporalType.TIMESTAMP)
     public Date getCreatedTime() {

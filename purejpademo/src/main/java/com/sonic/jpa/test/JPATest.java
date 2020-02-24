@@ -6,10 +6,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.EntityTransaction;
-import javax.persistence.Persistence;
+import javax.persistence.*;
 import java.util.Date;
 
 /**
@@ -215,59 +212,113 @@ public class JPATest {
         System.out.println("customer: " + customer);
     }
 
+//    /**
+//     * 保存多对一时，建议先保存1，后保存n，这样不会多出额外的update语句
+//     */
+//    @Test
+//    public void testManyToOnePersist() {
+//        Customer customer = new Customer();
+//
+//        customer.setAge(15);
+//        customer.setEmail("hh@qq.com");
+//        customer.setLastName("hh");
+//        customer.setCreatedTime(new Date());
+//        customer.setBirth(new Date());
+//
+//        Order order1 = new Order();
+//        order1.setOrderName("O-hh-1");
+//
+//        Order order2 = new Order();
+//        order2.setOrderName("O-hh-2");
+//
+//        order1.setCustomer(customer);
+//        order2.setCustomer(customer);
+//
+//        entityManager.persist(customer);
+//        entityManager.persist(order1);
+//        entityManager.persist(order2);
+//
+//    }
+//
+//    /**
+//     * 左外连接
+//     */
+//    @Test
+//    public void testManyToOneFind() {
+////        Customer customer = entityManager.find(Customer.class, 11);
+////        System.out.println(customer.getEmail());
+//        Order order = entityManager.find(Order.class, 1);
+//        System.out.println(order.getOrderName());
+//        System.out.println(order.getCustomer().getEmail());
+//    }
+//
+//    @Test
+//    public void testManyToOneRemove(){
+//        Order order = entityManager.find(Order.class, 6);
+////  Wrong
+////        Order order = new Order();
+////        order.setId(8);
+//        entityManager.remove(order);
+//    }
+//
+//    @Test
+//    public void testManyToOneUpdate() {
+//        Order order = entityManager.find(Order.class, 1);
+//        order.getCustomer().setLastName("Sky222");
+//    }
+
+
     /**
-     * 保存多对一时，建议先保存1，后保存n，这样不会多出额外的update语句
+     * 单向1-n ：一定会多出update语句
+     * 因为多的一端不维护关联关系（外键），所以不会插入外键列，所以会多出update语句
      */
     @Test
-    public void testManyToOnePersist() {
+    public void testOneToManyPersist() {
         Customer customer = new Customer();
-
         customer.setAge(15);
-        customer.setEmail("hh@qq.com");
-        customer.setLastName("hh");
+        customer.setEmail("QQ@qq.com");
+        customer.setLastName("QQ");
         customer.setCreatedTime(new Date());
         customer.setBirth(new Date());
 
         Order order1 = new Order();
-        order1.setOrderName("O-hh-1");
+        order1.setOrderName("O-QQ-1");
 
         Order order2 = new Order();
-        order2.setOrderName("O-hh-2");
+        order2.setOrderName("O-QQ-2");
 
-        order1.setCustomer(customer);
-        order2.setCustomer(customer);
+        customer.getOrders().add(order1);
+        customer.getOrders().add(order2);
 
         entityManager.persist(customer);
         entityManager.persist(order1);
         entityManager.persist(order2);
-
     }
 
     /**
-     * 左外连接
+     * 默认使用懒加载
      */
     @Test
-    public void testManyToOneFind() {
-//        Customer customer = entityManager.find(Customer.class, 11);
-//        System.out.println(customer.getEmail());
-        Order order = entityManager.find(Order.class, 1);
-        System.out.println(order.getOrderName());
-        System.out.println(order.getCustomer().getEmail());
+    public void testOneToManyFind() {
+        Customer customer = entityManager.find(Customer.class, 18);
+        System.out.println(customer.getLastName());
+        System.out.println(customer.getOrders());
+    }
+
+    /**
+     * 删除1的一端，则会把关联n的一端的外键置空，然后进行删除
+     * 通过{@link CascadeType.REMOVE},级联删除
+     */
+    @Test
+    public void testOneToManyRemove() {
+        Customer customer = entityManager.find(Customer.class, 19);
+        entityManager.remove(customer);
     }
 
     @Test
-    public void testManyToOneRemove(){
-        Order order = entityManager.find(Order.class, 6);
-//  Wrong
-//        Order order = new Order();
-//        order.setId(8);
-        entityManager.remove(order);
-    }
-
-    @Test
-    public void testManyToOneUpdate() {
-        Order order = entityManager.find(Order.class, 1);
-        order.getCustomer().setLastName("Sky222");
+    public void testUpdate() {
+        Customer customer = entityManager.find(Customer.class, 17);
+        customer.getOrders().iterator().next().setOrderName("O-fix-1");
     }
 
 }

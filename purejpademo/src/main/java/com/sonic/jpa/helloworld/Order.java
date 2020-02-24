@@ -16,7 +16,7 @@ public class Order {
 
     private String orderName;
 
-    private Customer customer;
+//    private Customer customer;
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
@@ -40,14 +40,14 @@ public class Order {
     /**
      * 映射单向n-1的关联关系
      */
-    @JoinColumn(name = "CUSTOMER_ID")
-//    @ManyToOne(fetch = FetchType.LAZY) //懒加载
-    @ManyToOne
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
+//    @JoinColumn(name = "CUSTOMER_ID")
+////    @ManyToOne(fetch = FetchType.LAZY) //懒加载
+//    @ManyToOne
+//    public Customer getCustomer() {
+//        return customer;
+//    }
+//
+//    public void setCustomer(Customer customer) {
+//        this.customer = customer;
+//    }
 }
