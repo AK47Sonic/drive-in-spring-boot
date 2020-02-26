@@ -26,8 +26,13 @@ public class Customer {
 
     private Set<Order> orders = new HashSet<>();
 
-    @JoinColumn(name = "CUSTOMER_ID")
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    /**
+     * 在n-1关系中{@link @JoinColumn} 由多维护
+     * 在1-1关系中{@link @JoinColumn}两边都可维护，所以需要只指定一个方
+     * {@link @JoinColumn}如果没有指定name，则会根据字段名自动生成一个列名
+     */
+//    @JoinColumn(name = "CUSTOMER_ID")
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, mappedBy = "customer")
     public Set<Order> getOrders() {
         return orders;
     }

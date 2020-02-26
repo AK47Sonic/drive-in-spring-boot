@@ -1,6 +1,8 @@
 package com.sonic.jpa.test;
 
 import com.sonic.jpa.helloworld.Customer;
+import com.sonic.jpa.helloworld.Department;
+import com.sonic.jpa.helloworld.Manager;
 import com.sonic.jpa.helloworld.Order;
 import org.junit.After;
 import org.junit.Before;
@@ -267,7 +269,6 @@ public class JPATest {
 //        order.getCustomer().setLastName("Sky222");
 //    }
 
-
     /**
      * 单向1-n ：一定会多出update语句
      * 因为多的一端不维护关联关系（外键），所以不会插入外键列，所以会多出update语句
@@ -320,5 +321,66 @@ public class JPATest {
         Customer customer = entityManager.find(Customer.class, 17);
         customer.getOrders().iterator().next().setOrderName("O-fix-1");
     }
+
+    /**
+     * 由于双向维护关联关系，和插入顺序有关
+     * 先插入n，再插入1，会多出n update
+     * 先插入1，再插入n，会多出来2n update
+     * 使用{@code @MappedBy}就能使用{@code @JoinColumn}
+     * 建议（减少多余的SQL语句）：
+     * 1. 使用n的一方维护关联关系，1的一方不维护关联关系，这样插入的时候外键就可以直接插入，而不需要update
+     * 2. 插入的顺序：先插入1，再插入多
+     */
+    @Test
+    public void testOneToManyPersistBothSide() {
+        Customer customer = new Customer();
+        customer.setAge(15);
+        customer.setEmail("YYY@qq.com");
+        customer.setLastName("YYY");
+        customer.setCreatedTime(new Date());
+        customer.setBirth(new Date());
+
+        Order order1 = new Order();
+        order1.setOrderName("O-YYY-1");
+
+        Order order2 = new Order();
+        order2.setOrderName("O-YYY-2");
+
+        customer.getOrders().add(order1);
+        customer.getOrders().add(order2);
+
+        order1.setCustomer(customer);
+        order2.setCustomer(customer);
+
+        entityManager.persist(customer);
+        entityManager.persist(order1);
+        entityManager.persist(order2);
+
+    }
+
+    /**
+     * 维护关联关系的一方一定要设置对象，这样外键才可以插入。
+     * department.setMgr(manager);
+     * 不维护关联关系的一方，可以不设置对象
+     */
+    @Test
+    public void testOneToOnePersistence() {
+        Manager manager = new Manager();
+        manager.setMgrName("M-DD");
+
+        Department department = new Department();
+        department.setDeptName("D-DD");
+
+//        manager.setDept(department);
+        department.setMgr(manager);
+
+        entityManager.persist(manager);
+        entityManager.persist(department);
+
+    }
+
+    @Test
+    public void testOneToOneFind(){}
+
 
 }

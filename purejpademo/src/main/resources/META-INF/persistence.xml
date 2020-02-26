@@ -11,6 +11,8 @@
         <!-- add persistence class -->
         <class>com.sonic.jpa.helloworld.Customer</class>
         <class>com.sonic.jpa.helloworld.Order</class>
+        <class>com.sonic.jpa.helloworld.Department</class>
+        <class>com.sonic.jpa.helloworld.Manager</class>
 
         <properties>
 
