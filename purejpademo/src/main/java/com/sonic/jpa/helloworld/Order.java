@@ -41,6 +41,7 @@ public class Order {
      * 映射单向n-1的关联关系
      */
     @JoinColumn(name = "CUSTOMER_ID")
+//    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
     @ManyToOne(fetch = FetchType.LAZY) //懒加载
 //    @ManyToOne
     public Customer getCustomer() {

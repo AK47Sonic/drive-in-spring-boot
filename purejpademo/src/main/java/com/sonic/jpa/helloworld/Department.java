@@ -18,9 +18,10 @@ public class Department {
     @Column(name = "DEPT_NAME")
     private String deptName;
 
+//    @PrimaryKeyJoinColumn
     @JoinColumn(name = "MGR_ID", unique = true)
 //    @JoinColumn
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     private Manager mgr;
 
     public Integer getId() {

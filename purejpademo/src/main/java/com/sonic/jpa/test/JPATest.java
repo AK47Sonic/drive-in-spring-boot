@@ -253,10 +253,10 @@ public class JPATest {
 //        System.out.println(order.getOrderName());
 //        System.out.println(order.getCustomer().getEmail());
 //    }
-//
+//   // 删除多的一方只能删除多的一条，如果配置了级联，则是把所有外键相关的记录都删掉
 //    @Test
 //    public void testManyToOneRemove(){
-//        Order order = entityManager.find(Order.class, 6);
+//        Order order = entityManager.find(Order.class, 2);
 ////  Wrong
 ////        Order order = new Order();
 ////        order.setId(8);
@@ -379,8 +379,26 @@ public class JPATest {
 
     }
 
+    /**
+     * 如果是lazy的情况下，
+     * 如果查询维护外键的一方，查询另一个对象，只需要使用外键去查询
+     * 如果查询不维护外键的一方，查询另一个对象，则需要外连接去查询
+     */
     @Test
-    public void testOneToOneFind(){}
+    public void testOneToOneFind(){
+//        left join
+        Department department = entityManager.find(Department.class, 1);
+        System.out.println(department.getDeptName());
+        System.out.println(department.getMgr().getClass().getName());
+        System.out.println(department.getMgr().getMgrName());
+
+//        left join
+//        Manager manager = entityManager.find(Manager.class, 1);
+//        System.out.println(manager.getMgrName());
+//        System.out.println(manager.getDept().getClass().getName());
+//        System.out.println(manager.getDept().getDeptName());
+
+    }
 
 
 }
