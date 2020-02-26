@@ -13,6 +13,8 @@
         <class>com.sonic.jpa.helloworld.Order</class>
         <class>com.sonic.jpa.helloworld.Department</class>
         <class>com.sonic.jpa.helloworld.Manager</class>
+        <class>com.sonic.jpa.helloworld.Item</class>
+        <class>com.sonic.jpa.helloworld.Category</class>
 
         <properties>
 
