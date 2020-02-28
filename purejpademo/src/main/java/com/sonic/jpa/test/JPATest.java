@@ -382,7 +382,7 @@ public class JPATest {
      * 如果查询不维护外键的一方，查询另一个对象，则需要外连接去查询
      */
     @Test
-    public void testOneToOneFind(){
+    public void testOneToOneFind() {
 //        left join
         Department department = entityManager.find(Department.class, 1);
         System.out.println(department.getDeptName());
@@ -445,5 +445,24 @@ public class JPATest {
 
     }
 
+    @Test
+    public void testSecondLevelCache() {
+//        JPA 一级缓存
+//        Customer customer1 = entityManager.find(Customer.class, 1);
+//        Customer customer2 = entityManager.find(Customer.class, 1);
+
+        Customer customer1 = entityManager.find(Customer.class, 1);
+
+        entityTransaction.commit();
+        entityManager.close();
+
+        entityManagerFactory = Persistence.createEntityManagerFactory("jpa-1");
+        entityManager = entityManagerFactory.createEntityManager();
+        entityTransaction = entityManager.getTransaction();
+        entityTransaction.begin();
+
+        Customer customer2 = entityManager.find(Customer.class, 1);
+
+    }
 
 }

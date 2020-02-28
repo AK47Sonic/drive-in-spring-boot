@@ -11,6 +11,7 @@ import java.util.Set;
  * @author Sonic
  * @since 2020/2/23
  */
+@Cacheable(value = true)
 @Table(name = "jpa_customers")
 @Entity
 public class Customer {
@@ -32,7 +33,7 @@ public class Customer {
      * {@link @JoinColumn}如果没有指定name，则会根据字段名自动生成一个列名
      */
 //    @JoinColumn(name = "CUSTOMER_ID")
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE, mappedBy = "customer")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.REMOVE, mappedBy = "customer")
     public Set<Order> getOrders() {
         return orders;
     }
