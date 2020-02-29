@@ -577,4 +577,11 @@ public class JPATest {
         System.out.println(resultList);
     }
 
+    @Test
+    public void testExecuteUpdate() {
+        String jpql = "Update Customer c set c.lastName = ?0 where c.id = ?1 ";
+        Query update = entityManager.createQuery(jpql).setParameter(0, "update").setParameter(1, 1);
+        update.executeUpdate();
+    }
+
 }
