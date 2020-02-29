@@ -11,6 +11,7 @@ import java.util.Set;
  * @author Sonic
  * @since 2020/2/23
  */
+@NamedQuery(name = "testNamedQuery", query = "select c FROM Customer c where c.id = ?0 ")
 @Cacheable(value = true)
 @Table(name = "jpa_customers")
 @Entity
@@ -26,6 +27,14 @@ public class Customer {
     private Date birth;
 
     private Set<Order> orders = new HashSet<>();
+
+    public Customer() {
+    }
+
+    public Customer(String lastName, int age) {
+        this.lastName = lastName;
+        this.age = age;
+    }
 
     /**
      * 在n-1关系中{@link @JoinColumn} 由多维护

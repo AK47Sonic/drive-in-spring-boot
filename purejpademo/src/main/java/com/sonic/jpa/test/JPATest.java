@@ -1,12 +1,16 @@
 package com.sonic.jpa.test;
 
 import com.sonic.jpa.helloworld.*;
+import org.hibernate.jpa.QueryHints;
+import org.hibernate.query.internal.NativeQueryImpl;
+import org.hibernate.transform.Transformers;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 /**
  * JPATest
@@ -463,6 +467,114 @@ public class JPATest {
 
         Customer customer2 = entityManager.find(Customer.class, 1);
 
+    }
+
+    @Test
+    public void testJPQL() {
+        String jpql = "from Customer c where c.age > ?0";
+        Query query = entityManager.createQuery(jpql);
+        query.setParameter(0, 1);
+        List resultList = query.getResultList();
+        System.out.println("size: " + resultList.size());
+    }
+
+    /**
+     * 默认返回List<Object[]>
+     * 可以在实体类中创建对应的构造器， 然后在JPQL语句中利用对应的构造器返回实体类对象
+     */
+    @Test
+    public void testPartialProperties() {
+        String jpql = "select new Customer(c.lastName, c.age) from Customer c where c.id > ?0";
+        List resultList = entityManager.createQuery(jpql).setParameter(0, 1).getResultList();
+        for (Object o : resultList) {
+            System.out.println("object: " + o);
+        }
+    }
+
+    @Test
+    public void testNamedQuery() {
+        Query testNamedQuery = entityManager.createNamedQuery("testNamedQuery").setParameter(0, 1);
+        Customer customer = Customer.class.cast(testNamedQuery.getSingleResult());
+        System.out.println(customer);
+    }
+
+    /**
+     * createNativeQuery指定Class，只能用*查询
+     * 查询部分字段需要使用setResultTransformer
+     */
+    @Test
+    public void testNativeQuery() {
+//        String sql = "select * from jpa_customers where id = ?0";
+        String sql = "select LAST_NAME as lastName, age from jpa_customers where id = ?0";
+        Query query = entityManager.createNativeQuery(sql).setParameter(0, 1);
+        query.unwrap(NativeQueryImpl.class).setResultTransformer(Transformers.aliasToBean(Customer.class));
+        Customer singleResult = (Customer) query.getSingleResult();
+        System.out.println("singleResult: " + singleResult);
+    }
+
+    /**
+     * 使用hibernate 一级缓存
+     */
+    @Test
+    public void testQueryCache() {
+        String jpql = "from Customer c where c.age > ?0";
+        Query query = entityManager.createQuery(jpql).setHint(QueryHints.HINT_CACHEABLE, true);
+        query.setParameter(0, 1);
+        List resultList = query.getResultList();
+        System.out.println("size: " + resultList.size());
+
+        query = entityManager.createQuery(jpql).setHint(QueryHints.HINT_CACHEABLE, true);
+        query.setParameter(0, 1);
+        resultList = query.getResultList();
+        System.out.println("size: " + resultList.size());
+
+    }
+
+    @Test
+    public void testOrderBy() {
+        String jpql = "from Customer c where c.age > ?0 order by c.age desc ";
+        Query query = entityManager.createQuery(jpql).setHint(QueryHints.HINT_CACHEABLE, true);
+        query.setParameter(0, 1);
+        List resultList = query.getResultList();
+        System.out.println("size: " + resultList.size());
+    }
+
+    @Test
+    public void testGroupBy() {
+        String jpql = "select o.customer from Order o group by o.customer having count(o.id) >= 2";
+        List resultList = entityManager.createQuery(jpql).getResultList();
+        System.out.println("resultList: " + resultList);
+    }
+
+    @Test
+    public void testLeftOuterJoinFetch() {
+        String jpql = "from Customer c left outer join fetch c.orders where c.id = ?0 ";
+        Customer singleResult = (Customer) entityManager.createQuery(jpql).setParameter(0, 24).getSingleResult();
+        System.out.println("singleResult: " + singleResult.getLastName());
+        System.out.println("singleResult: " + singleResult.getOrders().size());
+
+//        String jpql = "from Customer c left outer join c.orders where c.id = ?0 ";
+//        List resultList = entityManager.createQuery(jpql).setParameter(0, 24).getResultList();
+//        System.out.println(resultList);
+
+    }
+
+    @Test
+    public void testSubQuery() {
+        String jpql = "select o from Order o where o.customer = (select c from Customer c where c.lastName = ?0)";
+        Query query = entityManager.createQuery(jpql).setParameter(0, "YYY");
+        List resultList = query.getResultList();
+        System.out.println(resultList.size());
+    }
+
+    /**
+     * 函数
+     */
+    @Test
+    public void testJPQLFun() {
+        String jpql = "select upper(c.email)  from Customer c";
+        List resultList = entityManager.createQuery(jpql).getResultList();
+        System.out.println(resultList);
     }
 
 }
