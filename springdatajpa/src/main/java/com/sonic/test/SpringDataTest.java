@@ -64,4 +64,35 @@ public class SpringDataTest {
         System.out.println(personList2);
     }
 
+    @Test
+    public void testQueryAnnotation() {
+        Person maxIdPerson = personRepository.getMaxIdPerson();
+        System.out.println("maxIdPerson: " + maxIdPerson);
+    }
+
+    @Test
+    public void testQueryAnnotationParam() {
+        List<Person> personList = personRepository.testQueryAnnotationParams("Sonic", "Sonic@qq.com");
+        System.out.println(personList);
+    }
+
+    @Test
+    public void testQueryAnnotationParam2() {
+        List<Person> personList = personRepository.testQueryAnnotationParams2("Sonic@qq.com", "Sonic");
+        System.out.println(personList);
+    }
+
+    @Test
+    public void testQueryAnnotationLikeParam() {
+//        List<Person> personList = personRepository.testQueryAnnotationLikeParam("Son%", "Sonic%");
+        List<Person> personList = personRepository.testQueryAnnotationLikeParam("Son", "Sonic");
+        System.out.println(personList);
+    }
+
+    @Test
+    public void testNativeQuery() {
+        long count = personRepository.getTotalCount();
+        System.out.println(count);
+    }
+
 }
