@@ -24,6 +24,10 @@ public class Person {
 
     private Date birth;
 
+    @JoinColumn(name = "address_id")
+    @ManyToOne
+    private Address address;
+
     public Integer getId() {
         return id;
     }
@@ -56,6 +60,14 @@ public class Person {
         this.birth = birth;
     }
 
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
     @Override
     public String toString() {
         return "Person{" +
@@ -63,6 +75,7 @@ public class Person {
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
                 ", birth=" + birth +
+                ", address=" + address +
                 '}';
     }
 }

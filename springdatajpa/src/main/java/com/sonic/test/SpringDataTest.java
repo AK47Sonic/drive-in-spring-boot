@@ -8,6 +8,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 
 /**
  * SpringDataTest
@@ -18,10 +21,11 @@ import java.sql.SQLException;
 public class SpringDataTest {
 
     private ApplicationContext ctx = null;
+    private PersonRepository personRepository;
 
     {
         ctx = new ClassPathXmlApplicationContext("classpath:/applicationContext.xml");
-
+        personRepository = ctx.getBean(PersonRepository.class);
     }
 
     @Test
@@ -32,7 +36,6 @@ public class SpringDataTest {
 
     @Test
     public void testSpringData() {
-        PersonRepository personRepository = ctx.getBean(PersonRepository.class);
         Person person = personRepository.getByLastName("Sonic");
         System.out.println("person: " + person);
     }
@@ -40,6 +43,25 @@ public class SpringDataTest {
     @Test
     public void testJPA() {
 
+    }
+
+    @Test
+    public void testKeyWords() {
+        List<Person> ps = personRepository.getByLastNameStartingWithAndIdLessThan("S", 10);
+        System.out.println(ps);
+
+        List<Person> personList = personRepository.getByEmailInOrBirthLessThan(Arrays.asList("Sonic@qq.com", "SYY@qq.com"), new Date());
+        System.out.println(personList);
+
+    }
+
+    @Test
+    public void testJoin() {
+//        List<Person> personList = personRepository.getByAddressIdGreaterThan(1);
+//        System.out.println(personList);
+
+        List<Person> personList2 = personRepository.getByAddress_ProvinceEquals("Shanghai");
+        System.out.println(personList2);
     }
 
 }
