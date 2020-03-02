@@ -7,12 +7,18 @@ import com.zaxxer.hikari.HikariDataSource;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+
+import static org.springframework.data.domain.Sort.Direction;
+import static org.springframework.data.domain.Sort.Order;
 
 /**
  * SpringDataTest
@@ -119,5 +125,25 @@ public class SpringDataTest {
         }
         personService.savePersons(personList);
     }
+
+    /**
+     * 排序，分页
+     */
+    @Test
+    public void testPagingAndSortingRepository() {
+        int pageNo = 2;
+        int pageSize = 2;
+
+        Order order1 = new Order(Direction.DESC, "id");
+        Order order2 = new Order(Direction.ASC, "id");
+        Sort sort = new Sort(order1, order2);
+
+        PageRequest pageRequest = new PageRequest(pageNo, pageSize, sort);
+        Page<Person> page = personRepository.findAll(pageRequest);
+        System.out.println("all: " + page.getTotalElements());
+        System.out.println("totalPages: " + page.getTotalPages());
+    }
+
+//    JpaSpecificationExecutor 带查询条件的分页
 
 }
