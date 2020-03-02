@@ -9,6 +9,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -105,6 +106,18 @@ public class SpringDataTest {
     public void testModifying() {
 //        personRepository.updatePersonEmail(1, "mm@qq.com");
         personService.updatePersonEmail("mm@qq.com", 1);
+    }
+
+    @Test
+    public void testCrudRepository() {
+        List<Person> personList = new ArrayList<>();
+        for (int i = 'a'; i < 'd'; i++) {
+            Person person = new Person();
+            person.setBirth(new Date());
+            person.setEmail("hh@qq.com");
+            personList.add(person);
+        }
+        personService.savePersons(personList);
     }
 
 }
