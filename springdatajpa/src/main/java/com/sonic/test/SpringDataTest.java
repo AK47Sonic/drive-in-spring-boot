@@ -2,6 +2,7 @@ package com.sonic.test;
 
 import com.sonic.domain.Person;
 import com.sonic.repository.PersonRepository;
+import com.sonic.service.PersonService;
 import com.zaxxer.hikari.HikariDataSource;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -22,10 +23,12 @@ public class SpringDataTest {
 
     private ApplicationContext ctx = null;
     private PersonRepository personRepository;
+    private PersonService personService;
 
     {
         ctx = new ClassPathXmlApplicationContext("classpath:/applicationContext.xml");
         personRepository = ctx.getBean(PersonRepository.class);
+        personService = ctx.getBean(PersonService.class);
     }
 
     @Test
@@ -93,6 +96,15 @@ public class SpringDataTest {
     public void testNativeQuery() {
         long count = personRepository.getTotalCount();
         System.out.println(count);
+    }
+
+    /**
+     * JPQL使用{@code @Modifying}可支持update/delete, 但还需要事务支持
+     */
+    @Test
+    public void testModifying() {
+//        personRepository.updatePersonEmail(1, "mm@qq.com");
+        personService.updatePersonEmail("mm@qq.com", 1);
     }
 
 }

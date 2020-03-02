@@ -2,6 +2,7 @@ package com.sonic.repository;
 
 import com.sonic.domain.Person;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
@@ -62,4 +63,8 @@ public interface PersonRepository extends JpaRepository<Person, Integer> {
 
     @Query(value = "select count(id) from data_persons", nativeQuery = true)
     long getTotalCount();
+
+    @Modifying
+    @Query("update Person p set p.email = :email where id = :id")
+    void updatePersonEmail(@Param("id") Integer id, @Param("email") String email);
 }
