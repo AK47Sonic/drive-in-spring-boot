@@ -1,0 +1,13 @@
+# DataSource
+spring:
+  datasource:
+    url: jdbc:mysql://192.168.1.151:3306/mybatis_plus?useSSL=false&allowMultiQueries=true
+    username: root
+    password: Citi2013
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+
+# \u65E5\u5FD7
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl

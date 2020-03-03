@@ -25,6 +25,7 @@
         <module>springhateoas</module>
         <module>springwebsocket</module>
         <module>purejpademo</module>
+        <module>springmybatisplus</module>
     </modules>
     <packaging>pom</packaging>
 
