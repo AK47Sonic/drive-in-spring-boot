@@ -32,6 +32,9 @@ public class CodeGenerator {
         gc.setIdType(IdType.AUTO); //设置主键策略
         gc.setServiceName("%sService"); //设置Service接口名字
         gc.setDateType(DateType.ONLY_DATE); //设置默认日期类型
+        gc.setBaseColumnList(true); // 生成XML中的 <sql id="Base_Column_List">
+        gc.setBaseResultMap(true); // 生成XML中的resultMap
+
         // gc.setSwagger2(true); 实体属性 Swagger2 注解
         mpg.setGlobalConfig(gc);
 
@@ -110,6 +113,7 @@ public class CodeGenerator {
 //        strategy.setTableFillList(Arrays.asList(createdTime, updatedTime));
 //        strategy.setVersionFieldName("version"); //数据库中字段名
 
+//        strategy.setCapitalMode(false);
         strategy.setInclude(new String[]{"user"}); //表名，支持正则表达式
         strategy.setControllerMappingHyphenStyle(true); //驼峰名字连接
 //        strategy.setTablePrefix(pc.getModuleName() + "_");

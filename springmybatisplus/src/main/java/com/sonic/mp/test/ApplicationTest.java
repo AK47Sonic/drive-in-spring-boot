@@ -1,5 +1,6 @@
 package com.sonic.mp.test;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.sonic.mp.StartUpApplication;
@@ -52,7 +53,6 @@ public class ApplicationTest {
         user.setName("AK");
         user.setId(1234758372583559173L);
 
-
         int r = userMapper.updateById(user);
         System.out.println(r);
         System.out.println("user: " + user);
@@ -100,6 +100,25 @@ public class ApplicationTest {
     public void testDelete() {
         int i = userMapper.deleteById(3L);
         System.out.println(i);
+    }
+
+    @Test
+    public void testWrapperSelect() {
+        Page<User> page = new Page<>(2, 2);
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        wrapper.between("age", 10, 50).eq("deleted", 0);
+        Page<User> userPage = userMapper.selectPage(page, wrapper);
+        System.out.println(userPage.getRecords());
+    }
+
+    @Test
+    public void testAndWrapperSelect() {
+        Page<User> page = new Page<>(2, 2);
+        QueryWrapper<User> wrapper = new QueryWrapper<>();
+        wrapper.eq("email", 0)
+                .and(true, i -> i.between("age", 10, 50).eq("deleted", 0));
+        Page<User> userPage = userMapper.selectPage(page, wrapper);
+        System.out.println(userPage.getRecords());
     }
 
 }
