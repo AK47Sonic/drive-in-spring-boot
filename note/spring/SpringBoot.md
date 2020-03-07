@@ -131,6 +131,10 @@
     - TransactionDefinition    
     - Isolation
     
+25. SpringBoot Test
+- @ActiveProfiles("test")
+- @RunWith(SpringRunner.class)
+- SpringBootTest(classes = {启动类})
 
     
 

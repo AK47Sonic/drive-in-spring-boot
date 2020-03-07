@@ -64,6 +64,8 @@ public class MySQLConfig {
         myBatisConfig.setLazyLoadingEnabled(true);
         myBatisConfig.setAggressiveLazyLoading(false);
         myBatisConfig.setCacheEnabled(true);
+        myBatisConfig.setDefaultStatementTimeout(10000);
+        myBatisConfig.setUseColumnLabel(true);
 
         SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
         factoryBean.setDataSource(dataSource);
