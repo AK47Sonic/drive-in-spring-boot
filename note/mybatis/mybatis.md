@@ -2,7 +2,7 @@
 
 1. 核心类
 - org.apache.ibatis.binding.MapperProxy
-- org.apache.ibatis.reflection.ParamNameResolver.getNamedParams 封装参数map
+- org.apache.ibatis.reflection.ParamNameResolver.getNamedParams 处理@Param，并封装参数map
 - @ConfigurationProperties 是通过set方法注入
 - org.mybatis.spring.SqlSessionFactoryBean
 - org.apache.ibatis.session.Configuration
@@ -43,6 +43,15 @@
 - useGeneratedKeys="true" keyProperty="id" 使用生成的主键，并将值封装给bean的id属性
 - <insert> 中使用<selectKey keyProperty="id" order="before" resultType="int"> 获取sequence的值，封装为Integer变量，并放到id字段中，供insert SQL语句使用
 - resultType/resultMap <select>两者必须有其一
+- `${}`: 直接替换 
+- `#{}`：占位符，预编译， PreparedStatement, 防止sql注入
+- 参数： javaType, jdbcType, mode(存储过程)， numericScale, resultMap, typeHandler, jdbcTypeName, expression
+    - jdbcType: 当某些数据库插入null值时候，mybatis映射到org.apache.ibatis.type.JdbcType.OTHER，MySQL认识，但Oracle不认识，所以需要手动指定#{email,jdbcType=NULL}
+- 返回值
+    - 是一个集合，则resultType是集合中对象的类型List<Employee> -> Employee, List<Map> -> map
+    - 是一个map
+        - key, value -> resultType = map
+        - key, 对象 -> 使用@MapKey指定key， resultType = 对象类名
 
 
 
@@ -55,6 +64,7 @@
 - setTypeAliasesPackage 对指定的包下所有的entity批量起别名（类名小写），别名不区分大小写
 - setMapperLocations 指定Mapper.xml所在位置
 - setUseActualParamName 默认true->支持通过arg0 arg1...argN 获取, false-> 0, 1...n
+- setJdbcTypeForNull(JdbcType.NULL); 对于不支持jdbcType.OTHER的数据库，可以设置为jdbcType.NULL
 
 4. Annotation
 - @Alias("别名") 在XML中,可使用别名代替全类名，覆盖setTypeAliasesPackage的设置

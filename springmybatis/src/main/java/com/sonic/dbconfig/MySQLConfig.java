@@ -67,6 +67,7 @@ public class MySQLConfig {
         myBatisConfig.setDefaultStatementTimeout(10000);
         myBatisConfig.setUseColumnLabel(true);
         myBatisConfig.setUseActualParamName(true);
+//        myBatisConfig.setJdbcTypeForNull(JdbcType.NULL); // Oracle
 
         SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
         factoryBean.setDataSource(dataSource);
