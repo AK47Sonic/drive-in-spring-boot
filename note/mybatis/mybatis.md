@@ -1,6 +1,8 @@
 ### MyBatis
 
 1. 核心类
+- org.apache.ibatis.binding.MapperProxy
+- org.apache.ibatis.reflection.ParamNameResolver.getNamedParams 封装参数map
 - @ConfigurationProperties 是通过set方法注入
 - org.mybatis.spring.SqlSessionFactoryBean
 - org.apache.ibatis.session.Configuration
@@ -16,6 +18,19 @@
     - ResultSetHandler
     - StatementHandler
 - boolean/Integer Mapper方法返回值（影响行数），MyBatis会自动封装，无需在XML中定义resultType
+- 参数
+    - 单个参数： #{参数名}直接取出参数值，写什么名字都OK
+        - 对象， #{属性名}
+        - Map，#{key}取出对应的值
+        - Collection, 封装为map，通过#{collection} #{list}取值
+        - Array, 封装为map，通过#{array}
+        - 使用@Param，则封装为Map，通过#{key}获取
+    - 多个参数：多个参数会被封装成一个map，#{}是从map中取key的值 param1...paramN
+        - 命名参数：明确指定封装参数时map的key， @Param("id") @Param("lastName"), 通过#{id}从map中取值
+    - 举例：
+        - Integer id， @Param("e") Employee emp -> id => #{param1} lastName => #{param2.lastName/e.lastName}
+        - List<Integer> ids -> #{list[0]}
+    - 备注：param1...paramN是默认支持的，arg0...argN是要使用setUseActualParamName开启
 
 
 2. XML 备注
@@ -27,7 +42,7 @@
 - parameterType="Employee" 指定参数类型，可省略
 - useGeneratedKeys="true" keyProperty="id" 使用生成的主键，并将值封装给bean的id属性
 - <insert> 中使用<selectKey keyProperty="id" order="before" resultType="int"> 获取sequence的值，封装为Integer变量，并放到id字段中，供insert SQL语句使用
-- resultType/resultMap 两者必须有其一
+- resultType/resultMap <select>两者必须有其一
 
 
 
@@ -39,6 +54,7 @@
 - setCacheEnabled 开启缓存
 - setTypeAliasesPackage 对指定的包下所有的entity批量起别名（类名小写），别名不区分大小写
 - setMapperLocations 指定Mapper.xml所在位置
+- setUseActualParamName 默认true->支持通过arg0 arg1...argN 获取, false-> 0, 1...n
 
 4. Annotation
 - @Alias("别名") 在XML中,可使用别名代替全类名，覆盖setTypeAliasesPackage的设置

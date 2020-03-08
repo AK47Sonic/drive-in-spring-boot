@@ -66,6 +66,7 @@ public class MySQLConfig {
         myBatisConfig.setCacheEnabled(true);
         myBatisConfig.setDefaultStatementTimeout(10000);
         myBatisConfig.setUseColumnLabel(true);
+        myBatisConfig.setUseActualParamName(true);
 
         SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
         factoryBean.setDataSource(dataSource);
