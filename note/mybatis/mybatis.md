@@ -52,7 +52,10 @@
     - 是一个map
         - key, value -> resultType = map
         - key, 对象 -> 使用@MapKey指定key， resultType = 对象类名
-
+    - resultMap
+        - type: 是bean类名， id 定义主键，底层会有优化，其他用result
+        - 如果在resultMap中没有定义的属性，MyBatis会自动封装（列名和字段名对应），如果返回的列名没有匹配的属性名，则自动忽略
+        - 如果是1对1情况下，可以直接使用<result column="dept_name" property="department.departmentName"/> 对象名.属性来赋值
 
 
 3. 配置项
