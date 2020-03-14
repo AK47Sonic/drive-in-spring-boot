@@ -55,7 +55,11 @@
     - resultMap
         - type: 是bean类名， id 定义主键，底层会有优化，其他用result
         - 如果在resultMap中没有定义的属性，MyBatis会自动封装（列名和字段名对应），如果返回的列名没有匹配的属性名，则自动忽略
-        - 如果是1对1情况下，可以直接使用<result column="dept_name" property="department.departmentName"/> 对象名.属性来赋值
+        - 如果是1对1情况下
+            - 可以直接使用<result column="dept_name" property="department.departmentName"/> 对象名.属性来赋值
+            - 或使用 <association property="department" javaType="Department"> <id column="did" property="id"/>
+            - 或使用分步查询  <association property="department" select="com.sonic.mapper.DepartmentMapper.getDeptById" column="{id=d_id}">
+            
 
 
 3. 配置项
@@ -68,6 +72,7 @@
 - setMapperLocations 指定Mapper.xml所在位置
 - setUseActualParamName 默认true->支持通过arg0 arg1...argN 获取, false-> 0, 1...n
 - setJdbcTypeForNull(JdbcType.NULL); 对于不支持jdbcType.OTHER的数据库，可以设置为jdbcType.NULL
+- setLazyLoadingEnabled(true), setAggressiveLazyLoading(false) 分步查询，开启懒加载
 
 4. Annotation
 - @Alias("别名") 在XML中,可使用别名代替全类名，覆盖setTypeAliasesPackage的设置
