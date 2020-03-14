@@ -59,6 +59,16 @@
         - DataSourceTransactionManager
     - 申明式事务
         - @EnableTransactionManagement在spring boot中在TransactionAutoConfiguration中自动装配    
+    - 标记@Transactional的方法A调用的其他方法B、C将都是拥有事务的。未标记@Transactional的方法, 调用@Transactional的方法，则不拥有事务特性， 因为方法中的this对象只是个普通对象（非代理对象）。
+    - 传播：
+        - Nested： 内嵌回滚，外层不回滚。外层回滚，内层回滚。内部不影响外部，外部影响内部
+        - Requires_New： 内层和外层毫无关系，各自是独立事务
+        - Required： 内层和外层都属于一个事务，一起提交和回滚
+    - 隔离：
+        - 脏读： （第一次）查到未提交的数据
+        - 不可重复读： （第二次）查到的数据和（第一次）查到的数据不同，因为被另一个事务update
+        - 幻读： 即使已经锁住了记录，因为被另一个事务insert，（第二次）查到的数据和（第一次）查到的数据不同
+    
 
 8. 配置Mybatis数据源
     - DataSource
