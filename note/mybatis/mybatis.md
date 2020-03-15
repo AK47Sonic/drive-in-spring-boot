@@ -58,10 +58,11 @@
         - 如果是1对1情况下
             - 可以直接使用<result column="dept_name" property="department.departmentName"/> 对象名.属性来赋值
             - 或使用 <association property="department" javaType="Department"> <id column="did" property="id"/>
-            - 或使用分步查询  <association property="department" select="com.sonic.mapper.DepartmentMapper.getDeptById" column="{id=d_id}">
+            - 或使用分步查询 <association property="department" select="com.sonic.mapper.DepartmentMapper.getDeptById" column="{id=d_id}"> 其中select指定的是select Id，多列封装map写法{key1=column1，key2=column2}
         - 如果是1对多情况下
-            - 使用<collection property="employees" ofType="Employee">, 务必注意，这里使用的是**ofType**。
-
+            - 使用<collection property="employees" ofType="Employee">, 务必注意，这里使用的是**ofType**。 
+            - 或使用分步查询 <collection property="employees" select="com.sonic.mapper.EmployeeMapperPlus.getEmployeesByDeptId" column="{deptId=id}" fetchType="eager"> 其中select指定的是select Id，多列封装map写法{key1=column1，key2=column2}
+        - 使用discriminator case 封装复杂逻辑
 
 3. 配置项
 - setMapUnderscoreToCamelCase 数据库字段下划线转驼峰
@@ -82,4 +83,17 @@
 - @Mapper 单一注册Mapper接口
 - 
 
+5. 动态SQL（OGNL）
+- 转义：https://www.w3school.com.cn/tags/html_ref_entities.html
+- 要么使用and或''，要么使用转义字符&amp;&amp;或&quot;&quot;
+- <if test="id != null and id != 0"> id 为属性参数值，满足条件就走
+- <where> 会把第一个and或者or去掉
+- <trim prefix="where" prefixOverrides="and"> 整体之前或之后加字符串，Overrides之前或之后移除字符串
+- <choose> <when test="id != 0"> 只走一个条件，其他条件跳过
+- <set> 去除尾部，
+- <foreach collection="_parameter.get(&quot;list&quot;)" item="item_id" separator="," open="(" close=")" index="i"> 
+    - collection：指定封装map的key 
+    - separator： 每个元素之后添加
+    - open/close: 整个foreach条件之前或之后添加
+    - index: 遍历list的时候是索引，遍历map的时候是map的key
 
