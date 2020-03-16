@@ -68,6 +68,8 @@
         - 单个参数：_parameter就是这个参数
         - 多个参数：参数会被封装为一个map，_parameter就是代表这个map
     - _databaseId: 需配置databaseIdProvider
+- <bind name="_lastName" value="'%' + lastName + '%'"/> 使用#{_lastName}获取
+- <sql id="insertColumn">last_name,email,gender,d_id</sql> <include refid="insertColumn"/> sql复用
 
 3. 配置项
 - setMapUnderscoreToCamelCase 数据库字段下划线转驼峰
