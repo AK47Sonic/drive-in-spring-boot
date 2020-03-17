@@ -28,7 +28,7 @@
        where id = ${id} and last_name = #{lastName}
     </select>
 
-    <select id="getEmployee" resultType="com.sonic.bean.Employee">
+    <select id="getEmployee" resultType="com.sonic.bean.Employee" useCache="true">
        SELECT id, last_name as lastName, email, gender  FROM tbl_employee where id = #{id}
     </select>
 
@@ -37,7 +37,7 @@
         values (#{lastName},#{email},#{gender})
     </insert>
     
-    <update id="updateEmployee" >
+    <update id="updateEmployee"  flushCache="true">
         update tbl_employee
         set last_name = #{lastName},email=#{email},gender=#{gender}
         where id = #{id}

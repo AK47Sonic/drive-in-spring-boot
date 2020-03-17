@@ -70,6 +70,7 @@
     - _databaseId: 需配置databaseIdProvider
 - <bind name="_lastName" value="'%' + lastName + '%'"/> 使用#{_lastName}获取
 - <sql id="insertColumn">last_name,email,gender,d_id</sql> <include refid="insertColumn"/> sql复用
+- <include> 中可以自定义一些property，在sql标签中使用${var}，当sql被执行时，property变量会被定义的值替换
 
 3. 配置项
 - setMapUnderscoreToCamelCase 数据库字段下划线转驼峰
@@ -82,6 +83,7 @@
 - setUseActualParamName 默认true->支持通过arg0 arg1...argN 获取, false-> 0, 1...n
 - setJdbcTypeForNull(JdbcType.NULL); 对于不支持jdbcType.OTHER的数据库，可以设置为jdbcType.NULL
 - setLazyLoadingEnabled(true), setAggressiveLazyLoading(false) 分步查询，开启懒加载, 只要获取另一个对象的属性，则会加载（包括toString）
+- setCacheEnabled(true); 开启2级缓存
 
 4. Annotation
 - @Alias("别名") 在XML中,可使用别名代替全类名，覆盖setTypeAliasesPackage的设置
@@ -104,3 +106,24 @@
     - open/close: 整个foreach条件之前或之后添加
     - index: 遍历list的时候是索引，遍历map的时候是map的key
 
+6. 缓存
+- 1级缓存： SqlSession级别的一个map，一直开启的
+- 2级缓存： 基于namespace级别的缓存（mapper), SqlSession关闭后，会把一级缓存的数据放入二级缓存。如果没有关闭，是不会放过去的。
+    - 开启2级缓存
+        - setCacheEnabled(true); 
+        - 在Mapper.xml中增加<cache>
+            - eviction: 缓存回收策略， FIFO， LRU。。。
+            - flushInterval： 缓存刷新间隔， 秒
+            - readOnly： true 只读 false 非只读， 读数据一致性问题
+            - size： 缓存存放多少元素
+            - type：自定义缓存全类名
+        - POJO需要实现序列化接口 
+        - <select id="getEmployee" resultType="com.sonic.bean.Employee" useCache="false">   单条语句关闭2级缓存
+        - <update id="updateEmployee"  flushCache="true"> 增删改默认flushCache="true"，清除一级二级缓存
+- 查询缓存顺序： 
+    1. 二级缓存
+    2. 一级缓存
+- 整合第三方cache
+    - 导入mybatis-echcache依赖
+    - 添加echcache.xml
+    - 在Mapper.xml中添加<cache 指定type>， 在其他文件中使用<cache-ref namespace指定相关mapper>
