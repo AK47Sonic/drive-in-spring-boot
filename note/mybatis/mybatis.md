@@ -127,3 +127,31 @@
     - 导入mybatis-echcache依赖
     - 添加echcache.xml
     - 在Mapper.xml中添加<cache 指定type>， 在其他文件中使用<cache-ref namespace指定相关mapper>
+    
+7. 运行原理
+- 获取SqlSessionFactory： org.apache.ibatis.session.defaults.DefaultSqlSessionFactory
+- 获取SqlSession：org.apache.ibatis.session.defaults.DefaultSqlSession 包含了Configuration和Executor
+- 获取接口的实现类对象（MapperProxy）
+- org.apache.ibatis.builder.xml.XMLConfigBuilder 解析XML
+    - configuration 包含所有MyBatis配置
+- org.apache.ibatis.mapping.MappedStatement 封装一个增删改查语句
+    - sqlSource 中sql包含完整sql语句
+- org.apache.ibatis.executor.Executor
+    - org.apache.ibatis.executor.CachingExecutor
+    - org.apache.ibatis.executor.BatchExecutor
+    - org.apache.ibatis.executor.SimpleExecutor
+- 每一个拦截器Interceptor的plugin方法会被调用
+- org.apache.ibatis.binding.MapperProxy (InvocationHandler)
+- StatementHandler 执行SQL语句
+    - ParameterHandler 设置预编译参数
+        - TypeHandler 进行数据库类型和JavaBean类型的映射
+    - ResultSetHandler 处理结果
+        - TypeHandler 进行数据库类型和JavaBean类型的映射
+- 总流程；MapperProxy -> DefaultSqlSession -> Executor -> StatementHandler -> ParameterHandler -> TypeHandler -> ResultSetHandler -> TypeHandler
+
+8. 插件
+- 步骤
+    1. 实现org.apache.ibatis.plugin.Interceptor
+    2. @Intercepts指定拦截的方法@Intercepts({@Signature(type = StatementHandler.class, method = "parameterize", args = Statement.class)})
+    3. 注册插件factoryBean.setPlugins(new Interceptor[]{new MyFirstPlugin()});
+- 

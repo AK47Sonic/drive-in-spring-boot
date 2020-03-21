@@ -1,6 +1,8 @@
 package com.sonic.dbconfig;
 
+import com.sonic.plugin.MyFirstPlugin;
 import com.zaxxer.hikari.HikariDataSource;
+import org.apache.ibatis.plugin.Interceptor;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.type.JdbcType;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -69,11 +71,13 @@ public class MySQLConfig {
         myBatisConfig.setUseActualParamName(true);
 //        myBatisConfig.setJdbcTypeForNull(JdbcType.NULL); // Oracle
 
+
         SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
         factoryBean.setDataSource(dataSource);
         factoryBean.setConfiguration(myBatisConfig);
 
         factoryBean.setTypeAliasesPackage("com.sonic.bean");
+        factoryBean.setPlugins(new Interceptor[]{new MyFirstPlugin("Sonic", "123456")});
 
         PathMatchingResourcePatternResolver patternResolver = new PathMatchingResourcePatternResolver();
         Resource[] resources = mapperLocationList.stream().map(el -> {
