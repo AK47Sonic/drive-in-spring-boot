@@ -154,4 +154,15 @@
     1. 实现org.apache.ibatis.plugin.Interceptor
     2. @Intercepts指定拦截的方法@Intercepts({@Signature(type = StatementHandler.class, method = "parameterize", args = Statement.class)})
     3. 注册插件factoryBean.setPlugins(new Interceptor[]{new MyFirstPlugin()});
-- 
+- pagehelper
+
+9， 多语句插入
+- insert..,values(),values()
+
+10. 批量保存
+- ExecutorType.BATCH, 预编译SQL一次，发多次参数
+- SqlSessionTemplate(SqlSessionFactory sqlSessionFactory, ExecutorType executorType) 
+
+11. 存储过程
+-  SQL Server只需要定义#{@id,mode=IN,javaType=java.lang.String,jdbcType=VARCHAR}，不用定义mode=OUT
+- 支持exec和call两种方式

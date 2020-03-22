@@ -34,4 +34,6 @@ public interface EmployeeMapper {
 
     void deleteEmployeeById(int id);
 
+    List<Employee> getEmps();
+
 }

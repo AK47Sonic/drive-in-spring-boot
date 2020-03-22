@@ -47,4 +47,8 @@
         delete from tbl_employee where id = #{id}
     </delete>
 
+    <select id="getEmps" resultType="com.sonic.bean.Employee" useCache="true">
+       SELECT id, last_name as lastName, email, gender  FROM tbl_employee
+    </select>
+
 </mapper>
