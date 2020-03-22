@@ -76,6 +76,8 @@ public class MySQLConfig {
         factoryBean.setDataSource(dataSource);
         factoryBean.setConfiguration(myBatisConfig);
 
+//        factoryBean.setTypeHandlers();
+
         factoryBean.setTypeAliasesPackage("com.sonic.bean");
         factoryBean.setPlugins(new Interceptor[]{new MyFirstPlugin("Sonic", "123456")});
 

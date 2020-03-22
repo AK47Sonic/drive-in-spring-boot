@@ -166,3 +166,8 @@
 11. 存储过程
 -  SQL Server只需要定义#{@id,mode=IN,javaType=java.lang.String,jdbcType=VARCHAR}，不用定义mode=OUT
 - 支持exec和call两种方式
+
+12. TypeHandler
+- 枚举 
+    - org.apache.ibatis.type.EnumOrdinalTypeHandler
+    - org.apache.ibatis.type.EnumTypeHandler
