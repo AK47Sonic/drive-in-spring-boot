@@ -171,3 +171,7 @@
 - 枚举 
     - org.apache.ibatis.type.EnumOrdinalTypeHandler
     - org.apache.ibatis.type.EnumTypeHandler
+- 自定义类型处理器 org.apache.ibatis.type.BaseTypeHandler
+    - factoryBean.setTypeHandlers();
+    - 插入：#{id, typeHandler=全类名}
+    - 查询：<resultMap><result typeHandler=XXX>
