@@ -7,3 +7,10 @@
     - 删除一个配置 git config --local --unset user.naem 
     - 添加文件到git git add readme.txt
     - 提交文件 git commit -m"Add readme"
+- 查看日志 git log
+- 查看git当前管理文件状态 git status
+- 工作区中已经被git管理，且发生改变的文件一起添加到暂存区 git add -u
+- 区域
+    - 工作目录（区）
+    - 暂存区 git add index.html images
+    - 版本历史 git commit
