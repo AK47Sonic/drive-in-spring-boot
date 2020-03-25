@@ -5,6 +5,10 @@
     - HEAD 指向当前工作的分支引用
     - config 配置信息
     - refs 具体分支指向的commit信息
+- git三大对象commit/tree/blob
+    - git cat-file -p  5da6a28（commit id） 
+    ![git三大对象](../pic/git三大对象.JPG)
+- 分离头指针（detached head）不基于任何branch，而基于commit进行的开发和提交，切换分支时会被git删除。
 
 ### 操作
 - 查看版本 git --version
@@ -16,7 +20,7 @@
     - 添加文件到git git add readme.txt
     - 提交文件 git commit -m"Add readme"
 - 查看本地branch信息 git branch -v
-- 创建新的分支 git checkout -b temp 5da6a28a47c
+- 创建新的分支 git checkout -b temp 5da6a28a47c, git checkout -b temp master
 - 切换分支 git checkout master
 - 工作区直接提交到本地库 git commit -am"Add test"
 - 查看日志 git log
@@ -36,4 +40,10 @@
     - 暂存区 git add index.html images
     - 版本历史 git commit
 - 查看git文件 git cat-file -t 59a4b3  git cat-file -p 59a4b3   （.git/objects/59）
-###
+- 比较两个commit的差异 git diff bfb24bc 5da6a28, git diff head head^, git diff head head~2  (当前和父亲的父亲比较)
+- 删除分支 git branch -D temp
+- 对最新一个commit的message进行变更 git commit --amend
+- 对过去的commit的message进行变更 git rebase -i 5da6a28 （是需要变更的commit的上一个commit id） 
+    - use commit 意思是commit内容仍然保留
+    - reword commit内容仍然保留进行message修改
+### 
