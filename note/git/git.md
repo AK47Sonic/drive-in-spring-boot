@@ -35,5 +35,5 @@
     - 工作目录（区）
     - 暂存区 git add index.html images
     - 版本历史 git commit
-- 查看git文件 git cat-file -t 59a4b3  git cat-file -p 59a4b3   
+- 查看git文件 git cat-file -t 59a4b3  git cat-file -p 59a4b3   （.git/objects/59）
 ###
