@@ -46,4 +46,12 @@
 - 对过去的commit的message进行变更 git rebase -i 5da6a28 （是需要变更的commit的上一个commit id） 
     - use commit 意思是commit内容仍然保留
     - reword commit内容仍然保留进行message修改
+- 合并commit git rebase -i 4c1e3e0e
+    ![合并commmit](../pic/合并commit.JPG)
+    ![合并commmit2](../pic/合并commit2.JPG)
+- 合并非连续的commit git rebase -i 4c1e3e0e，git rebase --continue
+    ![合并非连续](../pic/合并commit3.JPG)
+- 比较暂存区和本地库 git diff --cached
+- 比较工作区和暂存区 git diff
+    - 指定文件 git diff -- readme.md
 ### 
