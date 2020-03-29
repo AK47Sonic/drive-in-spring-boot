@@ -19,7 +19,14 @@
             - 生成 ssh-keygen -t rsa -b 4096 -C "XXX@qq.com"
             - 头像 -> settings -> SSH and GPG keys [github](https://github.com/settings/profile)
             - 贴公钥内容
-
+- fast-forward： 依据之前版本进行的更改
+- 区域
+    - 工作目录（区)，本地分支
+    - 暂存区
+    - 本地库
+        - 本地版本
+        - 远程分支
+    - 远程库
 
 ### 操作
 - 查看版本 git --version
@@ -31,7 +38,7 @@
     - 添加文件到git git add readme.txt
     - 提交文件 git commit -m"Add readme"
 - 查看本地branch信息 git branch -av  (-a列出本地和远端分支)
-- 创建新的分支 git checkout -b temp 5da6a28a47c, git checkout -b temp master
+- 创建新的分支 git checkout -b temp 5da6a28a47c, git checkout -b localbranch remortebranch
 - 切换分支 git checkout master
 - 工作区直接提交到本地库 git commit -am"Add test"
 - 查看日志 git log
@@ -73,7 +80,8 @@
     - 如果工作区没有相同文件，则状态退回到工作区
     - 如果工作区有相同文件，则清除暂存区，保留工作区文件
 - 恢复工作区（和暂存区一样） git checkout -- readme.md
-    - （和Head 一样， 暂存区也恢复） git checkout head -- readme.md
+    - （和Head 一样， 暂存区也恢复） git checkout HEAD -- readme.md
+        - **Head/head 会导致Detached**
 - 保存工作区和暂存区 git stash
     - 查看 git stash list
     - 应用 git stash apply/pop
@@ -88,5 +96,9 @@
     - clone远程库(--bare 不需要工作区) git clone --bare file:///f/BigData/SpringBootLearning/projects/git_learning/.git zhineng.git
     - 远端分支拉到本地，但不做关联 git fetch github master
     ![remotes](../pic/remotes.JPG)
-    - 
+    - 合并分支(影响工作区，merge完以后，生成一个新的commit，有两个parent) git merge --allow-unrelated-histories github/master
+        - merge
+        ![merge](../pic/merge.JPG)
+        - push
+        ![merge2](../pic/merge2.JPG)
 ### 
