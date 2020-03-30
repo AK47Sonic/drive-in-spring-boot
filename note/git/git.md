@@ -98,8 +98,16 @@
     - 远端分支拉到本地，但不做关联 git fetch github master
     ![remotes](../pic/remotes.JPG)
     - 合并分支(影响工作区，merge完以后，生成一个新的commit，有两个parent) git merge --allow-unrelated-histories github/master
-        - merge
-        ![merge](../pic/merge.JPG)
-        - push
-        ![merge2](../pic/merge2.JPG)
+        - 概念
+            - merge
+            ![merge](../pic/merge.JPG)
+            - push
+            ![merge2](../pic/merge2.JPG)
+        - 不同文件（merge直接成功，不会有冲突）
+        - 相同文件，不同位置（merge直接成功，不会有冲突）
+        - 相同文件，相同位置（merge冲突, 则通过vi编辑）
+            - 放弃merge git merge --abort
+            - 提交merge git commit
+        - 文件重命名，文件被修改（merge直接成功, 更新保留在改名后的文件中）
+        - 文件被2遍重命名 （merge冲突, 则通过git add保留要的，git rm 提交不要的，最后git commit）
 ### 
