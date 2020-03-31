@@ -110,4 +110,6 @@
             - 提交merge git commit
         - 文件重命名，文件被修改（merge直接成功, 更新保留在改名后的文件中）
         - 文件被2遍重命名 （merge冲突, 则通过git add保留要的，git rm 提交不要的，最后git commit）
-### 
+### Github
+- 查询 https://github.com/search
+- 在readme中查询学习 学习 in:readme stars:>1000
