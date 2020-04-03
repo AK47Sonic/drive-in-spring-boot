@@ -45,7 +45,7 @@
     
 5. Dockerfile demo
     - docker build -f CentosDockerfile -t mycentos:1.3 .
-    - [Centos docker demo](./docker/CentosDockerfile)   
+    - [Centos docker demo](CentosDockerfile)   
 6. K8s
     - Master
         - API Server  负责接收和处理请求
