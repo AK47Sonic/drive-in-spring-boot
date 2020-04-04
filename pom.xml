@@ -27,6 +27,7 @@
         <module>purejpademo</module>
         <module>springmybatisplus</module>
         <module>mybatisplusgenerator</module>
+        <module>springbootrest</module>
     </modules>
     <packaging>pom</packaging>
 
