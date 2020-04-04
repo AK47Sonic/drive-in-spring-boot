@@ -23,11 +23,22 @@
 - CSV如果包含中文，需要进行UTF-8转换
 ![Collection_data](../pic/Postman_collection_data.JPG)
 - param中使用{{columnName}}
-![Collection_data](../pic/Postman_collection_data1.JPG)
+![Collection_data1](../pic/Postman_collection_data1.JPG)
 - Tests中获取CSV中的值使用data.columnName
-![Collection_data](../pic/Postman_collection_dat2.JPG)
+![Collection_data2](../pic/Postman_collection_data2.JPG)
 
 - Cookie
+- Chrome F12抓包获取固定的Cookie值
+![Cookie](../pic/Postman_cookie1.JPG)
+- 获取Cookie域名
+![Cookie2](../pic/Postman_cookie2.JPG)
+![Cookie3](../pic/Postman_cookie3.JPG)
+- 获取Cookie变量值
+![Cookie4](../pic/Postman_cookie4.JPG)
+![Cookie5](../pic/Postman_cookie5.JPG)
+![Cookie6](../pic/Postman_cookie6.JPG)
+- Postman会保留cookie，所以先用登录url获取cookie，然后再用url获取数据
+
 
 
 
