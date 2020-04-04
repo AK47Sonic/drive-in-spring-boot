@@ -30,6 +30,10 @@ public class ApplicationRunnerBootstrap implements ApplicationRunner {
         values = args.getSourceArgs();
         System.out.println(args.getSourceArgs());
         System.out.println(args.getOptionNames());
+        String env = System.getProperty("env");
+        String var = System.getenv("var_env");
+        System.out.println("env:" + env);
+        System.out.println("var:" + var);
 //        System.out.println(args.getOptionValues());
     }
 
