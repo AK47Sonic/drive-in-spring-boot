@@ -42,15 +42,22 @@
     Main-Class: org.springframework.boot.loader.JarLauncher
     ```
 - 通过变量启动
-    - 环境变量
-        - jar启动 java -jar springbootdemo-0.0.1-SNAPSHOT.jar --some_env=always
-        - 通过System.getenv("var_env");获取
-        ![env_var](../pic/Alibaba_env_var.JPG)
-    - 程序参数Program arguments
-        - 通过args获取
-    - VM options
-        - -Denv=dev
-        - 通过System.getProperty("env");获取
+    - 传参数
+        - 环境变量
+            - jar启动 java -jar springbootdemo-0.0.1-SNAPSHOT.jar --var_env=always
+            - 通过System.getenv("var_env");获取
+            ![env_var](../pic/Alibaba_env_var.JPG)
+        - 程序参数Program arguments
+            - 通过args获取
+            - IDEA中模拟环境变量： --env=XXX
+        - VM options
+            - -Denv=dev
+            - 通过System.getProperty("env");获取
+    - 配置文件
+        - ${env}可以从-Denv或者--env中获取
+        - 配置文件中的属性都可以通过-Denv=XXX或者--env=XXX传入，进行设置。比如：-Dserver.port=8081，--server.port=8081 
+    
+
 
 
 
