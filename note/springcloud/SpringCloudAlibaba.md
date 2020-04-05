@@ -129,7 +129,41 @@ https://github.com/eacdy/itmuch-miniapp
     - @Builder 建造者模式
     - @Data
 
-    
+### 版本管理
+- 语义化版本
+    - 主版本 第几代
+    - 次版本 功能增加，架构没有变化
+    - 增量版本， bug修复
+    - snapshot 开发版 -> M 里程碑 -> release 正式版 
+- Spring Cloud 版本
+    - 伦敦地铁站站名
+        - Greenwich release 第一个正式版本 -> SR1版本 发现bug -> SR2版本
+        
+### 服务发现原理
+- 服务消费者和服务提供者本地都维护一个cache，通过定时任务对cache进行更新，从服务发现组件获取到最新的服务列表信息
+- 服务消费者和服务提供者都会定时向服务发现组件发送心跳，如果长时间不发送，则服务发现组件会移除这个服务信息
+- 服务消费者通过cache获取到服务列表，然后直接调用服务提供者
+![service](../pic/Alibaba_service.JPG)
+
+### Nacos
+- https://nacos.io/en-us/docs/what-is-nacos.html
+- 服务发现组件
+- 配置服务器
+![nacos](../pic/Alibaba_nacos.JPG)
+- 搭建Nacos server https://nacos.io/zh-cn/docs/quick-start.html
+- Console: http://172.25.43.113:8848/nacos/index.html
+- 没有在application.yml中配置spring.application.name，服务名称使用-，不要用_和特殊字符。
+```text
+2020-04-05 22:51:19.009  WARN 948 --- [           main] o.s.c.a.n.registry.NacosServiceRegistry  : No service to register for nacos client...
+```
+- 注册成功
+```text
+2020-04-05 22:56:35.047  INFO 5308 --- [           main] o.s.c.a.n.registry.NacosServiceRegistry  : nacos registry, user-center 172.25.43.113:8081 register finished
+```
+
+
+
+
 
 
 

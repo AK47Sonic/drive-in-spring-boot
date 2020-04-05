@@ -1,5 +1,5 @@
 server:
-  port: 8081
+  port: 8088
 
 spring:
   datasource:
@@ -8,5 +8,13 @@ spring:
       username: root
       password: Citi2013
       driver-class-name: com.mysql.cj.jdbc.Driver
+  cloud:
+    nacos:
+      discovery:
+#      指定nacos server的地址 不要写协议名 http://
+        server-addr: localhost:8848
+  application:
+#  服务名称使用-，不要用_和特殊字符。
+    name: user-center
 
 
