@@ -72,6 +72,41 @@
     - 总结
         - 共用的放在application.XXX中，非共用的放在application-env.XXX中    
 
+- structure
+    - domain
+        - dto （data transfer object）
+        - entity 数据库对应
+        - enums 枚举
+
+### 服务拆分方法论  
+- 领域驱动设计（Domain Driven Design简称DDD）
+- 面向对象（by name、by verb）
+
+### 服务拆分
+- 职责划分
+- 通用性划分
+
+### 数据库
+- 测试connection
+![db_gui](../pic/Alibaba_db_gui.JPG)
+- 创建console
+![db_gui2](../pic/Alibaba_db_gui2.JPG)
+
+### API文档
+https://t.itmuch.com/doc.html
+
+### 注册微信小程序
+https://mp.weixin.qq.com/
+![weixin](../pic/Alibaba_weixin.JPG)
+
+### 前端代码
+https://github.com/eacdy/itmuch-miniapp
+- 安装nodejs
+    - 检测node -v
+- 参考 https://github.com/eacdy/itmuch-miniapp
+
+    
+
     
 
 
