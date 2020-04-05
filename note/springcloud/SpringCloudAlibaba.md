@@ -22,6 +22,10 @@
 - YAML配置是有序的，而properties配置是无序的
 
 ### Spring boot
+
+- Spring boot Initializer
+![spring_init](../pic/Alibaba_spring_init.JPG)
+
 - Runner
     - org.springframework.boot.ApplicationRunner 参数封装为ApplicationArguments
     - org.springframework.boot.CommandLineRunner 可变参数
@@ -78,6 +82,9 @@
         - entity 数据库对应
         - enums 枚举
 
+- @Autowired和@Resource区别： https://blog.csdn.net/weixin_40423597/article/details/80643990
+- Intellij IDEA中Mybatis Mapper自动注入警告的6种解决方案：https://www.imooc.com/article/287865
+
 ### 服务拆分方法论  
 - 领域驱动设计（Domain Driven Design简称DDD）
 - 面向对象（by name、by verb）
@@ -105,7 +112,22 @@ https://github.com/eacdy/itmuch-miniapp
     - 检测node -v
 - 参考 https://github.com/eacdy/itmuch-miniapp
 
+### 通用Mapper （MyBatis 插件）
+- https://github.com/abel533/Mapper
+- 整合lombok https://github.com/abel533/Mapper/wiki/4.1.mappergenerator
     
+### Lombok
+- https://projectlombok.org/setup/maven
+- 注解
+    - @Getter
+    - @Setter
+    - @ToString
+    - @EqualsAndHashCode
+    - @NoArgsConstructor 无参构造
+    - @AllArgsConstructor 所有参数构造
+    - @RequiredArgsConstructor 只对final申明的字段进行构造函数 @RequiredArgsConstructor(onConstructor = @__(@Autowired)) 在构造函数上加@Autowired注解
+    - @Builder 建造者模式
+    - @Data
 
     
 

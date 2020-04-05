@@ -28,6 +28,8 @@
         <module>springmybatisplus</module>
         <module>mybatisplusgenerator</module>
         <module>springbootrest</module>
+        <module>content-center</module>
+        <module>user-center</module>
     </modules>
     <packaging>pom</packaging>
 
