@@ -5,11 +5,16 @@ import com.sonic.contentcenter.domain.dto.content.ShareDTO;
 import com.sonic.contentcenter.domain.dto.user.UserDTO;
 import com.sonic.contentcenter.domain.entity.content.Share;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cloud.client.ServiceInstance;
+import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.List;
 
 /**
  * ShareService
@@ -17,6 +22,7 @@ import org.springframework.web.client.RestTemplate;
  * @author Sonic
  * @since 2020/4/5
  */
+@Slf4j
 @Service
 @RequiredArgsConstructor(onConstructor = @__(@Autowired))
 public class ShareService {
@@ -25,11 +31,21 @@ public class ShareService {
 
     private final RestTemplate restTemplate;
 
+    private final DiscoveryClient discoveryClient;
+
     public ShareDTO findById(Integer id) {
         Share share = this.shareMapper.selectByPrimaryKey(id);
         Integer userId = share.getUserId();
 
-        ResponseEntity<UserDTO> forEntity = restTemplate.getForEntity("http://localhost:8081/users/{id}", UserDTO.class, userId);
+        List<ServiceInstance> instances = discoveryClient.getInstances("user-center");
+        String targetURL = instances.stream()
+                .map(i -> i.getUri() + "/users/{id}")
+                .findFirst()
+                .orElseThrow(() -> new IllegalArgumentException("当前没有实例！"));
+
+        log.info("请求的目标地址：{}", targetURL);
+
+        ResponseEntity<UserDTO> forEntity = restTemplate.getForEntity(targetURL, UserDTO.class, userId);
         UserDTO userDTO = forEntity.getBody();
 
         ShareDTO shareDTO = new ShareDTO();

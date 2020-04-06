@@ -160,7 +160,16 @@ https://github.com/eacdy/itmuch-miniapp
 ```text
 2020-04-05 22:56:35.047  INFO 5308 --- [           main] o.s.c.a.n.registry.NacosServiceRegistry  : nacos registry, user-center 172.25.43.113:8081 register finished
 ```
+- 服务发现的领域模型
+![namespace](../pic/Alibaba_nacos_namespace.JPG)
+    - Namespace 隔离 dev、uat、prod 默认public
+    - Group 不同服务可以分到一个组
+    - Service 微服务功能划分
+    - Cluster 对微服务的虚拟划分：北京cluster 南京cluster
+    - Instance 微服务实例
 
+- 元数据
+![metadata](../pic/Alibaba_metadata.JPG)
 
 
 

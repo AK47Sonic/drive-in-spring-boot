@@ -13,6 +13,14 @@ spring:
       discovery:
 #      指定nacos server的地址 不要写协议名 http://
         server-addr: localhost:8848
+        metadata:
+          instance: c
+          haha: hehe
+#       指定namespace 使用id，非名称
+#        namespace: 9519b58d-f5a4-4670-82ca-511e68c7fa70
+        #  指定集群名称 NJ
+#        cluster-name: NJ
+
   application:
 #  服务名称使用-，不要用_和特殊字符。
     name: user-center
