@@ -171,7 +171,31 @@ https://github.com/eacdy/itmuch-miniapp
 - 元数据
 ![metadata](../pic/Alibaba_metadata.JPG)
 
+- 步骤
+    - https://spring-cloud-alibaba-group.github.io/github-pages/edgware/spring-cloud-alibaba.html
+    - 加依赖
+    ```xml
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+    ```
+    - 加配置
+    ```yaml
+    spring:
+      cloud:
+        nacos:
+          discovery:
+            server-addr: localhost:8848
+            metadata:
+              instance: c
+              haha: hehe    
+      application:
+        name: user-center
+    ```
+
 ### Ribbon
+- org.springframework.cloud.netflix.ribbon.RibbonAutoConfiguration
 - 负载均衡
     - 服务端负载均衡
     ![loadbalance](../pic/Alibaba_loadbalence.JPG)
@@ -179,6 +203,28 @@ https://github.com/eacdy/itmuch-miniapp
     ![clientloadbalance](../pic/Alibaba_client_loadbalence.JPG)
 - ribbon
 ![ribbon](../pic/Alibaba_ribbon.JPG)   
+- 坑
+    - ribbonconfiguration.RibbonConfiguration
+    - Ribbon轮训策略的配置类一定要放在主上下文之外，只让Ribbon上下文扫描到，才能对每个service进行独立配置。如果被主上下文扫描到，则会导致所有service都使用同一个策略配置。
+    - https://cloud.spring.io/spring-cloud-static/Greenwich.SR5/single/spring-cloud.html
+        - 16.2 Customizing the Ribbon Client
+        - 16.4 Customizing the Ribbon Client by Setting Properties
+ 
+- 步骤
+    - 加依赖
+        - Nacos已经包含Ribbon jar
+    - 加注解
+        - @LoadBalanced 使用loadbalancer
+        - 全局 @RibbonClients(defaultConfiguration = RibbonConfiguration.class)
+        - 个性 @RibbonClient(name = "user-center", configuration = RibbonConfiguration.class)
+                - RibbonConfiguration.class不能被spring的上下文扫描到
+    - 加配置
+        - 个性 
+        ```yaml
+        user-center:
+          ribbon:
+            NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+        ```
 
 
 
