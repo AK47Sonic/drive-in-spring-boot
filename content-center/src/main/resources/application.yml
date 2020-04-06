@@ -15,7 +15,12 @@ spring:
 
   application:
     name: content-center
+ribbon:
+  eager-load:
+    enabled: true
+    clients: user-center
 
 #user-center:
 #  ribbon:
 #    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+

@@ -19,5 +19,10 @@ public class RibbonConfiguration {
         return new RandomRule();
     }
 
+//    @Bean
+//    public IPing ping() {
+//        return new PingUrl();
+//    }
+
 
 }

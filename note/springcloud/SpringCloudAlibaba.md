@@ -180,6 +180,10 @@ https://github.com/eacdy/itmuch-miniapp
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
     ```
+    - 改代码 user-center是服务名
+    ```text
+      ResponseEntity<UserDTO> forEntity = restTemplate.getForEntity("http://user-center/users/{userId}", UserDTO.class, userId);
+    ```
     - 加配置
     ```yaml
     spring:
@@ -209,7 +213,7 @@ https://github.com/eacdy/itmuch-miniapp
     - https://cloud.spring.io/spring-cloud-static/Greenwich.SR5/single/spring-cloud.html
         - 16.2 Customizing the Ribbon Client
         - 16.4 Customizing the Ribbon Client by Setting Properties
- 
+
 - 步骤
     - 加依赖
         - Nacos已经包含Ribbon jar
@@ -225,6 +229,11 @@ https://github.com/eacdy/itmuch-miniapp
           ribbon:
             NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
         ```
+- 懒加载
+    - 当restTemplate.getForEntity("http://user-center/users/{userId}", UserDTO.class, userId);被调用才会创建ribbon client
+    - 16.9 Caching of Ribbon Configuration
+- Ribbon支持Nacos权重
+    - http://www.imooc.com/article/288660
 
 
 
