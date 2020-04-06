@@ -171,6 +171,17 @@ https://github.com/eacdy/itmuch-miniapp
 - 元数据
 ![metadata](../pic/Alibaba_metadata.JPG)
 
+### Ribbon
+- 负载均衡
+    - 服务端负载均衡
+    ![loadbalance](../pic/Alibaba_loadbalence.JPG)
+    - 客户端负载均衡
+    ![clientloadbalance](../pic/Alibaba_client_loadbalence.JPG)
+- ribbon
+![ribbon](../pic/Alibaba_ribbon.JPG)   
+
+
+
 
 
 
