@@ -80,4 +80,7 @@
 
 ### 安装方案
 - Kubeadm： 都使用pod去操作
+    - Kubectl
+    - Kubeadm
+    - Kubelet
 - Binary： 每个组件是个进程，一个个配置和启动
