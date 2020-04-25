@@ -20,8 +20,13 @@ ribbon:
   eager-load:
     enabled: true
     clients: user-center
+logging:
+  level:
+    # 打印Feign日志
+    com.sonic.contentcenter.feignclient.UserCenterFeignClient: debug
 
 #user-center:
 #  ribbon:
 #    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+
 

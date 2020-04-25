@@ -236,14 +236,23 @@ https://github.com/eacdy/itmuch-miniapp
     - http://www.imooc.com/article/288660
 
 ### Feign
-申明式HTTP客户端
-- 增加依赖
-- 写接口
-- 增加注解
-    - @EnableFeignClients
-    - @FeignClient(name = "user-center") 
-
-
+- 申明式HTTP客户端
+    - 增加依赖
+    - 写接口
+    - 增加注解
+        - @EnableFeignClients
+        - @FeignClient(name = "user-center") 
+- 源码
+    - LoadBalancerFeignClient （和Ribbon结合使用）
+    - feign.Client.Default （不和Ribbon结合使用）
+- 日志
+![日志](../pic/Feign日志.JPG)
+    - 在Feign client configuration注入Logger.Level.FULL的bean
+    - Feign client日志定义为debug com.sonic.contentcenter.feignclient.UserCenterFeignClient: debug
+    - **坑**：如果在Feign client configuration增加@Configuration，就必须放在ComponentScan之外，否则会对所有client生效
+        - 估计原理：
+            - 通过@FeignClient(name = "user-center", configuration = UserCenterFeignConfiguration.class)的configuration指定，单个client已经可以在子容器找到对应的configuration。
+            - 如果增加了@Configuration，则会被parent上下文优先扫到，则作为父容器的bean，所有的client都会使用这个配置
 
 
 
