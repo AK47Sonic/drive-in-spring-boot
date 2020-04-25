@@ -162,7 +162,7 @@ https://github.com/eacdy/itmuch-miniapp
 ```
 - 服务发现的领域模型
 ![namespace](../pic/Alibaba_nacos_namespace.JPG)
-    - Namespace 隔离 dev、uat、prod 默认public
+    - Namespace 隔离 dev、uat、prod 默认public， 服务不能跨越namespace调用，不同namespace之间无法调用
     - Group 不同服务可以分到一个组
     - Service 微服务功能划分
     - Cluster 对微服务的虚拟划分：北京cluster 南京cluster
@@ -234,6 +234,14 @@ https://github.com/eacdy/itmuch-miniapp
     - 16.9 Caching of Ribbon Configuration
 - Ribbon支持Nacos权重
     - http://www.imooc.com/article/288660
+
+### Feign
+申明式HTTP客户端
+- 增加依赖
+- 写接口
+- 增加注解
+    - @EnableFeignClients
+    - @FeignClient(name = "user-center") 
 
 
 

@@ -4,6 +4,7 @@ import com.sonic.contentcenter.dao.content.ShareMapper;
 import com.sonic.contentcenter.domain.dto.content.ShareDTO;
 import com.sonic.contentcenter.domain.dto.user.UserDTO;
 import com.sonic.contentcenter.domain.entity.content.Share;
+import com.sonic.contentcenter.feignclient.UserCenterFeignClient;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -30,6 +31,8 @@ public class ShareService {
 
     private final DiscoveryClient discoveryClient;
 
+    private final UserCenterFeignClient userCenterFeignClient;
+
     public ShareDTO findById(Integer id) {
         Share share = this.shareMapper.selectByPrimaryKey(id);
         Integer userId = share.getUserId();
@@ -45,8 +48,16 @@ public class ShareService {
 //        ResponseEntity<UserDTO> forEntity = restTemplate.getForEntity(targetURL, UserDTO.class, userId);
 //        UserDTO userDTO = forEntity.getBody();
 
-        ResponseEntity<UserDTO> forEntity = restTemplate.getForEntity("http://user-center/users/{userId}", UserDTO.class, userId);
-        UserDTO userDTO = forEntity.getBody();
+        /**
+         * restTemplate
+         */
+//        ResponseEntity<UserDTO> forEntity = restTemplate.getForEntity("http://user-center/users/{userId}", UserDTO.class, userId);
+//        UserDTO userDTO = forEntity.getBody();
+
+        /**
+         * Feign
+         */
+        UserDTO userDTO = this.userCenterFeignClient.findById(userId);
 
         ShareDTO shareDTO = new ShareDTO();
         BeanUtils.copyProperties(share, shareDTO);
