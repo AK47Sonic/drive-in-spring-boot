@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Configuration;
 //@RibbonClient(name = "user-center", configuration = RibbonConfiguration.class)
 //全局配置
 //@RibbonClients(defaultConfiguration = RibbonConfiguration.class)
-@RibbonClients(defaultConfiguration = NacosWeightedRule.class)
+//@RibbonClients(defaultConfiguration = NacosWeightedRule.class)
+@RibbonClients(defaultConfiguration = NacosSameClusterWeightedRule.class)
 public class UserCenterRibbonConfiguration {
 }

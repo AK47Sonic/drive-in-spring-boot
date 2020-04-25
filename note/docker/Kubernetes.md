@@ -8,6 +8,7 @@
     - 有一个唯一IP
     - 一定有一个Pause容器，把其他容器都link在一起，并进行健康检查，汇报给K8s
     - 关系紧密的容器，可以放在一个Pod里
+    
 - ReplicaSet(RS)
     - 管理Pod
 - Deployment
@@ -18,6 +19,16 @@
     - Selector 指定使用的标签
     - ClusterIP 客户端使用ClusterIP访问service
     ![原理2](../pic/K8s原理2.JPG)
+    - 由于Pod每次删除再创建会分配在任意的机器上，IP地址不同，所以我们需要使用固定端点进行访问
+        - kubectl expose deployment nginx-deploy --name=nginx --port=80 --target-port=80 --protocol=TCP
+        - port：暴露服务的端口
+        - target port：Pod端口
+        - name：service名称
+        - type：service类型：ClusterIP（集群内部，只能被prod客户端访问），NodePort，LoadBalancer，ExternalName
+            - ClusterIP： 只能集群内部访问
+            - NodePort：集群外可以访问
+        
+        
 - ETCD: 集群的存储组件
 - APiServer：操作K8s唯一入口，对外提供http或https api
     - 认证: 认证了身份
@@ -78,9 +89,22 @@
 2. 服务端验证成功就向用户返回一个sessionid，服务端保存了这个session_id对应的信息，写入用户的 Cookie。
 3. 之后前端发出的每一次请求，都会通过Cookie，将session_id传回服务端，服务端收到session_id，找到对应的数据，由此得知用户的身份。
 
+- 172.16.0.0/16 意思：表示掩码是16个1。11111111.11111111.0000000.0000000，这是2进制的掩码，转百化为10进制掩码是255.255.0.0。
+- CIDR：CIDR是一个用于给用户分配IP地址以及在互联网上有效地路由IP数据包的对IP地址进行归类的方法
+
 ### 安装方案
 - Kubeadm： 都使用pod去操作
     - Kubectl
     - Kubeadm
     - Kubelet
 - Binary： 每个组件是个进程，一个个配置和启动
+
+### 操作
+- netstat -ntlp 查看端口
+- kubectl --dry-run=true 检测语法是否错误，不会正在创建
+![Kubectl](../pic/Kubectl.JPG)
+- dig -t A nginx.default.svc.cluster.local @10.96.0.10 指定DNS服务器地址，解析nginx域名
+- cat /etc/resolv.conf 查看DNS配置
+
+
+
