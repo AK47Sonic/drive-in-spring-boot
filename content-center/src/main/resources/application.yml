@@ -16,6 +16,9 @@ spring:
 
   application:
     name: content-center
+  # Feign get request
+  main:
+    allow-bean-definition-overriding: true
 ribbon:
   eager-load:
     enabled: true
@@ -24,6 +27,16 @@ logging:
   level:
     # 打印Feign日志
     com.sonic.contentcenter.feignclient.UserCenterFeignClient: debug
+
+feign:
+  client:
+    config:
+#    想要调用的微服务名称
+#      user-center:
+# 全局属性配置
+      default:
+        loggerLevel: full
+
 
 #user-center:
 #  ribbon:

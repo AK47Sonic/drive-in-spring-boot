@@ -1,8 +1,11 @@
 package com.sonic.contentcenter;
 
 import com.sonic.contentcenter.dao.content.ShareMapper;
+import com.sonic.contentcenter.domain.dto.user.UserDTO;
 import com.sonic.contentcenter.domain.entity.content.Share;
+import com.sonic.contentcenter.feignclient.TestUserCenterFeignClient;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -47,5 +50,14 @@ public class TestController {
         // consul/eureka/zookeeper 都可以使用discoveryClient
         return this.discoveryClient.getInstances("user-center");
     }
+
+    @Autowired
+    private TestUserCenterFeignClient testUserCenterFeignClient;
+
+    @GetMapping("/test-get")
+    public UserDTO query(UserDTO userDTO) {
+        return testUserCenterFeignClient.query(userDTO);
+    }
+
 
 }

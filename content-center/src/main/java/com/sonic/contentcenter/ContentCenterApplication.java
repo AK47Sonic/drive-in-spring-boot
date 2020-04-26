@@ -10,6 +10,7 @@ import tk.mybatis.spring.annotation.MapperScan;
 //扫描mybatis包里面的mapper接口
 @MapperScan("com.sonic")
 @SpringBootApplication
+//@EnableFeignClients(defaultConfiguration = UserCenterFeignConfiguration.class)
 @EnableFeignClients
 public class ContentCenterApplication {
 
