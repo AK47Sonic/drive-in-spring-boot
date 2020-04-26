@@ -264,10 +264,34 @@ https://github.com/eacdy/itmuch-miniapp
 - 请求构造
     - http://localhost:8087/q?id=1&&roles=bb 可以直接映射到User对象，封装为属性。加了@RequestParam反而需要属性和http参数一一对应
     - https://www.imooc.com/article/289000
+- 性能优化
+    - URLConnection
+    - Apache HttpClient（支持连接池）
+    - OKHttp （支持连接池）
+- 总结：https://www.imooc.com/article/289005
 
-
-
-
-
+### Sentinel
+- 雪崩效应 cascading failure
+    - 一次请求对应一个线程，只要没有请求超时，就会等待，那么阻塞的线程就会越来越多，最终无法再创建新的线程。
+- 容错方案
+    - 超时
+    - 限流
+    - 舱壁模式 （Bulkhead）
+    - 断路器模式 （CircuitBreaker）
+    ![断路器](../pic/断路器.JPG)
+- 访问： http://localhost:8010/actuator/sentinel
+- 下载： https://github.com/alibaba/Sentinel/releases
+- 安装路径： F:\BigData\SpringBootLearning\Tools\sentinel
+- 使用： java -jar sentinel-dashboard-1.6.2.jar
+    - localhost:8080/#/dashboard
+    - 懒加载，所以需要访问服务，才能在sentinel上呈现
+- 限流
+    - 直接
+    - 关联：当关联的资源达到阀值，就限流自己，其实是保护关联的资源，优先关联资源的一种做法
+    - 链路：只统计和限制指定链路上的流量
+- 流控效果
+    - 快速失败
+    - Warm Up，因子3，阀值100，超时时间10。初始阀值是100/3，然后在10秒内慢慢增加阀值到100
+    - 排队等待
 
 

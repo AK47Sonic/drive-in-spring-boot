@@ -13,6 +13,11 @@ spring:
       discovery:
         server-addr: localhost:8848
         cluster-name: BJ
+    sentinel:
+      transport:
+      # 指定sentinel控制台地址
+        dashboard: localhost:8080
+
 
   application:
     name: content-center
@@ -36,6 +41,18 @@ feign:
 # 全局属性配置
       default:
         loggerLevel: full
+  httpclient:
+  # 让feign使用apache httpclient做请求，而不是默认的urlconnnection
+    enabled: true
+    # feign最大连接数
+    max-connections: 200
+    # feign单个路径的最大连接数
+    max-connections-per-route: 50
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
 
 
 #user-center:
