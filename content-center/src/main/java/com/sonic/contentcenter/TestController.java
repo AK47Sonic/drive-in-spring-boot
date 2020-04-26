@@ -3,6 +3,7 @@ package com.sonic.contentcenter;
 import com.sonic.contentcenter.dao.content.ShareMapper;
 import com.sonic.contentcenter.domain.dto.user.UserDTO;
 import com.sonic.contentcenter.domain.entity.content.Share;
+import com.sonic.contentcenter.feignclient.TestBaiduFeignClient;
 import com.sonic.contentcenter.feignclient.TestUserCenterFeignClient;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,5 +60,12 @@ public class TestController {
         return testUserCenterFeignClient.query(userDTO);
     }
 
+    @Autowired
+    private TestBaiduFeignClient testBaiduFeignClient;
+
+    @GetMapping("baidu")
+    public String baiduIndex() {
+        return testBaiduFeignClient.index();
+    }
 
 }
