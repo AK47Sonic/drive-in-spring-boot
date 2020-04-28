@@ -293,5 +293,5 @@ https://github.com/eacdy/itmuch-miniapp
     - 快速失败
     - Warm Up，因子3，阀值100，超时时间10。初始阀值是100/3，然后在10秒内慢慢增加阀值到100
     - 排队等待
-
+- 降级规则
 
