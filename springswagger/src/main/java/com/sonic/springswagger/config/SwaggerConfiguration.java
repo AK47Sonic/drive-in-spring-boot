@@ -22,9 +22,23 @@ import java.util.ArrayList;
 public class SwaggerConfiguration {
 
     @Bean
-    public Docket docket(ApiInfo apiInfo) {
+    public Docket docket1(ApiInfo apiInfo) {
         return new Docket(DocumentationType.SWAGGER_2)
                 .apiInfo(apiInfo)
+                .groupName("Sonic")
+                .select()
+                // 指定要展示的包
+                .apis(RequestHandlerSelectors.basePackage("com.sonic.springswagger.controller"))
+                // 过滤条件
+                .paths(PathSelectors.regex("^/[\\s\\S]*"))
+                .build();
+    }
+
+    @Bean
+    public Docket docket2(ApiInfo apiInfo) {
+        return new Docket(DocumentationType.SWAGGER_2)
+                .apiInfo(apiInfo)
+                .groupName("Alisa")
                 .select()
                 // 指定要展示的包
                 .apis(RequestHandlerSelectors.basePackage("com.sonic.springswagger.controller"))

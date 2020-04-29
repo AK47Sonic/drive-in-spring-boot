@@ -13,7 +13,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
  */
 @SpringBootApplication(scanBasePackages = {"com.sonic"})
 @EnableJpaRepositories("com.sonic.repository")
-@EntityScan(basePackages = "com.sonic.entity")
+@EntityScan(basePackages = "com.sonic.dto")
 public class JPAApplicationBootstrap {
     public static void main(String[] args) {
         SpringApplication.run(JPAApplicationBootstrap.class, args);
