@@ -51,15 +51,24 @@ feign:
     max-connections: 200
     # feign单个路径的最大连接数
     max-connections-per-route: 50
+  sentinel:
+  # Feign整合Sentinel
+    enabled: true
 management:
   endpoints:
     web:
       exposure:
         include: "*"
-
+resttemplate:
+  sentinel:
+  # 关闭@SentinelRestTemplate注解
+#    enabled: false
+    enabled: true
 
 #user-center:
 #  ribbon:
 #    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+
+
 
 

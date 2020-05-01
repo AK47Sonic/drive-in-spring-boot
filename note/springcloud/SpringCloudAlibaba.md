@@ -314,6 +314,14 @@ https://github.com/eacdy/itmuch-miniapp
     - SphU: 定义资源，让资源受到监控，保护资源
     - Tracer：对我们自定义的异常进行统计
     - ContextUtil：标记调用来源，可以使用来源名来细分限流规则
+- @SentinelResource: 定义和监控资源，代替Sentinel API
+- @SentinelRestTemplate： 监控restTemplate
+- Feign整合Sentinel： feign.sentinel.enable=true
+    - fallback
+    - fallbackFactory
+
+
+
 
 
 
