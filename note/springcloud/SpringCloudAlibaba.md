@@ -294,4 +294,26 @@ https://github.com/eacdy/itmuch-miniapp
     - Warm Up，因子3，阀值100，超时时间10。初始阀值是100/3，然后在10秒内慢慢增加阀值到100
     - 排队等待
 - 降级规则
+    - 平均响应时间
+    - 异常比例
+    - 异常数
+- 热点：对一个接口的热点参数进行限流
+- 系统规则
+- 授权规则
+- 代码配置规则
+    - http://www.imooc.com/article/289345
+- 服务与控制台通讯原理
+    - 机器列表中呈现服务与控制台通信的端口（服务注册，并且发送心跳）
+    - http://10.0.75.1:8720/api
+    - http://localhost:8010/actuator/sentinel   （clientIp, clientPort）
+- 应用端连接控制台配置项
+![应用连接控制台配置项](../pic/应用连接控制台配置项.JPG)
+![控制台配置项](../pic/控制台配置项.JPG)
+
+- Sentinel API
+    - SphU: 定义资源，让资源受到监控，保护资源
+    - Tracer：对我们自定义的异常进行统计
+    - ContextUtil：标记调用来源，可以使用来源名来细分限流规则
+
+
 

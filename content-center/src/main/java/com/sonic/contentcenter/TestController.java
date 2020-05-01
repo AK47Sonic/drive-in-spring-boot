@@ -1,15 +1,23 @@
 package com.sonic.contentcenter;
 
+import com.alibaba.csp.sentinel.Entry;
+import com.alibaba.csp.sentinel.SphU;
+import com.alibaba.csp.sentinel.Tracer;
+import com.alibaba.csp.sentinel.context.ContextUtil;
+import com.alibaba.csp.sentinel.slots.block.BlockException;
 import com.sonic.contentcenter.dao.content.ShareMapper;
 import com.sonic.contentcenter.domain.dto.user.UserDTO;
 import com.sonic.contentcenter.domain.entity.content.Share;
 import com.sonic.contentcenter.feignclient.TestBaiduFeignClient;
 import com.sonic.contentcenter.feignclient.TestUserCenterFeignClient;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
@@ -21,6 +29,7 @@ import java.util.List;
  * @author Sonic
  * @since 2020/4/5
  */
+@Slf4j
 @RestController
 @RequiredArgsConstructor
 public class TestController {
@@ -52,7 +61,7 @@ public class TestController {
         return this.discoveryClient.getInstances("user-center");
     }
 
-    @Autowired
+    @Autowired(required = false)
     private TestUserCenterFeignClient testUserCenterFeignClient;
 
     @GetMapping("/test-get")
@@ -60,7 +69,7 @@ public class TestController {
         return testUserCenterFeignClient.query(userDTO);
     }
 
-    @Autowired
+    @Autowired(required = false)
     private TestBaiduFeignClient testBaiduFeignClient;
 
     @GetMapping("baidu")
@@ -83,6 +92,35 @@ public class TestController {
         return "test-b";
     }
 
+    @GetMapping("/test-sentinel-api")
+    public String testSentinelAPI(@RequestParam(required = false) String a) {
+        String resourceName = "test-sentinel-api";
+        ContextUtil.enter(resourceName, "test-wfw");
 
+//        定义一个sentinel保护的资源，名称test-sentinel-api
+        Entry entry = null;
+        try {
+            entry = SphU.entry(resourceName);
+
+            if (StringUtils.isBlank(a)) {
+                throw new IllegalArgumentException("a 不能为空");
+            }
+            // 被保护的业务逻辑
+            return a;
+// 如果被保护的资源被限流或降级，就会抛BlockException
+        } catch (BlockException e) {
+            log.warn("限流或者降级", e);
+            return "限流或者降级";
+        } catch (IllegalArgumentException e2) {
+            // 统计 IllegalArgumentException发生的次数，占比
+            Tracer.trace(e2);
+            return "统计 IllegalArgumentException";
+        } finally {
+            if (entry != null) {
+                entry.exit();
+            }
+            ContextUtil.exit();
+        }
+    }
 
 }
