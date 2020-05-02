@@ -337,6 +337,23 @@ https://github.com/eacdy/itmuch-miniapp
 - 本质：CommonFilter
 - 配置总结：https://www.imooc.com/article/289562
 
+### MQ
+- 异步
+    - AsyncRestTemplate
+    - @Async
+    - WebClient
+    - MQ
+- MQ适用场景
+    - 异步处理
+    - 流量秀峰填谷
+    - 解耦微服务
+- MQ的选择：https://www.imooc.com/article/290040
+- 搭建RocketMQ： http://www.imooc.com/article/290089
+    - 启动NAMESERVER： start mqnamesrv.cmd
+    - 启动BROKER： start mqbroker.cmd -n 127.0.0.1:9876 autoCreateTopicEnable=true
+    - 控制台：https://www.imooc.com/article/290092
+        - http://localhost:17890/
+
 
 
 

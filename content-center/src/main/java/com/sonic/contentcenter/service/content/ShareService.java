@@ -2,6 +2,7 @@ package com.sonic.contentcenter.service.content;
 
 import com.alibaba.csp.sentinel.adapter.servlet.callback.UrlCleaner;
 import com.sonic.contentcenter.dao.content.ShareMapper;
+import com.sonic.contentcenter.domain.dto.content.ShareAuditDTO;
 import com.sonic.contentcenter.domain.dto.content.ShareDTO;
 import com.sonic.contentcenter.domain.dto.user.UserDTO;
 import com.sonic.contentcenter.domain.entity.content.Share;
@@ -15,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
+import java.util.Objects;
 import java.util.Optional;
 
 /**
@@ -86,4 +88,23 @@ public class ShareService {
         System.out.println(forEntity.getStatusCode());
     }
 
+    public Share auditById(Integer id, ShareAuditDTO auditDTO) {
+
+        Share share = this.shareMapper.selectByPrimaryKey(id);
+
+        if (share == null) {
+            throw new IllegalArgumentException("参数非法，该分享不存在");
+        }
+        if (!Objects.equals("NOT_YET", share.getAuditStatus())) {
+            throw new IllegalArgumentException("参数非法，该分享已经审核通过或审核不通过");
+        }
+
+        share.setAuditStatus(auditDTO.getAuditStatusEnum().toString());
+        this.shareMapper.updateByPrimaryKey(share);
+
+//        异步执行
+//        userCenterFeignClient.addBonus(id, 500);
+
+        return share;
+    }
 }
