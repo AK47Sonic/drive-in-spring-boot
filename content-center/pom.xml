@@ -78,6 +78,12 @@
             <version>2.1.0.RELEASE</version>
         </dependency>
 
+        <!-- 拉持久化-->
+        <dependency>
+            <groupId>com.alibaba.csp</groupId>
+            <artifactId>sentinel-datasource-extension</artifactId>
+        </dependency>
+
     </dependencies>
 
     <!--<dependencyManagement>-->

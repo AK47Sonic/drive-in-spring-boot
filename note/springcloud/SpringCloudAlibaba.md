@@ -284,7 +284,7 @@ https://github.com/eacdy/itmuch-miniapp
 - 安装路径： F:\BigData\SpringBootLearning\Tools\sentinel
 - 使用： java -jar sentinel-dashboard-1.6.2.jar
     - localhost:8080/#/dashboard
-    - 懒加载，所以需要访问服务，才能在sentinel上呈现
+    - **懒加载，所以需要访问服务，才能在sentinel上呈现**
 - 限流
     - 直接
     - 关联：当关联的资源达到阀值，就限流自己，其实是保护关联的资源，优先关联资源的一种做法
@@ -319,8 +319,23 @@ https://github.com/eacdy/itmuch-miniapp
 - Feign整合Sentinel： feign.sentinel.enable=true
     - fallback
     - fallbackFactory
-
-
+- Sentinel总结
+![总结](../pic/Sentinel总结.JPG)
+- 规则持久化
+    - 拉模式 http://www.imooc.com/article/289402
+        - Sentinel控制台和服务的Sentinel客户端交互，Sentinel客户端定时读取文件，放入缓存 （客户端->文件:拉）
+        - 存放路径：C:\Users\Administrator\sentinel\rules
+    - 推模式 http://www.imooc.com/article/289464
+        - 配置中心推送配置变更给服务的Sentinel客户端和Sentinel控制台 （配置中心->客户端:推）
+        - 配置复杂
+- 集群流控： https://www.jianshu.com/p/bb198c08b418
+- 错误页面优化： 实现UrlBlockHandler
+- 区分来源：实现RequestOriginParser
+    - 不建议放在参数里，建议放在head中
+- Restful URL支持
+    - /shares/1和/shares/2, 实现UrlCleaner 让资源名称相同/shares/{number}，才能统一规则
+- 本质：CommonFilter
+- 配置总结：https://www.imooc.com/article/289562
 
 
 

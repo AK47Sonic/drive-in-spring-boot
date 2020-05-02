@@ -1,5 +1,6 @@
 package com.sonic.contentcenter.service.content;
 
+import com.alibaba.csp.sentinel.adapter.servlet.callback.UrlCleaner;
 import com.sonic.contentcenter.dao.content.ShareMapper;
 import com.sonic.contentcenter.domain.dto.content.ShareDTO;
 import com.sonic.contentcenter.domain.dto.user.UserDTO;
@@ -13,6 +14,8 @@ import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+
+import java.util.Optional;
 
 /**
  * ShareService
@@ -32,6 +35,9 @@ public class ShareService {
     private final DiscoveryClient discoveryClient;
 
     private final UserCenterFeignClient userCenterFeignClient;
+
+    @Autowired
+    private Optional<UrlCleaner> urlCleanerOptional;
 
     public ShareDTO findById(Integer id) {
         Share share = this.shareMapper.selectByPrimaryKey(id);
