@@ -3,6 +3,7 @@ package com.sonic.contentcenter;
 import com.alibaba.cloud.sentinel.annotation.SentinelRestTemplate;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.ServletComponentScan;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 import org.springframework.context.annotation.Bean;
@@ -13,6 +14,7 @@ import tk.mybatis.spring.annotation.MapperScan;
 @SpringBootApplication
 //@EnableFeignClients(defaultConfiguration = UserCenterFeignConfiguration.class)
 @EnableFeignClients
+@ServletComponentScan(basePackages = {"com.sonic"})
 public class ContentCenterApplication {
 
     public static void main(String[] args) {
