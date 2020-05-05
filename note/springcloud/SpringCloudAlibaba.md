@@ -352,8 +352,14 @@ https://github.com/eacdy/itmuch-miniapp
     - 启动NAMESERVER： start mqnamesrv.cmd
     - 启动BROKER： start mqbroker.cmd -n 127.0.0.1:9876 autoCreateTopicEnable=true
     - 控制台：https://www.imooc.com/article/290092
+        - java -jar rocketmq-console-ng-1.0.1.jar
         - http://localhost:17890/
-
-
-
+- MQ
+    - RocketMQ: RocketMQMessageListener
+    - ActiveMQ: JmsListener
+    - RabbitMQ: RabbitListener
+    - Kafka: KafkaListener
+- MQ 分布式事务
+![mq分布式事务](../pic/mq分布式事务.JPG)
+- Windows kill进程： taskkill /pid 12892 /f
 
