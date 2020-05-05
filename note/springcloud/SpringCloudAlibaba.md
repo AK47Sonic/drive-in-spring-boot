@@ -337,7 +337,7 @@ https://github.com/eacdy/itmuch-miniapp
 - 本质：CommonFilter
 - 配置总结：https://www.imooc.com/article/289562
 
-### MQ
+### 消息驱动微服务
 - 异步
     - AsyncRestTemplate
     - @Async
@@ -362,4 +362,12 @@ https://github.com/eacdy/itmuch-miniapp
 - MQ 分布式事务
 ![mq分布式事务](../pic/mq分布式事务.JPG)
 - Windows kill进程： taskkill /pid 12892 /f
+- Spring Cloud Stream
+![stream](../pic/stream.JPG)
+![stream编程模型](../pic/stream编程模型.JPG)
+- binder是连接消息中间件的组件
+- binder创建binding
+- 消息相对微服务的走向
+    - 如果是input，表示微服务接受消息
+    - 如果是output，表示微服务发送消息
 
