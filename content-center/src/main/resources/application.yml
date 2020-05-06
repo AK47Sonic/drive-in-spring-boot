@@ -20,7 +20,14 @@ spring:
       transport:
       # 指定sentinel控制台地址
         dashboard: localhost:8080
-
+    stream:
+      rocketmq:
+        binder:
+          name-server: 127.0.0.1:9876
+      bindings:
+        output:
+#        用来指定topic
+          destination: stream-test-topic
 
   application:
     name: content-center
@@ -35,6 +42,7 @@ logging:
   level:
     # 打印Feign日志
     com.sonic.contentcenter.feignclient.UserCenterFeignClient: debug
+    com.alibaba.nacos.client.naming: error
 
 feign:
   client:
@@ -73,6 +81,5 @@ rocketmq:
 #user-center:
 #  ribbon:
 #    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
-
 
 

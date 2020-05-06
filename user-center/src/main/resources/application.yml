@@ -16,6 +16,17 @@ spring:
         metadata:
           instance: c
           haha: hehe
+    stream:
+      rocketmq:
+        binder:
+          name-server: 127.0.0.1:9876
+      bindings:
+        input:
+          destination: stream-test-topic
+          # RocketMQ一定要设置
+          # 如果用的是其他MQ，可空
+          group: binder-group
+
 #       指定namespace 使用id，非名称
 #        namespace: 9519b58d-f5a4-4670-82ca-511e68c7fa70
         #  指定集群名称 NJ
@@ -26,4 +37,7 @@ spring:
     name: user-center
 rocketmq:
   name-server: 127.0.0.1:9876
+logging:
+  level:
+    com.alibaba.nacos.client.naming: error
 
