@@ -368,6 +368,6 @@ https://github.com/eacdy/itmuch-miniapp
 - binder是连接消息中间件的组件
 - binder创建binding
 - 消息相对微服务的走向
-    - 如果是input，表示微服务接受消息
-    - 如果是output，表示微服务发送消息
+    - 如果是input，表示微服务接受消息, 来自于org.springframework.cloud.stream.messaging.Sink.INPUT
+    - 如果是output，表示微服务发送消息，来自于org.springframework.cloud.stream.messaging.Source.OUTPUT
 
