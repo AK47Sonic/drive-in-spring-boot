@@ -20,11 +20,12 @@ public class BIOServer {
 
         ServerSocket serverSocket = new ServerSocket(6666);
         System.out.println("服务器启动");
+        ExecutorService executorService = Executors.newCachedThreadPool();
 
         while (true) {
             System.out.println("server等待客户端。。。。。");
             final Socket socket = serverSocket.accept();
-            ExecutorService executorService = Executors.newCachedThreadPool();
+
             System.out.println("连接到一个客户端");
             executorService.execute(new Runnable() {
                 @Override
@@ -35,7 +36,7 @@ public class BIOServer {
                 }
             });
 
-            executorService.shutdown();
+//            executorService.shutdown();
 //            break;
 
         }
