@@ -30,6 +30,7 @@
         <module>springbootrest</module>
         <module>content-center</module>
         <module>user-center</module>
+        <module>nettydemo</module>
     </modules>
     <packaging>pom</packaging>
 
