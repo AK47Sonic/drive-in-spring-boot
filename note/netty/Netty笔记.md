@@ -27,6 +27,13 @@
                     - Scattering 将数据写到buffer数组
                     - Gathering 从buffer数组读数据
         - Selector 检测多个注册的通道上的是否有事件发生
+            - 流程：
+                1. ServerSocketChannel 在Selector上注册SelectionKey.OP_ACCEPT事件，是为建立客户端连接做准备
+                2. 当selector.select获取到SelectionKey.OP_ACCEPT事件后，则可以通过accept创建SocketChannel
+                3. SocketChannel在Selector上注册SelectionKey.OP_READ事件，是为有数据进出时做准备，可以读取或者写入数据
+                4. SelectionKey在注册时，已经添加了SocketChannel信息和事件，因此已经绑定
+                5. 最后要移除SelectionKey，因为Selector自身没有提供remove方法。若不删除，会保留到下一次循环, selector.select时候会重复获得
+        
 - 英文1字节，中文3字节        
     
     - AIO：异步非阻塞，AIO 引入异步通道的概念，采用了 Proactor 模式，简化了程序编写，有效的请求才启动线程，它的特点是先由操作系统完成后才通知服务端程序启动线程去处理，一般适用于连接数较多且连接时间较长的应用
