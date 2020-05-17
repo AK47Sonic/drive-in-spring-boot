@@ -35,6 +35,8 @@ public class NIOServer {
             // 获取到关注的事件
             Set<SelectionKey> selectionKeys = selector.selectedKeys();
 
+            System.out.println("keys:" + selector.keys().size() + ", selectedKeys:" + selector.selectedKeys().size());
+
             Iterator<SelectionKey> keyIterator = selectionKeys.iterator();
             while (keyIterator.hasNext()) {
                 SelectionKey key = keyIterator.next();

@@ -33,7 +33,9 @@
                 3. SocketChannel在Selector上注册SelectionKey.OP_READ事件，是为有数据进出时做准备，可以读取或者写入数据
                 4. SelectionKey在注册时，已经添加了SocketChannel信息和事件，因此已经绑定
                 5. 最后要移除SelectionKey，因为Selector自身没有提供remove方法。若不删除，会保留到下一次循环, selector.select时候会重复获得
-        
+            - selector key 说明
+                - selector.keys() 是所有在selector上注册的事件，累加
+                - selector.selectedKeys() 是当前channel触发的事件
 - 英文1字节，中文3字节        
     
     - AIO：异步非阻塞，AIO 引入异步通道的概念，采用了 Proactor 模式，简化了程序编写，有效的请求才启动线程，它的特点是先由操作系统完成后才通知服务端程序启动线程去处理，一般适用于连接数较多且连接时间较长的应用
