@@ -24,8 +24,10 @@ public class TestServer {
                     .childHandler(new TestServerInitalizer());
 
             ChannelFuture channelFuture = serverBootstrap.bind(7000).sync();
+            System.out.println("----------------process-------------");
             channelFuture.channel().closeFuture().sync();
 
+            System.out.println("----------------close-------------");
         } catch (Exception e) {
 
         } finally {

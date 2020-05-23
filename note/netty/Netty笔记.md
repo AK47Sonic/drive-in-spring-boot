@@ -83,3 +83,6 @@
         - 处理io事件，即read，write事件，在对应的NioSocketChannel处理
         - 处理任务，即RunAllTasks
     - WorkGroup中NIOEventLoop处理业务时，会使用到pipeline，pipeline是channel的集合，还包含处理器Handler，过滤器和拦截器等等
+    - pipeline包含ChannelHandlerContext的双向链表，每个ChannelHandlerContext包含一个ChannelHandler
+    - Unpooled操作缓冲区的工具类
+    
