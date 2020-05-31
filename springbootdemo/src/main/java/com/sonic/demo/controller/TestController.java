@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class TestController {
     @GetMapping("/test")
-    public String test() {
+    public String test() throws InterruptedException {
+        Thread.sleep(5000);
+        System.out.println("xxx");
         return "test";
     }
 

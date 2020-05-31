@@ -1,0 +1,8 @@
+//protoc.exe --java_out=. Student.proto
+syntax = "proto3"; //版本
+option java_outer_classname = "StudentPOJO"; //w外部类名
+
+message Student { // 内部类名
+    int32 id = 1; //1表示属性序号
+    string name = 2;
+}
