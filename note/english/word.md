@@ -1,0 +1,14 @@
+### 20200526
+- interact 互相影响；互相作用
+    - interact with each other
+- Scale 规模
+    - small/large scale 大规模
+    - Scale out 扩展
+- peer 同行，同等地位的人，同龄人
+    -  peer at 盯着看
+    - peer pressure 同行压力，同龄压力
+- collate 整理
+- affinity 密切关系；亲和力
+- collocate 并置
+    - collocate resource
+- show 节目，表演
