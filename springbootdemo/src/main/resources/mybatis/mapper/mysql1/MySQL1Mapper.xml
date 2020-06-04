@@ -3,6 +3,6 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sonic.demo.mapper.mysql1.MySQL1Mapper">
     <insert id="insertUser" parameterType="com.sonic.demo.domain.User">
-      insert into userTable(userId, userName) values (#{userId}, #{userName})
+      insert into userXA(userId, userName) values (#{userId}, #{userName})
     </insert>
 </mapper>

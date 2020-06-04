@@ -3,6 +3,7 @@ package com.sonic.demo.controller;
 import com.sonic.demo.domain.User;
 import com.sonic.demo.mapper.mysql1.MySQL1Mapper;
 import com.sonic.demo.mapper.mysql2.MySQL2Mapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @author Sonic
  * @since 2020/4/4
  */
+@Slf4j
 @RestController
 public class TestController {
 //    @GetMapping("/test")
@@ -30,6 +32,7 @@ public class TestController {
 
     @GetMapping("/save2DB")
     public void save2DB() {
+        log.info("----------save2DB---------");
         User user = User.builder().userId("1")
                 .userName("Sonic")
                 .build();
