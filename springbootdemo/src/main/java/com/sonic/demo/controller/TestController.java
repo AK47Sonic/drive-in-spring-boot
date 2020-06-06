@@ -5,6 +5,8 @@ import com.sonic.demo.mapper.mysql1.MySQL1Mapper;
 import com.sonic.demo.mapper.mysql2.MySQL2Mapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jms.annotation.JmsListener;
+import org.springframework.jms.core.JmsTemplate;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -25,6 +27,9 @@ public class TestController {
 //        System.out.println("xxx");
 //        return "test";
 //    }
+
+    @Autowired
+    private JmsTemplate jmsTemplate;
 
     @Autowired(required = false)
     private MySQL1Mapper mySQL1Mapper;
@@ -50,6 +55,29 @@ public class TestController {
         if ("1".equals(flag)) {
             throw new RuntimeException("Business Exception");
         }
+    }
+
+    @Transactional
+    @JmsListener(destination = "user:msg:new")
+    public void create(String name) {
+        log.info("create user:{}", name);
+        User user = User.builder().userId("2")
+                .userName("Aon" + name)
+                .build();
+        mySQL1Mapper.insertUser(user);
+        jmsTemplate.convertAndSend("user:msg:reply", user.getUserName());
+        throwEx("1");
+    }
+
+    @GetMapping("/message")
+    public void sendMsg(@RequestParam String name) {
+        log.info("send msg to create user: {}", name);
+        jmsTemplate.convertAndSend("user:msg:new", name);
+    }
+
+    @JmsListener(destination = "user:msg:reply")
+    public void receive(String msg) {
+        log.info("---------- receive msg:{} -------------", msg);
     }
 
 }

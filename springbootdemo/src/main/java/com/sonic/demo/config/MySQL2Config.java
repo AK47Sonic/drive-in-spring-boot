@@ -84,13 +84,13 @@ public class MySQL2Config {
     @Bean("mysql2DataSource")
     public DataSource getDataSource() throws SQLException {
 
-        MysqlXADataSource mysql2XADataSource=new MysqlXADataSource();
+        MysqlXADataSource mysql2XADataSource = new MysqlXADataSource();
         mysql2XADataSource.setUrl(url);
         mysql2XADataSource.setPinGlobalTxToPhysicalConnection(true);
         mysql2XADataSource.setPassword(password);
         mysql2XADataSource.setUser(userName);
 
-        AtomikosDataSourceBean xa2DataSource=new AtomikosDataSourceBean();
+        AtomikosDataSourceBean xa2DataSource = new AtomikosDataSourceBean();
         xa2DataSource.setXaDataSource(mysql2XADataSource);
         xa2DataSource.setUniqueResourceName("mysql2XADataSource");
         xa2DataSource.setMinPoolSize(10);
@@ -118,7 +118,6 @@ public class MySQL2Config {
         myBatisConfig.setUseColumnLabel(true);
         myBatisConfig.setUseActualParamName(true);
 //        myBatisConfig.setJdbcTypeForNull(JdbcType.NULL); // Oracle
-
 
         SqlSessionFactoryBean factoryBean = new SqlSessionFactoryBean();
         factoryBean.setDataSource(dataSource);
