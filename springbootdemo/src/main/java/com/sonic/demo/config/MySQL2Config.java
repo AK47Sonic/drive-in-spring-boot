@@ -1,6 +1,6 @@
 package com.sonic.demo.config;
 
-import com.zaxxer.hikari.HikariDataSource;
+import com.mysql.cj.jdbc.MysqlXADataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.type.JdbcType;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.jta.atomikos.AtomikosDataSourceBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.io.Resource;
@@ -17,6 +18,7 @@ import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
 import javax.sql.DataSource;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -80,13 +82,26 @@ public class MySQL2Config {
     }
 
     @Bean("mysql2DataSource")
-    public DataSource getDataSource() {
-        HikariDataSource hikariDataSource = new HikariDataSource();
-        hikariDataSource.setUsername(userName);
-        hikariDataSource.setPassword(password);
-        hikariDataSource.setJdbcUrl(url);
-        hikariDataSource.setDriverClassName(driverClassName);
-        return hikariDataSource;
+    public DataSource getDataSource() throws SQLException {
+
+        MysqlXADataSource mysql2XADataSource=new MysqlXADataSource();
+        mysql2XADataSource.setUrl(url);
+        mysql2XADataSource.setPinGlobalTxToPhysicalConnection(true);
+        mysql2XADataSource.setPassword(password);
+        mysql2XADataSource.setUser(userName);
+
+        AtomikosDataSourceBean xa2DataSource=new AtomikosDataSourceBean();
+        xa2DataSource.setXaDataSource(mysql2XADataSource);
+        xa2DataSource.setUniqueResourceName("mysql2XADataSource");
+        xa2DataSource.setMinPoolSize(10);
+        xa2DataSource.setMaxPoolSize(10);
+
+//        HikariDataSource hikariDataSource = new HikariDataSource();
+//        hikariDataSource.setUsername(userName);
+//        hikariDataSource.setPassword(password);
+//        hikariDataSource.setJdbcUrl(url);
+//        hikariDataSource.setDriverClassName(driverClassName);
+        return xa2DataSource;
     }
 
     @Bean("mysql2SqlSessionFactory")

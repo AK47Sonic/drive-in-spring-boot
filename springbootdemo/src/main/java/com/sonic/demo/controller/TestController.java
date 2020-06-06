@@ -5,7 +5,9 @@ import com.sonic.demo.mapper.mysql1.MySQL1Mapper;
 import com.sonic.demo.mapper.mysql2.MySQL2Mapper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -30,8 +32,9 @@ public class TestController {
     @Autowired(required = false)
     private MySQL2Mapper mySQL2Mapper;
 
+    @Transactional(transactionManager = "xaTransactionManager")
     @GetMapping("/save2DB")
-    public void save2DB() {
+    public void save2DB(@RequestParam String flag) {
         log.info("----------save2DB---------");
         User user = User.builder().userId("1")
                 .userName("Sonic")
@@ -39,6 +42,14 @@ public class TestController {
         mySQL1Mapper.insertUser(user);
         mySQL2Mapper.insertUser(user);
 
+        throwEx(flag);
+
+    }
+
+    private void throwEx(String flag) {
+        if ("1".equals(flag)) {
+            throw new RuntimeException("Business Exception");
+        }
     }
 
 }
