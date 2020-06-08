@@ -34,6 +34,7 @@
         <module>ignitedemo</module>
         <module>springtxnojta</module>
         <module>springchainedtx</module>
+        <module>springdubbo</module>
     </modules>
     <packaging>pom</packaging>
 
