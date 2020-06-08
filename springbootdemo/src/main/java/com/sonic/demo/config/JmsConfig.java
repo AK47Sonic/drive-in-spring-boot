@@ -74,7 +74,7 @@ public class JmsConfig {
         DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
         configurer.configure(factory, connectionFactory);
         factory.setReceiveTimeout(10000L);
-        factory.setTransactionManager(transactionManager);
+//        factory.setTransactionManager(transactionManager);
         return factory;
     }
 

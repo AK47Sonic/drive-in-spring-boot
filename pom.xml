@@ -32,6 +32,7 @@
         <module>user-center</module>
         <module>nettydemo</module>
         <module>ignitedemo</module>
+        <module>springtxnojta</module>
     </modules>
     <packaging>pom</packaging>
 
