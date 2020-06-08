@@ -7,6 +7,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 import org.springframework.transaction.jta.JtaTransactionManager;
 
+import javax.transaction.SystemException;
 import javax.transaction.UserTransaction;
 
 /**
@@ -22,7 +23,13 @@ public class TransactionManagerConfig {
     @Primary
     public JtaTransactionManager xaTransactionManager() {
         UserTransactionManager userTransactionManager = new UserTransactionManager();
+        userTransactionManager.setForceShutdown(true);
         UserTransaction userTransaction = new UserTransactionImp();
+        try {
+            userTransaction.setTransactionTimeout(300);
+        } catch (SystemException e) {
+            e.printStackTrace();
+        }
         return new JtaTransactionManager(userTransaction, userTransactionManager);
     }
 

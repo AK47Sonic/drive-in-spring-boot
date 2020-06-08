@@ -13,6 +13,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.boot.jta.atomikos.AtomikosDataSourceBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 
@@ -82,6 +83,7 @@ public class MySQL1Config {
     }
 
     @Bean("mysql1DataSource")
+    @Primary
     public DataSource getDataSource() throws SQLException {
 
         MysqlXADataSource mysql1XADataSource = new MysqlXADataSource();
@@ -105,6 +107,7 @@ public class MySQL1Config {
     }
 
     @Bean("mysql1SqlSessionFactory")
+    @Primary
     public SqlSessionFactory sqlSessionFactory(@Qualifier("mysql1DataSource") DataSource dataSource) throws Exception {
         org.apache.ibatis.session.Configuration myBatisConfig = new org.apache.ibatis.session.Configuration();
         myBatisConfig.setMapUnderscoreToCamelCase(true);
@@ -142,8 +145,14 @@ public class MySQL1Config {
     }
 
     @Bean("mysql1SqlSessionTemplate")
+    @Primary
     public SqlSessionTemplate sqlSessionTemplate(@Qualifier("mysql1SqlSessionFactory") SqlSessionFactory sqlSessionFactory) {
         return new SqlSessionTemplate(sqlSessionFactory);
     }
+
+//    @Bean("mysqlTransactionManager")
+//    public DataSourceTransactionManager transactionManager(@Qualifier("mysql1DataSource") DataSource dataSource) {
+//        return new DataSourceTransactionManager(dataSource);
+//    }
 
 }

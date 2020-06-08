@@ -57,7 +57,7 @@ public class TestController {
         }
     }
 
-    @Transactional
+    @Transactional(transactionManager = "xaTransactionManager")
     @JmsListener(destination = "user:msg:new")
     public void create(String name) {
         log.info("create user:{}", name);
@@ -66,7 +66,7 @@ public class TestController {
                 .build();
         mySQL1Mapper.insertUser(user);
         jmsTemplate.convertAndSend("user:msg:reply", user.getUserName());
-        throwEx("1");
+//        throwEx("1");
     }
 
     @GetMapping("/message")

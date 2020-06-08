@@ -6,11 +6,11 @@ import org.springframework.boot.autoconfigure.jms.DefaultJmsListenerContainerFac
 import org.springframework.boot.jta.atomikos.AtomikosConnectionFactoryBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.jms.annotation.EnableJms;
 import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
 import org.springframework.jms.config.JmsListenerContainerFactory;
 import org.springframework.jms.core.JmsTemplate;
-import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.jms.ConnectionFactory;
 import javax.jms.XAConnectionFactory;
@@ -46,6 +46,7 @@ public class JmsConfig {
     }
 
     @Bean("xaAtomikosConnectionFactory")
+    @Primary
     public ConnectionFactory connectionFactory(@Qualifier("activeMQXAConnectionFactory") XAConnectionFactory xaConnectionFactory) {
         AtomikosConnectionFactoryBean atomikosConnectionFactoryBean = new AtomikosConnectionFactoryBean();
         atomikosConnectionFactoryBean.setUniqueResourceName("xaMQ");
@@ -63,20 +64,41 @@ public class JmsConfig {
         JmsTemplate jmsTemplate = new JmsTemplate();
         jmsTemplate.setReceiveTimeout(10000L);
         jmsTemplate.setConnectionFactory(connectionFactory);
+        jmsTemplate.setSessionTransacted(true);
 //        jmsTemplate.setDefaultDestination(activeMQQueue);
         return jmsTemplate;
     }
 
     @Bean("jmsListenerContainerFactory")
     public JmsListenerContainerFactory<?> jmsListenerContainerFactory(@Qualifier("xaAtomikosConnectionFactory") ConnectionFactory connectionFactory,
-                                                                      @Qualifier("xaTransactionManager") PlatformTransactionManager transactionManager,
+//                                                                      @Qualifier("mysqlTransactionManager") DataSourceTransactionManager transactionManager,
                                                                       DefaultJmsListenerContainerFactoryConfigurer configurer) {
         DefaultJmsListenerContainerFactory factory = new DefaultJmsListenerContainerFactory();
         configurer.configure(factory, connectionFactory);
         factory.setReceiveTimeout(10000L);
+        factory.setSessionTransacted(true);
 //        factory.setTransactionManager(transactionManager);
         return factory;
     }
+
+//    @Bean("jmsTransactionManager")
+//    public JmsTransactionManager jmsTransactionManager(@Qualifier("xaAtomikosConnectionFactory") ConnectionFactory cf) {
+//        JmsTransactionManager jmsTransactionManager = new JmsTransactionManager(cf);
+//        return jmsTransactionManager;
+//    }
+
+//    @Bean
+//    public DefaultMessageListenerContainer messageListenerContainer(@Qualifier("mysqlTransactionManager") DataSourceTransactionManager transactionManager,
+//                                                                    @Qualifier("xaAtomikosConnectionFactory") ConnectionFactory connectionFactory
+//                                                                    ) {
+//        DefaultMessageListenerContainer container = new DefaultMessageListenerContainer();
+//        container.setTransactionManager(transactionManager);
+//        container.setConnectionFactory(connectionFactory);
+//        container.setReceiveTimeout(10000L);
+//        container.setSessionTransacted(true);
+//        container.setDestinationName("user:msg:new");
+//        return container;
+//    }
 
 
 
