@@ -33,6 +33,7 @@
         <module>nettydemo</module>
         <module>ignitedemo</module>
         <module>springtxnojta</module>
+        <module>springchainedtx</module>
     </modules>
     <packaging>pom</packaging>
 
