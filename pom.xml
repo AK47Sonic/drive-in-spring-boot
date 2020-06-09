@@ -35,6 +35,7 @@
         <module>springtxnojta</module>
         <module>springchainedtx</module>
         <module>springdubbo</module>
+        <module>springbootdubbo</module>
     </modules>
     <packaging>pom</packaging>
 
