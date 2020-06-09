@@ -36,7 +36,7 @@ public class HateoasAppBootstrap
         ServletRegistrationBean  servletRegistrationBean = new ServletRegistrationBean();
         servletRegistrationBean.setServlet(new MyServlet2());
         servletRegistrationBean.setName("myservlet2");
-        servletRegistrationBean.addUrlMappings("/springboot/myservlet2");
+        servletRegistrationBean.addUrlMappings("/spring/myservlet2");
         servletRegistrationBean.addInitParameter("myname", "myvalue");
 
         return servletRegistrationBean;
@@ -47,7 +47,7 @@ public class HateoasAppBootstrap
         FilterRegistrationBean filterRegistrationBean = new FilterRegistrationBean();
         filterRegistrationBean.setFilter(new MyFilter2());
         filterRegistrationBean.setServletNames(Arrays.asList("myservlet2"));
-//        filterRegistrationBean.addUrlPatterns("/springboot/myservlet2");
+//        filterRegistrationBean.addUrlPatterns("/spring/myservlet2");
         filterRegistrationBean.setDispatcherTypes(DispatcherType.REQUEST, DispatcherType.FORWARD, DispatcherType.INCLUDE);
         return filterRegistrationBean;
     }
