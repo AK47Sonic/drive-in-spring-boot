@@ -1,14 +1,86 @@
-### 20200526
-- interact 互相影响；互相作用
-    - interact with each other
-- Scale 规模
-    - small/large scale 大规模
-    - Scale out 扩展
-- peer 同行，同等地位的人，同龄人
-    -  peer at 盯着看
-    - peer pressure 同行压力，同龄压力
-- collate 整理
-- affinity 密切关系；亲和力
-- collocate 并置
-    - collocate resource
-- show 节目，表演
+## 2020/6/20
+- show 表演
+- rat 老鼠
+	- mouse 
+- giant 巨大的
+- pet 宠物
+- horrible 可怕的，恐怖的
+	- terrible
+- mat 垫子
+	- pad
+- poem 诗
+- funny 有趣的
+- rhyme 押韵
+	- without rhyme or reason 莫名其妙的
+- piece 片，块
+	- a piece of 
+	- a slice of 一片
+- priase 表扬
+- silly 蠢的
+- upset 不高兴的
+- seat 座位
+- wear wore worn 穿戴
+- belt 皮带
+- embarrassing 尴尬的，羞涩的
+- locker 储物柜
+- hall 大厅，走廊
+- phrase 短语
+	- phase 阶段
+- valentine 情人
+- candy 糖
+- mystery 秘密
+- mall 商场，购物中心
+- mood 心情
+	- in a good mood
+	- in a bad mood
+- cruel 残酷的
+	- cruelly
+- flavor 口味
+- grape 葡萄
+	- grape wine 葡萄酒
+	- grape juice 葡萄汁
+- mango 芒果
+	- mangoes
+- shave 剃
+	- shave off beard 刮掉胡子
+- beard 胡子
+- flyer 飞行物
+- pineapple 菠萝
+- watermelon 西瓜
+- papaya 木瓜
+- guava 石榴
+- ripe 熟的
+	- unripe 生的
+- secretary 秘书
+- can 罐
+	- a can of 一罐
+- metal 金属
+	- metal sheet 金属片
+- plastic 塑料
+	- plastic bag 塑料袋
+- garbage 垃圾（剩饭）
+	- garbage can 垃圾桶
+	- garbage bag 垃圾袋
+	- trash 垃圾（废物）
+- separate 分开的， 分开 区别：分开后，成为独立个体
+	- divide 区别：分开后，仍是整体一部分
+	- split 强调分开动作
+- decrease 减少
+	- decrease by 1.4% 
+	- decrease from 198 to 96
+	- increase 增加
+- mental 心里的，精神的
+	- mental state 精神状态
+- cinnamon roll 肉桂卷
+- sock 短袜
+- eighth 第八 八分之一
+	- three eighth of 3/8
+- across 穿过
+	- across from 在对面
+- sale 销售
+	- on sale 特卖
+- pair 双
+	- a pair of 一双
+- fraction 部分
+	- a fraction of 一部分
+- market 市场
